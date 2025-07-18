@@ -1,0 +1,51 @@
+
+    /* Custom Tailwind Theme (earth tones) */
+    :root {
+      --sage: #A8B5A2;
+      --sandalwood: #a56c2a;
+      --rosewater: #ffcab8;
+      --turmeric: #ffa200;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .bg-sage { background-color: var(--sage); } 
+    .bg-sandalwood { background-color: var(--sandalwood); }
+    .bg-rosewater { background-color: var(--rosewater); }
+    .bg-turmeric { background-color: var(--turmeric); }
+
+    .text-sage { color: var(--sage); }
+    .text-sandalwood { color: var(--sandalwood); }
+    .text-rosewater { color: var(--rosewater); }
+    .text-turmeric { color: var(--turmeric); }
+    
+    .writing-mode-vertical {
+    writing-mode: vertical-rl;
+    }
+  .text-orientation-mixed {
+    text-orientation: mixed;
+    }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    }
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+    }
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+    }

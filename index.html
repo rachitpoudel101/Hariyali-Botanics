@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hariyali Botanic</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Google Fonts: Serif + Sans-Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* Ensure dropdowns open on hover and click for accessibility */
+    .group:focus-within .group-hover\:block,
+    .group:hover .group-hover\:block {
+      display: block !important;
+    }
+    .group-hover\:block {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- ======= NAVBAR ======= -->
+  <nav class="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 relative">
+        
+        <!-- Left Nav Links -->
+        <div class="hidden md:flex space-x-6 text-sm uppercase font-medium">
+          <div class="group relative">
+            <button class="hover:text-sage">Shop</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 min-w-[180px]">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Skin</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hair</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Add+</a>
+              <div class="border-t my-1"></div>
+              <span class="block px-4 py-2 text-xs text-gray-500 font-semibold uppercase tracking-wider">Shop by concern</span>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wrinkle</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Acne</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hair loss</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Daily Essentials</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Blackheads</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Dry Skin</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Guides</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="digital.html" class="block px-4 py-2 hover:bg-gray-100">Digital Guides</a>
+              <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100">Blog</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Ayuretreat</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <!-- <a href="#" class="block px-4 py-2 hover:bg-gray-100">Network Partners</a> -->
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Upcoming Retreats</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Waitlist Interest</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Form Fill Up</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">About Us</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Our Story</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Our Principles</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Membership</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 w-64">
+              <a href="https://nas.io" target="_blank" class="block px-4 py-2 hover:bg-gray-100">nas.io</a>
+              <p class="px-4 py-2 text-sm text-gray-600">Inquire via Daraz for discounts or complimentary products.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Logo -->
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+          <a href="index.html" class="text-xl font-bold tracking-wider text-sage">Hariyali</a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-4 text-lg">
+          <button class="hover:text-sage"><i class="fas fa-search"></i></button>
+          <button class="hover:text-sage"><i class="fas fa-user"></i></button>
+          <a href="https://www.daraz.com.np" target="_blank" class="hover:text-sage">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+
+          <!-- Mobile Menu Icon -->
+          <div class="md:hidden">
+            <button id="mobile-toggle" class="text-2xl focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t px-4 pb-4">
+      <ul class="space-y-2 pt-4 font-medium">
+        <li><a href="#" class="block hover:text-sage">Shop</a></li>
+        <li><a href="#" class="block hover:text-sage">Guides</a></li>
+        <li><a href="#" class="block hover:text-sage">Ayuretreat</a></li>
+        <li><a href="#" class="block hover:text-sage">About Us</a></li>
+        <li><a href="#" class="block hover:text-sage">Membership</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======= HERO VIDEO ======= -->
+  <section class="w-full h-[60vw] max-h-[400px] md:h-screen md:max-h-none overflow-hidden relative">
+    <video autoplay muted loop playsinline class="w-full h-full object-cover">
+      <source src="Media/test.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- ======= TEXT & CTA SECTION BELOW VIDEO ======= -->
+  <section class="bg-white py-16 text-center px-6">
+        <h1 class="text-3xl md:text-5xl font-bold text-sage mb-6">
+          Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-3xl mx-auto font-light">
+          Inspired by the Himalayan range, made with pure natural ingredients for your well-being.
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="#" class="bg-sandalwood text-white hover:opacity-90 px-6 py-2 rounded-full font-medium transition">Shop</a>
+          <a href="#" class="bg-rosewater text-white hover:opacity-90 px-6 py-2 rounded-full font-medium transition">Digital Guides</a>
+          <a href="#" class="bg-turmeric text-white hover:opacity-90 px-6 py-2 rounded-full font-medium transition">Ayuretreat</a>
+        </div>
+  </section>
+
+  <!-- ======= PRODUCT SLIDER SECTION ======= -->
+  <section class="py-16 px-4 bg-[#fffaf4]">
+    <div class="max-w-[1200px] flex flex-col lg:flex-row gap-12 items-center">
+      <!-- Vertical Bestsellers Text -->
+        <div class="shrink-0 flex flex-col justify-center h-full w-full lg:w-auto">
+          <!-- Desktop: vertical text link -->
+          <a 
+            href="#" 
+            class="hidden lg:flex text-[1.5rem] font-semibold text-[#8B4513] font-playfair writing-mode-vertical text-orientation-mixed tracking-[2px] h-[300px] items-center justify-center mt-20 transition-transform hover:scale-105"
+          >
+            BESTSELLERS
+          </a>
+
+          <!-- Mobile: horizontal text link -->
+          <a 
+            href="#" 
+            class="flex lg:hidden text-xl font-semibold text-[#8B4513] font-playfair tracking-[2px] items-center justify-center mb-6 transition-transform hover:scale-105"
+          >
+            BESTSELLERS
+          </a>
+        </div>
+
+
+      <!-- Horizontal Product Slider -->
+      <div class="w-full relative flex items-center">
+        <!-- Navigation Arrow Left -->
+        <button
+          class="bg-white border border-[#e5e5e5] rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center cursor-pointer shadow-md hover:bg-[#f8f8f8] hover:scale-[1.05] transition-all duration-300 absolute left-[-20px] md:left-[-50px] top-1/2 -translate-y-1/2 z-10"
+          onclick="slideHorizontal(-1)">
+          <svg width="20" height="20" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Product Container -->
+        <div class="overflow-hidden w-full">
+          <div id="horizontal-slider" class="flex gap-4 md:gap-8 transition-transform duration-500 ease-in-out w-max">
+            <!-- Product Card (Repeat as needed) -->
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <!-- Repeat product cards here -->
+          </div>
+        </div>
+
+        <!-- Navigation Arrow Right -->
+        <button
+          class="bg-white border border-[#e5e5e5] rounded-full w-[36px] h-[36px] md:w-[50px] md:h-[50px] flex items-center justify-center cursor-pointer shadow-md hover:bg-[#f8f8f8] hover:scale-[1.05] transition-all duration-300 absolute right-[-12px] md:right-[-60px] top-1/2 -translate-y-1/2 z-10"
+          onclick="slideHorizontal(1)">
+          <svg width="18" height="18" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 6 15 12 9 18"></polyline>
+          </svg>
+        </button>
+
+        <!-- Right-side BESTSELLERS (vertical on desktop, horizontal on mobile)
+        <div class="shrink-0 flex flex-col justify-center h-full w-full lg:w-auto ml-2">
+          <h3 class="hidden lg:flex text-[1.5rem] font-semibold text-[#8B4513] font-playfair writing-mode-vertical text-orientation-mixed tracking-[2px] h-[300px] items-center justify-center mt-20">
+            NEW ARRIVAILS
+          </h3>
+          <h3 class="flex lg:hidden text-xl font-semibold text-[#8B4513] font-playfair tracking-[2px] items-center justify-center mb-6">
+            NEW ARRIVAILS
+          </h3>
+        </div> -->
+      </div>
+    </div>  
+  </section>
+
+<!-- ======= SKINCARE QUIZ SECTION ======= -->
+  <section class="w-full bg-[#fdfaf6] py-20 px-4 flex flex-col md:flex-row items-center justify-center gap-16">
+    <!-- Image grid (2x2) -->
+    <div class="grid grid-cols-2 gap-4 w-full max-w-lg md:max-w-xl">
+      <img src="img1.jpg" alt="" class="w-full h-56 md:h-64 object-cover rounded-xl"/>
+      <img src="img2.jpg" alt="" class="w-full h-56 md:h-64 object-cover rounded-xl"/>
+      <img src="img3.jpg" alt="" class="w-full h-56 md:h-64 object-cover rounded-xl"/>
+      <img src="img4.jpg" alt="" class="w-full h-56 md:h-64 object-cover rounded-xl"/>
+    </div>
+    <!-- Quiz text and button -->
+    <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
+      <h2 class="text-4xl md:text-6xl font-bold text-[#18382c] mb-6 leading-tight">
+        SKINCARE<br>
+        <span class="italic font-playfair text-5xl md:text-7xl font-bold">Ritual Quiz</span>
+      </h2>
+      <p class="text-2xl md:text-3xl text-[#18382c] mb-10 font-medium">Your personalized ritual in minutes</p>
+      <a href="quiz.html" class="bg-[#18382c] text-white px-12 py-5 rounded-xl text-2xl md:text-3xl font-bold tracking-wide hover:bg-[#285c44] transition">TAKE THE QUIZ</a>
+    </div>
+  </section>
+
+<!-- ======= SHOP BY CONCERN SECTION ======= -->
+  <section class="w-full bg-[#18382c] py-10 px-4 flex flex-col items-center">
+    <div class="flex flex-wrap justify-center gap-6 text-base md:text-lg font-medium">
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="Photos/concern-wrinkle.jpeg" alt="Wrinkle" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Wrinkle</span>
+      </a>
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="concern-acne.jpg" alt="Acne" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Acne</span>
+      </a>
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="concern-hairloss.jpg" alt="Hair loss" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Hair loss</span>
+      </a>
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="concern-daily.jpg" alt="Daily Essentials" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Daily Essentials</span>
+      </a>
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="concern-blackheads.jpg" alt="Blackheads" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Blackheads</span>
+      </a>
+      <a href="#" class="relative flex items-center justify-center bg-white border border-[#e5e5e5] rounded-lg w-28 h-28 md:w-36 md:h-36 hover:bg-[#f5f5f5] transition">
+        <img src="concern-dryskin.jpg" alt="Dry Skin" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg"/>
+        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black bg-opacity-60 text-white text-xs md:text-base px-3 py-1 rounded pointer-events-none">Dry Skin</span>
+      </a>
+    </div>
+  </section>
+
+<!-- ======= COMMUNITY TESTIMONIALS SECTION ======= -->
+  <section class="w-full bg-[#fdfaf6] py-16 px-4 flex flex-col items-center">
+    <h3 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-8">Hariyali Community <span class="text-[#8B4513]">|</span> Testimonials / Love Notes</h3>
+    <div class="w-full max-w-2xl relative">
+      <div id="testimonial-rotator" class="text-center">
+        <blockquote class="text-xl md:text-2xl italic text-[#18382c] font-playfair min-h-[100px]" id="testimonial-quote">
+          "The products have transformed my skin! Love the natural feel."
+        </blockquote>
+        <div class="mt-4 text-[#8B4513] font-semibold" id="testimonial-author">
+          – Anisha, Kathmandu
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ======= DIGITAL GUIDE SECTION ======= -->
+<section class="w-full bg-gradient-to-br from-[#fffaf6] to-[#f5e9d7] py-16 px-4 flex flex-col items-center">
+  <h3 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-8">Digital Guide</h3>
+  <div class="w-full max-w-2xl relative">
+    <div id="digital-rotator" class="text-center bg-gradient-to-br from-[#e8f0e6] to-[#f5e9d7] rounded-xl shadow-lg p-8 border border-[#e0e7ef]">
+      <div class="text-xl md:text-2xl font-semibold text-[#285c44] min-h-[60px]" id="digital-title">
+        Mindful Living: 7-Day Challenge
+      </div>
+      <div class="mt-2 text-[#8B4513] font-bold uppercase tracking-wide" id="digital-type">
+        Course
+      </div>
+      <div class="mt-4 text-[#444] max-w-xl mx-auto text-base md:text-lg min-h-[40px] text-center font-medium" id="digital-desc">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet.
+      </div>
+      <div class="mt-6">
+        <button onclick="window.location.href='blog.html'"
+          class="inline-block bg-[#8B4513] hover:bg-[#a86c3c] text-white px-6 py-2 rounded-full font-semibold transition shadow-md">
+          Read More
+        </button>
+      </div>
+    </div>
+    <div class="flex justify-center gap-4 mt-8">
+      <a href="digital.html" class="bg-gradient-to-r from-[#18382c] to-[#285c44] text-white px-6 py-2 rounded-full font-semibold hover:from-[#285c44] hover:to-[#18382c] transition shadow-md">Explore Courses</a>
+      <a href="#" class="bg-gradient-to-r from-[#8B4513] to-[#a86c3c] text-white px-6 py-2 rounded-full font-semibold hover:from-[#a86c3c] hover:to-[#8B4513] transition shadow-md">Read Blogs</a>
+    </div>
+  </div>
+</section>
+
+<footer class="w-full bg-[#18382c] text-white py-10 px-4 mt-0">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+    <!-- Brand and Social -->
+    <div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
+      <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
+      <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
+      </div>
+    </div>
+    <!-- Quick Links -->
+    <div class="flex-1 flex flex-col items-center md:items-start mb-8 md:mb-0">
+      <div class="mb-4 font-semibold text-lg">Quick Links</div>
+      <div class="flex flex-wrap gap-3 text-sm text-gray-200">
+        <a href="index.html" class="hover:text-[#8B4513]">Home</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Shop</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Guide</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Ayuretreat</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Club</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Blog</a>
+        <span>|</span>
+        <a href="#" class="hover:text-[#8B4513]">Contact Us</a>
+      </div>
+      <a href="#" class="block mt-4 text-xs text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
+    </div>
+    <!-- Email Signup & Message -->
+    <div class="flex-1 flex flex-col items-center md:items-end w-full">
+      <form class="w-full max-w-xs mb-6">
+        <label for="footer-email-signup" class="block text-sm text-[#e0e7ef] mb-1">Sign up for updates</label>
+        <div class="flex">
+          <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition" required>
+          <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-4 py-2 rounded-r-lg font-semibold transition">Sign Up</button>
+        </div>
+      </form>
+      <div class="bg-[#22343a] rounded-xl p-6 shadow-lg border border-[#2c3e50] w-full max-w-xs">
+        <form id="footer-message-form" class="space-y-3">
+          <div>
+            <label for="footer-name" class="block text-xs text-[#e0e7ef] mb-1">Name</label>
+            <input type="text" id="footer-name" name="footer-name" autocomplete="off"
+              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition"
+              required>
+          </div>
+          <div>
+            <label for="footer-message" class="block text-xs text-[#e0e7ef] mb-1">Message</label>
+            <textarea id="footer-message" name="footer-message" rows="2"
+              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none"
+              required></textarea>
+          </div>
+          <button type="submit"
+            class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-2 rounded-lg font-mono font-semibold text-base flex items-center justify-center gap-2 transition">
+            <span>&#9993;</span> Send Message
+          </button>
+        </form>
+        <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-sm">Thank you for your message!</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-300 mt-8">
+    &copy; 2025 Hariyali Botanic. All rights reserved.
+  </div>
+</footer>
+
+  <script>
+    const toggle = document.getElementById('mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    let scrollAmount = 0;
+    const slider = document.getElementById("horizontal-slider");
+
+    function slideHorizontal(direction) {
+      const cardWidth = 368; // width + gap
+      scrollAmount += direction * cardWidth;
+      slider.style.transform = `translateX(-${scrollAmount}px)`;
+    }
+
+    // Rotating testimonials
+    const testimonials = [
+      {
+        quote: "The products have transformed my skin! Love the natural feel.",
+        author: "– Anisha, Kathmandu"
+      },
+      {
+        quote: "Hariyali is more than skincare, it's a ritual of self-love. My skin glows every morning.",
+        author: "– Prerana, Lalitpur"
+      },
+      {
+        quote: "I struggled with acne for years. After using Hariyali, my skin feels calm and clear.",
+        author: "– Suman, Pokhara"
+      },
+      {
+        quote: "The scents are so calming and the results are real. My friends keep asking my secret!",
+        author: "– Prakash, Bhaktapur"
+      },
+      {
+        quote: "Natural, gentle, and effective. I recommend Hariyali to everyone who cares about their skin.",
+        author: "– Ritu, Butwal"
+      },
+      {
+        quote: "The ritual quiz was spot on. My personalized routine feels luxurious and easy.",
+        author: "– Sneha, Kathmandu"
+      },
+      {
+        quote: "My dry skin is finally hydrated and happy. Thank you, Hariyali!",
+        author: "– Binita, Dharan"
+      }
+    ];
+    let testimonialIndex = 0;
+    function rotateTestimonial() {
+      testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+      document.getElementById('testimonial-quote').textContent = testimonials[testimonialIndex].quote;
+      document.getElementById('testimonial-author').textContent = testimonials[testimonialIndex].author;
+    }
+    setInterval(rotateTestimonial, 4000);
+
+    // Rotating digital guides/courses/blogs
+    const digitalItems = [
+      {
+        title: "Ayurveda for Beginners: A Self-Healing Course",
+        type: "Course",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet."
+      },
+      {
+        title: "Holistic Skincare: Digital Guide",
+        type: "Digital Guide",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet."
+      },
+      {
+        title: "Mindful Living: 7-Day Challenge",
+        type: "Course",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet."
+      },
+      {
+        title: "The Science of Herbs in Ayurveda",
+        type: "Blog",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet.."
+      },
+      {
+        title: "How to Choose the Right Oil for Your Dosha",
+        type: "Blog",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet.."
+      }
+    ];
+    let digitalIndex = 0;
+    function rotateDigital() {
+      digitalIndex = (digitalIndex + 1) % digitalItems.length;
+      document.getElementById('digital-title').textContent = digitalItems[digitalIndex].title;
+      document.getElementById('digital-type').textContent = digitalItems[digitalIndex].type;
+      document.getElementById('digital-desc').textContent = digitalItems[digitalIndex].desc;
+    }
+    setInterval(rotateDigital, 4000);
+
+    // Email signup dummy handler
+    document.querySelector('form[action=""]').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.reset();
+      // Optionally show a message
+    });
+    // Footer message form handler
+    document.getElementById('footer-message-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('footer-name').value = '';
+      document.getElementById('footer-message').value = '';
+      document.getElementById('footer-message-success').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('footer-message-success').classList.add('hidden');
+      }, 3000);
+    });
+
+    // Make dropdowns open on click for mobile and keyboard users
+    document.querySelectorAll('.group > button').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = btn.parentElement;
+        // Close other open dropdowns
+        document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+          if (!parent.contains(el)) el.style.display = 'none';
+        });
+        // Toggle current dropdown
+        const dropdown = parent.querySelector('.group-hover\\:block');
+        if (dropdown) {
+          dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+        if (!el.contains(e.target) && !el.parentElement.contains(e.target)) {
+          el.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hariyali Botanic</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Google Fonts: Serif + Sans-Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-white font-inter">
+  <nav class="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 relative">
+        
+        <!-- Left Nav Links -->
+        <div class="hidden md:flex space-x-6 text-sm uppercase font-medium">
+          <div class="group relative">
+            <button class="hover:text-sage">Shop</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 min-w-[180px]">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Skin</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hair</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Add+</a>
+              <div class="border-t my-1"></div>
+              <span class="block px-4 py-2 text-xs text-gray-500 font-semibold uppercase tracking-wider">Shop by concern</span>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wrinkle</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Acne</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hair loss</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Daily Essentials</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Blackheads</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Dry Skin</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Guides</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="digital.html" class="block px-4 py-2 hover:bg-gray-100">Digital Guides</a>
+              <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100">Blog</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Ayuretreat</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <!-- <a href="#" class="block px-4 py-2 hover:bg-gray-100">Network Partners</a> -->
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Upcoming Retreats</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Waitlist Interest</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Form Fill Up</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">About Us</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Our Story</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Our Principles</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Membership</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 w-64">
+              <a href="https://nas.io" target="_blank" class="block px-4 py-2 hover:bg-gray-100">nas.io</a>
+              <p class="px-4 py-2 text-sm text-gray-600">Inquire via Daraz for discounts or complimentary products.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Logo -->
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+          <a href="index.html" class="text-xl font-bold tracking-wider text-sage">Hariyali</a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-4 text-lg">
+          <button class="hover:text-sage"><i class="fas fa-search"></i></button>
+          <button class="hover:text-sage"><i class="fas fa-user"></i></button>
+          <a href="https://www.daraz.com.np" target="_blank" class="hover:text-sage">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+
+          <!-- Mobile Menu Icon -->
+          <div class="md:hidden">
+            <button id="mobile-toggle" class="text-2xl focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t px-4 pb-4">
+      <ul class="space-y-2 pt-4 font-medium">
+        <li><a href="#" class="block hover:text-sage">Shop</a></li>
+        <li><a href="#" class="block hover:text-sage">Guides</a></li>
+        <li><a href="#" class="block hover:text-sage">Ayuretreat</a></li>
+        <li><a href="#" class="block hover:text-sage">About Us</a></li>
+        <li><a href="#" class="block hover:text-sage">Membership</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    <section>
+  <div class="quiz-container relative min-h-screen flex flex-col items-center justify-center py-16 px-4 bg-gradient-to-br from-[#fdfaf6] to-[#e6e6e6] overflow-hidden">
+    <!-- Decorative Top Image -->
+    <img src="quiz-top-floral.png" alt="" class="absolute top-0 left-1/2 -translate-x-1/2 w-40 md:w-64 opacity-80 pointer-events-none select-none z-10"/>
+    <!-- Quiz Card -->
+    <div class="relative z-20 w-full max-w-lg bg-white/90 rounded-2xl shadow-xl p-8 md:p-12 flex flex-col items-center">
+      <!-- Logo or Quiz Title -->
+      <img src="logo.png" alt="Hariyali Logo" class="w-24 mb-4"/>
+      <h1 class="text-3xl md:text-4xl font-playfair font-bold text-[#18382c] mb-2 text-center">Your Personalized Ritual Quiz</h1>
+      <p class="text-base md:text-lg text-gray-700 mb-8 text-center">Answer a few questions and discover your custom skincare ritual, curated just for you.</p>
+      <!-- Progress Bar -->
+      <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
+        <div id="progressBar" class="bg-[#18382c] h-2 rounded-full transition-all duration-300" style="width: 16.67%"></div>
+      </div>
+      <!-- Steps (only one visible at a time) -->
+      <div id="step1" class="quiz-step">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">Let's get to know you</h2>
+      <form class="space-y-6">
+          <input type="text" id="userName" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:border-[#18382c] transition"/>
+          <select id="userAge" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:border-[#18382c] transition">
+          <option value="">Select your age range</option>
+          <option value="18-25">18-25</option>
+          <option value="26-35">26-35</option>
+          <option value="36-45">36-45</option>
+          <option value="46-55">46-55</option>
+          <option value="56+">56+</option>
+          </select>
+          <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition">Next</button>
+      </form>
+      </div>
+      <div id="step2" class="quiz-step hidden">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What is your skin type?</h2>
+      <div class="grid grid-cols-1 gap-4">
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'oily')">
+          <span class="font-medium">Oily</span>
+          <span class="block text-sm text-gray-600">Shiny, enlarged pores, prone to breakouts</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'dry')">
+          <span class="font-medium">Dry</span>
+          <span class="block text-sm text-gray-600">Tight, flaky, rough texture</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'combination')">
+          <span class="font-medium">Combination</span>
+          <span class="block text-sm text-gray-600">Oily T-zone, dry cheeks</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'sensitive')">
+          <span class="font-medium">Sensitive</span>
+          <span class="block text-sm text-gray-600">Easily irritated, reactive to products</span>
+          </button>
+      </div>
+      </div>
+      <div id="step3" class="quiz-step hidden">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What are your main skin concerns?</h2>
+      <p class="text-gray-600 mb-4 text-center">Select all that apply</p>
+      <div class="grid grid-cols-1 gap-4">
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('acne')">Acne & Breakouts</button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('aging')">Fine Lines & Aging</button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('pigmentation')">Dark Spots & Pigmentation</button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('dullness')">Dullness & Uneven Tone</button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('dryness')">Dryness & Dehydration</button>
+      </div>
+      <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-6">Next</button>
+      </div>
+      <div id="step4" class="quiz-step hidden">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">How much time do you spend on skincare?</h2>
+      <div class="grid grid-cols-1 gap-4">
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('routine', 'minimal')">
+          5 minutes or less <span class="block text-sm text-gray-600">Quick and simple routine</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('routine', 'moderate')">
+          10-15 minutes <span class="block text-sm text-gray-600">Balanced routine with key steps</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('routine', 'extensive')">
+          20+ minutes <span class="block text-sm text-gray-600">Comprehensive multi-step routine</span>
+          </button>
+      </div>
+      </div>
+      <div id="step5" class="quiz-step hidden">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What's your skincare budget?</h2>
+      <div class="grid grid-cols-1 gap-4">
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'low')">
+          Under $100 <span class="block text-sm text-gray-600">Essential products only</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'medium')">
+          $100 - $300 <span class="block text-sm text-gray-600">Quality products with some luxury</span>
+          </button>
+          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'high')">
+          $300+ <span class="block text-sm text-gray-600">Premium luxury skincare</span>
+          </button>
+      </div>
+      </div>
+      <div id="step6" class="quiz-step hidden">
+      <h2 class="text-2xl font-semibold text-[#18382c] mb-4 text-center">Your Personalized Skincare Ritual</h2>
+      <p class="text-gray-600 mb-6 text-center">Based on your answers, here are our recommendations:</p>
+      <div id="recommendations" class="space-y-6"></div>
+      <button type="button" onclick="restartQuiz()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-8">Retake Quiz</button>
+      </div>
+    </div>
+    <!-- Decorative Bottom Image -->
+    <img src="quiz-bottom-floral.png" alt="" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 md:w-64 opacity-80 pointer-events-none select-none z-10"/>
+    <!-- Optional: Soft overlay for extra effect -->
+    <div class="absolute inset-0 bg-[url('quiz-bg.jpg')] bg-cover bg-center opacity-20 pointer-events-none select-none"></div>
+  </div>
+</section>
+
+<footer class="w-full bg-[#18382c] text-white py-10 px-4 mt-0">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex flex-col items-center md:items-start">
+      <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
+      <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
+      </div>
+    </div>
+    <div class="flex flex-col items-center md:items-end text-sm gap-2">
+      <a href="index.html" class="hover:text-[#8B4513]">Home</a>
+      <a href="#" class="hover:text-[#8B4513]">Shop</a>
+      <a href="#" class="hover:text-[#8B4513]">Guides</a>
+      <a href="#" class="hover:text-[#8B4513]">Ayuretreat</a>
+      <a href="#" class="hover:text-[#8B4513]">About Us</a>
+      <a href="#" class="hover:text-[#8B4513]">Membership</a>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-300 mt-8">
+    &copy; 2024 Hariyali Botanic. All rights reserved.
+  </div>
+</footer>
+
+<script>
+    let currentStep = 1
+    let quizData = {
+    name: "",
+    age: "",
+    skinType: "",
+    concerns: [],
+    routine: "",
+    budget: "",
+    }
+
+    const products = {
+    cleansers: [
+        { name: "Gentle Cleansing Oil", price: 45, skinTypes: ["dry", "sensitive"], concerns: ["dryness"] },
+        { name: "Purifying Foam Cleanser", price: 38, skinTypes: ["oily", "combination"], concerns: ["acne"] },
+        { name: "Brightening Gel Cleanser", price: 42, skinTypes: ["all"], concerns: ["dullness", "pigmentation"] },
+    ],
+    serums: [
+        {
+        name: "Vitamin C Brightening Serum",
+        price: 85,
+        skinTypes: ["all"],
+        concerns: ["dullness", "pigmentation", "aging"],
+        },
+        { name: "Hyaluronic Acid Serum", price: 65, skinTypes: ["dry", "sensitive"], concerns: ["dryness", "aging"] },
+        { name: "Niacinamide Serum", price: 55, skinTypes: ["oily", "combination"], concerns: ["acne", "pigmentation"] },
+        { name: "Retinol Renewal Serum", price: 95, skinTypes: ["all"], concerns: ["aging", "acne"] },
+    ],
+    moisturizers: [
+        { name: "Hydrating Night Cream", price: 75, skinTypes: ["dry", "sensitive"], concerns: ["dryness", "aging"] },
+        { name: "Lightweight Day Moisturizer", price: 58, skinTypes: ["oily", "combination"], concerns: ["acne"] },
+        { name: "Anti-Aging Moisturizer", price: 88, skinTypes: ["all"], concerns: ["aging", "dryness"] },
+    ],
+    treatments: [
+        { name: "Exfoliating Mask", price: 68, skinTypes: ["oily", "combination"], concerns: ["acne", "dullness"] },
+        { name: "Hydrating Sheet Mask Set", price: 45, skinTypes: ["dry", "sensitive"], concerns: ["dryness"] },
+        { name: "Brightening Treatment", price: 125, skinTypes: ["all"], concerns: ["pigmentation", "dullness"] },
+    ],
+    }
+
+    function nextStep() {
+    // Validate current step
+    if (currentStep === 1) {
+        const name = document.getElementById("userName").value
+        const age = document.getElementById("userAge").value
+
+        if (!name || !age) {
+        alert("Please fill in all fields")
+        return
+        }
+
+        quizData.name = name
+        quizData.age = age
+    }
+
+    if (currentStep === 3 && quizData.concerns.length === 0) {
+        alert("Please select at least one skin concern")
+        return
+    }
+
+    // Hide current step
+    document.getElementById(`step${currentStep}`).classList.add("hidden")
+
+    // Show next step
+    currentStep++
+    if (currentStep <= 6) {
+        document.getElementById(`step${currentStep}`).classList.remove("hidden")
+        document.getElementById(`step${currentStep}`).classList.add("slide-in")
+
+        // Update progress bar
+        const progress = (currentStep / 6) * 100
+        document.getElementById("progressBar").style.width = progress + "%"
+
+        // Generate recommendations on final step
+        if (currentStep === 6) {
+        generateRecommendations()
+        }
+    }
+    }
+
+    function selectOption(category, value) {
+    quizData[category] = value
+
+    // Remove selected class from all options in this step
+    const currentStepElement = document.getElementById(`step${currentStep}`)
+    const options = currentStepElement.querySelectorAll(".quiz-option")
+    options.forEach((option) => option.classList.remove("selected"))
+
+    // Add selected class to clicked option
+    event.target.closest(".quiz-option").classList.add("selected")
+
+    // Auto-advance after selection (except for concerns step)
+    if (category !== "concerns") {
+        setTimeout(() => {
+        nextStep()
+        }, 500)
+    }
+    }
+
+    function toggleConcern(concern) {
+    const index = quizData.concerns.indexOf(concern)
+    const option = event.target.closest(".quiz-option")
+
+    if (index > -1) {
+        quizData.concerns.splice(index, 1)
+        option.classList.remove("selected")
+    } else {
+        quizData.concerns.push(concern)
+        option.classList.add("selected")
+    }
+    }
+
+    function generateRecommendations() {
+    const recommendationsContainer = document.getElementById("recommendations")
+    let recommendations = []
+
+    // Get cleanser recommendation
+    const cleanser =
+        products.cleansers.find(
+        (product) => product.skinTypes.includes(quizData.skinType) || product.skinTypes.includes("all"),
+        ) || products.cleansers[0]
+
+    // Get serum recommendation based on concerns
+    const serum =
+        products.serums.find((product) => product.concerns.some((concern) => quizData.concerns.includes(concern))) ||
+        products.serums[0]
+
+    // Get moisturizer recommendation
+    const moisturizer =
+        products.moisturizers.find(
+        (product) => product.skinTypes.includes(quizData.skinType) || product.skinTypes.includes("all"),
+        ) || products.moisturizers[0]
+
+    // Get treatment recommendation based on budget and concerns
+    let treatment = null
+    if (quizData.budget !== "low") {
+        treatment = products.treatments.find((product) =>
+        product.concerns.some((concern) => quizData.concerns.includes(concern)),
+        )
+    }
+
+    recommendations = [cleanser, serum, moisturizer]
+    if (treatment) recommendations.push(treatment)
+
+    // Filter by budget
+    if (quizData.budget === "low") {
+        recommendations = recommendations.filter((product) => product.price < 60)
+    } else if (quizData.budget === "medium") {
+        recommendations = recommendations.filter((product) => product.price < 100)
+    }
+
+    // Generate HTML
+    let html = `<div class="bg-white bg-opacity-90 p-6 rounded-lg mb-6">
+            <h3 class="text-xl font-medium mb-2">Hello ${quizData.name}!</h3>
+            <p class="text-gray-600">Based on your ${quizData.skinType} skin type and concerns about ${quizData.concerns.join(", ")}, here's your personalized routine:</p>
+        </div>`
+
+    recommendations.forEach((product, index) => {
+        html += `
+                <div class="bg-white bg-opacity-90 p-6 rounded-lg border border-gray-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-medium text-lg">${product.name}</h4>
+                        <span class="text-xl font-bold text-gray-800">$${product.price}</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Step ${index + 1} of your routine</p>
+                    <button class="bg-gray-800 text-white px-6 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
+                        ADD TO CART
+                    </button>
+                </div>
+            `
+    })
+
+    const totalPrice = recommendations.reduce((sum, product) => sum + product.price, 0)
+    html += `
+            <div class="bg-gray-800 text-white p-6 rounded-lg text-center">
+                <h4 class="text-xl font-medium mb-2">Complete Routine</h4>
+                <p class="text-2xl font-bold mb-4">$${totalPrice}</p>
+                <button class="bg-white text-gray-800 px-8 py-3 font-medium hover:bg-gray-100 transition-colors">
+                    GET YOUR COMPLETE ROUTINE
+                </button>
+            </div>
+        `
+
+    recommendationsContainer.innerHTML = html
+    }
+
+    function restartQuiz() {
+    currentStep = 1
+    quizData = {
+        name: "",
+        age: "",
+        skinType: "",
+        concerns: [],
+        routine: "",
+        budget: "",
+    }
+
+    // Hide all steps
+    for (let i = 1; i <= 6; i++) {
+        document.getElementById(`step${i}`).classList.add("hidden")
+    }
+
+    // Show first step
+    document.getElementById("step1").classList.remove("hidden")
+    document.getElementById("progressBar").style.width = "16.67%"
+
+    // Clear form
+    document.getElementById("userName").value = ""
+    document.getElementById("userAge").value = ""
+
+    // Remove all selected classes
+    document.querySelectorAll(".quiz-option").forEach((option) => {
+        option.classList.remove("selected")
+    })
+    }
+
+    // Close button functionality
+    document.getElementById("closeBtn").addEventListener("click", () => {
+    if (confirm("Are you sure you want to close the quiz?")) {
+        window.close()
+    }
+    })
+
+  // ===== Navbar Dropdown Script (copy from index.html) =====
+  // Mobile menu toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+  // Dropdown open/close logic
+  document.querySelectorAll('.group > button').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = btn.parentElement;
+      document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+        if (!parent.contains(el)) el.style.display = 'none';
+      });
+      const dropdown = parent.querySelector('.group-hover\\:block');
+      if (dropdown) {
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+      }
+    });
+  });
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+      if (!el.contains(e.target) && !el.parentElement.contains(e.target)) {
+        el.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
