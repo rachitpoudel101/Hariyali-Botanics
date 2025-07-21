@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hariyali Botanic</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Google Fonts: Serif + Sans-Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* Ensure dropdowns open on hover and click for accessibility */
+    .group:focus-within .group-hover\:block,
+    .group:hover .group-hover\:block {
+      display: block !important;
+    }
+    .group-hover\:block {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- ======= NAVBAR ======= -->
+  <nav class="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 relative">
+        <!-- Left Nav Links -->
+        <div class="hidden md:flex space-x-6 text-sm uppercase font-medium">
+          <div class="group relative">
+            <button class="hover:text-sage">Shop</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 min-w-[180px]">
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Skin</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Hair</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Add+</a>
+              <div class="border-t my-1"></div>
+              <span class="block px-4 py-2 text-xs text-gray-500 font-semibold uppercase tracking-wider">Shop by concern</span>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Wrinkle</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Acne</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Hair loss</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Daily Essentials</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Blackheads</a>
+              <a href="shop.html" class="block px-4 py-2 hover:bg-gray-100">Dry Skin</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Guides</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="digital.html" class="block px-4 py-2 hover:bg-gray-100">Digital Guides</a>
+              <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100">Blog</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Ayuretreat</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Upcoming Retreats</a>
+              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Waitlist Interest</a>
+              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Form Fill Up</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">About Us</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
+              <a href="our_story.html" class="block px-4 py-2 hover:bg-gray-100">Our Story</a>
+              <a href="our_principle.html" class="block px-4 py-2 hover:bg-gray-100">Our Principles</a>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <button class="hover:text-sage">Membership</button>
+            <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 w-64">
+              <a href="https://nas.io" target="_blank" class="block px-4 py-2 hover:bg-gray-100">nas.io</a>
+              <p class="px-4 py-2 text-sm text-gray-600">Inquire via Daraz for discounts or complimentary products.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Logo -->
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+          <a href="index.html" class="text-xl font-bold tracking-wider text-sage">Hariyali</a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-4 text-lg">
+          <button class="hover:text-sage"><i class="fas fa-search"></i></button>
+          <button class="hover:text-sage"><i class="fas fa-user"></i></button>
+          <a href="https://www.daraz.com.np" target="_blank" class="hover:text-sage">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+
+          <!-- Mobile Menu Icon -->
+          <div class="md:hidden">
+            <button id="mobile-toggle" class="text-2xl focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t px-4 pb-4">
+      <ul class="space-y-2 pt-4 font-medium">
+        <li><a href="shop.html" class="block hover:text-sage">Shop</a></li>
+        <li><a href="digital.html" class="block hover:text-sage">Guides</a></li>
+        <li><a href="ayuretreat.html" class="block hover:text-sage">Ayuretreat</a></li>
+        <li><a href="our_story.html" class="block hover:text-sage">About Us</a></li>
+        <li><a href="https://nas.io" target="_blank" class="block hover:text-sage">Membership</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======= OUR PRINCIPLES MAIN CONTENT ======= -->
+  <main class="max-w-4xl mx-auto px-4 py-16">
+    <h1 class="text-4xl md:text-5xl font-bold text-sage mb-8 text-center font-playfair">Our Principles</h1>
+    <div class="bg-white rounded-xl shadow-lg p-8 text-lg md:text-xl text-gray-700 leading-relaxed font-inter">
+      <ul class="list-disc pl-6 space-y-6">
+        <li>
+          <span class="font-semibold text-[#8B4513]">Purity First:</span>
+          We use only the purest, natural ingredients, free from harmful chemicals and synthetic additives.
+        </li>
+        <li>
+          <span class="font-semibold text-[#8B4513]">Sustainability:</span>
+          Our sourcing and packaging honor the earth, supporting ethical harvesting and eco-friendly practices.
+        </li>
+        <li>
+          <span class="font-semibold text-[#8B4513]">Ayurvedic Wisdom:</span>
+          Every product is inspired by time-tested Ayurvedic rituals and the healing power of Himalayan botanicals.
+        </li>
+        <li>
+          <span class="font-semibold text-[#8B4513]">Community Care:</span>
+          We empower our community with education, personalized rituals, and holistic wellness guides.
+        </li>
+        <li>
+          <span class="font-semibold text-[#8B4513]">Transparency:</span>
+          We believe in honest communication about our ingredients, processes, and values.
+        </li>
+        <li>
+          <span class="font-semibold text-[#8B4513]">Mindful Beauty:</span>
+          Our mission is to nurture self-love, confidence, and well-being through mindful self-care.
+        </li>
+      </ul>
+      <p class="mt-8">
+        These principles guide every step of our journey at Hariyali Botanic. Thank you for sharing in our vision.
+      </p>
+    </div>
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="w-full bg-[#18382c] text-white py-10 px-4 mt-0">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+      <!-- Brand and Social -->
+      <div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
+        <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
+        <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
+        <div class="flex space-x-4 mt-2">
+          <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div class="flex-1 flex flex-col items-center md:items-start mb-8 md:mb-0">
+        <div class="mb-4 font-semibold text-lg">Quick Links</div>
+        <div class="flex flex-wrap gap-3 text-sm text-gray-200">
+          <a href="index.html" class="hover:text-[#8B4513]">Home</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Shop</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Guide</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Ayuretreat</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Club</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Blog</a>
+          <span>|</span>
+          <a href="#" class="hover:text-[#8B4513]">Contact Us</a>
+        </div>
+        <a href="#" class="block mt-4 text-xs text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
+      </div>
+      <!-- Email Signup & Message -->
+      <div class="flex-1 flex flex-col items-center md:items-end w-full">
+        <form class="w-full max-w-xs mb-6">
+          <label for="footer-email-signup" class="block text-sm text-[#e0e7ef] mb-1">Sign up for updates</label>
+          <div class="flex">
+            <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition" required>
+            <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-4 py-2 rounded-r-lg font-semibold transition">Sign Up</button>
+          </div>
+        </form>
+        <div class="bg-[#22343a] rounded-xl p-6 shadow-lg border border-[#2c3e50] w-full max-w-xs">
+          <form id="footer-message-form" class="space-y-3">
+            <div>
+              <label for="footer-name" class="block text-xs text-[#e0e7ef] mb-1">Name</label>
+              <input type="text" id="footer-name" name="footer-name" autocomplete="off"
+                class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition"
+                required>
+            </div>
+            <div>
+              <label for="footer-message" class="block text-xs text-[#e0e7ef] mb-1">Message</label>
+              <textarea id="footer-message" name="footer-message" rows="2"
+                class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none"
+                required></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-2 rounded-lg font-mono font-semibold text-base flex items-center justify-center gap-2 transition">
+              <span>&#9993;</span> Send Message
+            </button>
+          </form>
+          <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-sm">Thank you for your message!</div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-xs text-gray-300 mt-8">
+      &copy; 2025 Hariyali Botanic. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
