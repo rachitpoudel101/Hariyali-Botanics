@@ -1,0 +1,99 @@
+:root {
+  --green-dark: #426b4d;
+  --green-light: #a8b5a2;
+  --cream: #fefcf6;
+  --earth: #a56c2a;
+  --font-primary: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background-color: var(--cream);
+  color: #333;
+}
+
+.club-container {
+  max-width: 700px;
+  margin: 4rem auto;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--green-dark);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 2rem;
+  text-align: left;
+  max-width: 400px;
+}
+
+.perks li {
+  background: var(--green-light);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.signup-form {
+  margin-top: 1rem;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.05);
+}
+
+.signup-form h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--earth);
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  background-color: rgb(159, 206, 156);
+  color: rgb(10, 9, 9);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup-form button:hover {
+  background-color: #759e7f;
+}
+
+.freebie {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #a19999;
+}
