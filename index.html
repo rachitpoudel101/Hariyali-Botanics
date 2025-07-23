@@ -24,6 +24,143 @@
     .group-hover\:block {
       display: none;
     }
+
+    /* Product slider improvements */
+    .slider-section {
+      display: flex;
+      flex-direction: row;
+      gap: 4rem; /* increased gap */
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1950x; /* wider slider */
+      margin: 0 auto;
+    }
+    .bestseller-label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      min-width: 60px;
+      margin-right: 1rem;
+    }
+    .bestseller-label .vertical {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #8B4513;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      margin-bottom: 0;
+      transition: transform 0.2s;
+    }
+    .bestseller-label .vertical:hover {
+      transform: scale(1.05);
+    }
+    .bestseller-label .horizontal {
+      font-size: 1.25rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #8B4513;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s;
+    }
+    .bestseller-label .horizontal:hover {
+      transform: scale(1.05);
+    }
+    .slider-viewport {
+      flex: 1;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .slider-viewport::-webkit-scrollbar {
+      display: none;
+    }
+    #horizontal-slider {
+      display: flex;
+      gap: 3rem; 
+      min-width: 100%;
+      align-items: stretch;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(46,93,78,0.08);
+      border: 1px solid #e6e6e6;
+      transition: box-shadow 0.3s, transform 0.2s;
+      min-width: 380px; 
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 32px rgba(46,93,78,0.18);
+      transform: translateY(-4px) scale(1.03);
+      border-color: #b7d3c2;
+    }
+    @media (max-width: 1280px) {
+      .slider-section { max-width: 1100px; gap: 2rem; }
+      #horizontal-slider { gap: 1.2rem; }
+      .product-card { min-width: 320px; max-width: 340px; }
+    }
+    @media (max-width: 1024px) {
+      .slider-section { gap: 1.5rem; }
+      .product-card { min-width: 260px; max-width: 280px; }
+      #horizontal-slider { gap: 1rem; }
+    }
+    @media (max-width: 768px) {
+      .slider-section { flex-direction: column; gap: 1rem; max-width: 100vw; }
+      .bestseller-label { flex-direction: row; min-width: 0; margin-right: 0; }
+      .bestseller-label .vertical { display: none; }
+      .bestseller-label .horizontal { display: block; }
+      .product-card { min-width: 90vw; max-width: 95vw; }
+      #horizontal-slider { gap: 0.5rem; }
+    }
+    @media (min-width: 769px) {
+      .bestseller-label .vertical { display: block; }
+      .bestseller-label .horizontal { display: none; }
+    }
+    @media (max-width: 640px) {
+      .product-card { min-width: 98vw; max-width: 98vw; }
+      .slider-section { padding: 0; }
+    }
+    /* Navigation arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 9999px;
+      box-shadow: 0 2px 8px rgba(46,93,78,0.10);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .slider-arrow:hover {
+      background: #f8f8f8;
+      box-shadow: 0 4px 16px rgba(46,93,78,0.18);
+      transform: scale(1.05) translateY(-50%);
+    }
+    .slider-arrow.left {
+      left: 0; /* fix: make sure arrow is visible at left edge */
+    }
+    .slider-arrow.right {
+      right: 0;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -61,9 +198,9 @@
           <div class="group relative">
             <button class="hover:text-sage">Ayuretreat</button>
             <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10">
-              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Upcoming Retreats</a>
-              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Waitlist Interest</a>
-              <a href="ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Form Fill Up</a>
+              <a href="Ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Upcoming Retreats</a>
+              <!-- <a href="Ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Waitlist Interest</a>
+              <a href="Ayuretreat.html" class="block px-4 py-2 hover:bg-gray-100">Form Fill Up</a> -->
             </div>
           </div>
 
@@ -79,7 +216,8 @@
             <button class="hover:text-sage">Membership</button>
             <div class="absolute hidden group-hover:block bg-white shadow-md border rounded mt-2 z-10 w-64">
               <a href="https://nas.io" target="_blank" class="block px-4 py-2 hover:bg-gray-100">nas.io</a>
-              <p class="px-4 py-2 text-sm text-gray-600">Inquire via Daraz for discounts or complimentary products.</p>
+              <a href="club.html" class="block px-4 py-2 hover:bg-gray-100">Hariyali Club</a>
+              <!-- <p class="px-4 py-2 text-sm text-gray-600">Inquire via Daraz for discounts or complimentary products.</p> -->
             </div>
           </div>
 
@@ -150,42 +288,23 @@
 
   <!-- ======= PRODUCT SLIDER SECTION ======= -->
   <section class="py-16 px-4 bg-[#fffaf4]">
-    <div class="max-w-[1200px] flex flex-col lg:flex-row gap-12 items-center">
-      <!-- Vertical Bestsellers Text -->
-      <div class="shrink-0 flex flex-col justify-center h-full w-full lg:w-auto">
-        <!-- Desktop: vertical text link -->
-        <a 
-          href="#" 
-          class="hidden lg:flex text-[1.5rem] font-semibold text-[#8B4513] font-playfair writing-mode-vertical text-orientation-mixed tracking-[2px] h-[300px] items-center justify-center mt-20 transition-transform hover:scale-105"
-        >
-          BESTSELLERS
-        </a>
-
-        <!-- Mobile: horizontal text link -->
-        <a 
-          href="#" 
-          class="flex lg:hidden text-xl font-semibold text-[#8B4513] font-playfair tracking-[2px] items-center justify-center mb-6 transition-transform hover:scale-105"
-        >
-          BESTSELLERS
-        </a>
-      </div>
-
-      <!-- Horizontal Product Slider -->
-      <div class="w-full relative flex items-center">
-        <!-- Navigation Arrow Left -->
-        <button
-          class="bg-white border border-[#e5e5e5] rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center cursor-pointer shadow-md hover:bg-[#f8f8f8] hover:scale-[1.05] transition-all duration-300 absolute left-[-20px] md:left-[-50px] top-1/2 -translate-y-1/2 z-10"
-          onclick="slideHorizontal(-1)">
-          <svg width="20" height="20" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-
-        <!-- Product Container -->
-        <div class="overflow-hidden w-full">
-          <div id="horizontal-slider" class="flex gap-4 md:gap-8 transition-transform duration-500 ease-in-out w-max">
-            <!-- Product Card (Repeat as needed) -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+  <div class="slider-section">
+    <!-- Vertical Bestsellers Text -->
+    <div class="bestseller-label">
+      <a href="#" class="vertical hidden lg:flex">BESTSELLERS</a>
+      <a href="#" class="horizontal flex lg:hidden">BESTSELLERS</a>
+    </div>
+    <!-- Horizontal Product Slider -->
+    <div class="slider-viewport">
+      <!-- Navigation Arrow Left -->
+      <button class="slider-arrow left" onclick="slideHorizontal(-1)">
+        <svg width="20" height="20" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div id="horizontal-slider">
+        <!-- Product Card (Repeat as needed) -->
+        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
               <div class="w-[200px] mx-auto">
                 <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
               </div>
@@ -211,7 +330,7 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
               <div class="w-[200px] mx-auto">
                 <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
               </div>
@@ -237,7 +356,7 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
               <div class="w-[200px] mx-auto">
                 <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
               </div>
@@ -263,7 +382,7 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center">
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
               <div class="w-[200px] mx-auto">
                 <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
               </div>
@@ -288,31 +407,69 @@
                 </div>
               </div>
             </div>
-            <!-- Repeat product cards here -->
+
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 min-w-[350px] w-[350px] flex flex-col items-center animate-fadeIn text-center product-card">
+              <div class="w-[200px] mx-auto">
+                <img src="/placeholder.svg?height=300&width=250" alt="I Am Protected" class="w-full h-[200px] object-cover rounded-md">
+              </div>
+              <div class="flex flex-col gap-4 mt-4">                                                  
+                <a href="product-details.html" class="text-[1.5rem] font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                  I Am Protected
+                </a>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="text-yellow-400 text-[1.1rem]">★★★★☆</div>
+                  <span class="text-[#666] text-sm">(183)</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="font-semibold text-[#333] text-[1.1rem]">Rs13,300 NPR - Rs26,500 NPR</span>
+                  <span class="line-through text-[#999] text-sm">Rs14,800 NPR - Rs29,500 NPR</span>
+                </div>
+                <div class="flex gap-4 items-center mt-2 justify-center">
+                  <select class="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm cursor-pointer">
+                    <option>30mL</option>
+                    <option>50mL</option>
+                  </select>
+                  <button class="border-2 border-[#333] text-[#333] px-6 py-2 text-sm font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
-
-        <!-- Navigation Arrow Right -->
-        <button
-          class="bg-white border border-[#e5e5e5] rounded-full w-[36px] h-[36px] md:w-[50px] md:h-[50px] flex items-center justify-center cursor-pointer shadow-md hover:bg-[#f8f8f8] hover:scale-[1.05] transition-all duration-300 absolute right-[-12px] md:right-[-60px] top-1/2 -translate-y-1/2 z-10"
-          onclick="slideHorizontal(1)">
-          <svg width="18" height="18" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 6 15 12 9 18"></polyline>
-          </svg>
-        </button>
-
-        <!-- Right-side BESTSELLERS (vertical on desktop, horizontal on mobile)
-        <div class="shrink-0 flex flex-col justify-center h-full w-full lg:w-auto ml-2">
-          <h3 class="hidden lg:flex text-[1.5rem] font-semibold text-[#8B4513] font-playfair writing-mode-vertical text-orientation-mixed tracking-[2px] h-[300px] items-center justify-center mt-20">
-            NEW ARRIVAILS
-          </h3>
-          <h3 class="flex lg:hidden text-xl font-semibold text-[#8B4513] font-playfair tracking-[2px] items-center justify-center mb-6">
-            NEW ARRIVAILS
-          </h3>
-        </div> -->
-      </div>
-    </div>  
-  </section>
+      <!-- Navigation Arrow Right -->
+      <button class="slider-arrow right" onclick="slideHorizontal(1)">
+        <svg width="18" height="18" class="md:w-[24px] md:h-[24px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
 
   <!-- ======= SKINCARE QUIZ SECTION ======= -->
   <section class="w-full bg-[#fdfaf6] py-20 px-4 flex flex-col md:flex-row items-center justify-center gap-16">
@@ -378,103 +535,74 @@
       </div>
     </div>
   </section>
-
-  <!-- ======= DIGITAL GUIDE SECTION ======= -->
-  <section class="w-full bg-gradient-to-br from-[#fffaf6] to-[#f5e9d7] py-16 px-4 flex flex-col items-center">
-    <h3 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-8">Digital Guide</h3>
-    <div class="w-full max-w-2xl relative">
-      <div id="digital-rotator" class="text-center bg-gradient-to-br from-[#e8f0e6] to-[#f5e9d7] rounded-xl shadow-lg p-8 border border-[#e0e7ef]">
-        <div class="text-xl md:text-2xl font-semibold text-[#285c44] min-h-[60px]" id="digital-title">
-          Mindful Living: 7-Day Challenge
-        </div>
-        <div class="mt-2 text-[#8B4513] font-bold uppercase tracking-wide" id="digital-type">
-          Course
-        </div>
-        <div class="mt-4 text-[#444] max-w-xl mx-auto text-base md:text-lg min-h-[40px] text-center font-medium" id="digital-desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate explicabo dolores, quidem tenetur hic iure eos vitae cum dolorum, accusamus facilis necessitatibus repudiandae. Quidem obcaecati sequi quae amet explicabo eveniet.
-        </div>
-        <div class="mt-6">
-          <button onclick="window.location.href='blog.html'"
-            class="inline-block bg-[#8B4513] hover:bg-[#a86c3c] text-white px-6 py-2 rounded-full font-semibold transition shadow-md">
-            Read More
-          </button>
-        </div>
-      </div>
-      <div class="flex justify-center gap-4 mt-8">
-        <a href="digital.html" class="bg-gradient-to-r from-[#18382c] to-[#285c44] text-white px-6 py-2 rounded-full font-semibold hover:from-[#285c44] hover:to-[#18382c] transition shadow-md">Explore Courses</a>
-        <a href="#" class="bg-gradient-to-r from-[#8B4513] to-[#a86c3c] text-white px-6 py-2 rounded-full font-semibold hover:from-[#a86c3c] hover:to-[#8B4513] transition shadow-md">Read Blogs</a>
-      </div>
-    </div>
-  </section>
-
   <footer class="w-full bg-[#18382c] text-white py-10 px-4 mt-0">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
-      <!-- Brand and Social -->
-      <div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
-        <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
-        <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
-        <div class="flex space-x-4 mt-2">
-          <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
-        </div>
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+    <!-- Brand and Social -->
+    <div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
+      <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
+      <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
       </div>
-      <!-- Quick Links -->
-      <div class="flex-1 flex flex-col items-center md:items-start mb-8 md:mb-0">
-        <div class="mb-4 font-semibold text-lg">Quick Links</div>
-        <div class="flex flex-wrap gap-3 text-sm text-gray-200">
-          <a href="index.html" class="hover:text-[#8B4513]">Home</a>
-          <span>|</span>
-          <a href="shop.html" class="hover:text-[#8B4513]">Shop</a>
-          <span>|</span>
-          <a href="digital.html" class="hover:text-[#8B4513]">Guide</a>
-          <span>|</span>
-          <a href="ayuretreat.html" class="hover:text-[#8B4513]">Ayuretreat</a>
-          <span>|</span>
-          <a href="club.html" class="hover:text-[#8B4513]">Club</a>
-          <span>|</span>
-          <a href="blog.html" class="hover:text-[#8B4513]">Blog</a>
-          <span>|</span>
-          <a href="contact.html" class="hover:text-[#8B4513]">Contact Us</a>
-        </div>
-        <a href="#" class="block mt-4 text-xs text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
+    </div>
+    <!-- Quick Links -->
+    <div class="flex-1 flex flex-col items-center md:items-start mb-8 md:mb-0">
+      <div class="mb-4 font-semibold text-lg">Quick Links</div>
+      <div class="flex flex-wrap gap-3 text-sm text-gray-200">
+        <a href="index.html" class="hover:text-[#8B4513]">Home</a>
+        <span>|</span>
+        <a href="shop.html" class="hover:text-[#8B4513]">Shop</a>
+        <span>|</span>
+        <a href="digital.html" class="hover:text-[#8B4513]">Guide</a>
+        <span>|</span>
+        <a href="ayuretreat.html" class="hover:text-[#8B4513]">Ayuretreat</a>
+        <span>|</span>
+        <a href="club.html" class="hover:text-[#8B4513]">Club</a>
+        <span>|</span>
+        <a href="blog.html" class="hover:text-[#8B4513]">Blog</a>
+        <span>|</span>
+        <a href="contact.html" class="hover:text-[#8B4513]">Contact Us</a>
       </div>
-      <!-- Email Signup & Message -->
-      <div class="flex-1 flex flex-col items-center md:items-end w-full">
-        <form class="w-full max-w-xs mb-6">
-          <label for="footer-email-signup" class="block text-sm text-[#e0e7ef] mb-1">Sign up for updates</label>
-          <div class="flex">
-            <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition" required>
-            <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-4 py-2 rounded-r-lg font-semibold transition">Sign Up</button>
+      <a href="#" class="block mt-4 text-xs text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
+    </div>
+    <!-- Email Signup & Message -->
+    <div class="flex-1 flex flex-col items-center md:items-end w-full">
+      <form class="w-full max-w-xs mb-6">
+        <label for="footer-email-signup" class="block text-sm text-[#e0e7ef] mb-1">Sign up for updates</label>
+        <div class="flex">
+          <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition" required>
+          <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-4 py-2 rounded-r-lg font-semibold transition">Sign Up</button>
+        </div>
+      </form>
+      <div class="bg-[#22343a] rounded-xl p-6 shadow-lg border border-[#2c3e50] w-full max-w-xs">
+        <form id="footer-message-form" class="space-y-3">
+          <div>
+            <label for="footer-name" class="block text-xs text-[#e0e7ef] mb-1">Name</label>
+            <input type="text" id="footer-name" name="footer-name" autocomplete="off"
+              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition"
+              required>
           </div>
+          <div>
+            <label for="footer-message" class="block text-xs text-[#e0e7ef] mb-1">Message</label>
+            <textarea id="footer-message" name="footer-message" rows="2"
+              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none"
+              required></textarea>
+          </div>
+          <button type="submit"
+            class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-2 rounded-lg font-mono font-semibold text-base flex items-center justify-center gap-2 transition">
+            <span>&#9993;</span> Send Message
+          </button>
         </form>
-        <div class="bg-[#22343a] rounded-xl p-6 shadow-lg border border-[#2c3e50] w-full max-w-xs">
-          <form id="footer-message-form" class="space-y-3">
-            <div>
-              <label for="footer-name" class="block text-xs text-[#e0e7ef] mb-1">Name</label>
-              <input type="text" id="footer-name" name="footer-name" autocomplete="off"
-                class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition"
-                required>
-            </div>
-            <div>
-              <label for="footer-message" class="block text-xs text-[#e0e7ef] mb-1">Message</label>
-              <textarea id="footer-message" name="footer-message" rows="2"
-                class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none"
-                required></textarea>
-            </div>
-            <button type="submit"
-              class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-2 rounded-lg font-mono font-semibold text-base flex items-center justify-center gap-2 transition">
-              <span>&#9993;</span> Send Message
-            </button>
-          </form>
-          <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-sm">Thank you for your message!</div>
-        </div>
+        <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-sm">Thank you for your message!</div>
       </div>
     </div>
-    <div class="text-center text-xs text-gray-300 mt-8">
-      &copy; 2025 Hariyali Botanic. All rights reserved.
-    </div>
-  </footer>
+  </div>
+  <div class="text-center text-xs text-gray-300 mt-8">
+    &copy; 2025 Hariyali Botanic. All rights reserved.
+  </div>
+</footer>
 
   <script>
     const toggle = document.getElementById('mobile-toggle');
