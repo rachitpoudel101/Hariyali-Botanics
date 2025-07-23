@@ -125,67 +125,266 @@
 
   <!-- ======= PRODUCT DETAILS SECTION ======= -->
   <main class="max-w-5xl mx-auto px-4 py-16 flex flex-col md:flex-row gap-12 items-start">
-    <!-- Product Image -->
-    <div class="w-full md:w-1/2 flex justify-center">
-      <img src="/placeholder.svg?height=400&width=320" alt="I Am Protected" class="rounded-xl shadow-lg w-full max-w-xs object-cover">
-    </div>
-    <!-- Product Info -->
-    <div class="w-full md:w-1/2 flex flex-col gap-6">
-      <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c] mb-2">I Am Protected</h1>
-      <div class="flex items-center gap-3">
-        <div class="text-yellow-400 text-xl">★★★★☆</div>
-        <span class="text-[#666] text-base">(183 reviews)</span>
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="font-semibold text-[#333] text-2xl">Rs13,300 NPR - Rs26,500 NPR</span>
-        <span class="line-through text-[#999] text-base">Rs14,800 NPR - Rs29,500 NPR</span>
-      </div>
-      <p class="text-lg text-gray-700">
-        Experience the power of Himalayan botanicals with our signature "I Am Protected" serum. Crafted with pure, natural ingredients, this formula helps shield your skin from environmental stressors, leaving it radiant and nourished.
-      </p>
-      <div>
-        <label for="size" class="block text-sm font-medium mb-1">Size</label>
-        <select id="size" class="px-4 py-2 border border-gray-300 rounded-md bg-white text-base cursor-pointer">
-          <option>30mL</option>
-          <option>50mL</option>
-        </select>
-      </div>
-      <button class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 rounded-lg font-semibold text-lg transition w-full md:w-auto">
-        Add to Cart
-      </button>
-      <div class="mt-6">
-        <h2 class="text-xl font-bold mb-2">Product Details</h2>
-        <ul class="list-disc pl-6 text-gray-700 space-y-1">
-          <li>100% natural, Ayurvedic ingredients</li>
-          <li>Suitable for all skin types</li>
-          <li>Free from parabens, sulfates, and artificial fragrances</li>
-          <li>Handcrafted in Nepal</li>
-        </ul>
-      </div>
+  <!-- Product Image & Details (left column) -->
+  <div class="w-full md:w-1/2 flex flex-col items-center">
+    <img src="./Photos/Untitled.jpeg" alt="I Am Protected" class="rounded-xl shadow-lg w-full max-w-xs object-cover mb-6">
+    <div class="w-full">
+      <h2 class="text-xl font-bold mb-2">Product Details</h2>
+      <ul class="list-disc pl-6 text-gray-700 space-y-1">
+        <li>100% natural, Ayurvedic ingredients</li>
+        <li>Suitable for all skin types</li>
+        <li>Free from parabens, sulfates, and artificial fragrances</li>
+        <li>Handcrafted in Nepal</li>
+      </ul>
       <div class="mt-6">
         <h2 class="text-lg font-semibold mb-1">How to Use</h2>
         <p class="text-gray-700">Apply 2-3 drops to cleansed face and neck, morning and night. Gently massage until absorbed. Follow with your favorite moisturizer.</p>
       </div>
     </div>
-  </main>
+  </div>
+  <!-- Product Info (right column) -->
+  <div class="w-full md:w-1/2 flex flex-col gap-6">
+    <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c] mb-2">I Am Protected</h1>
+    <div class="flex items-center gap-3">
+      <div class="text-yellow-400 text-xl">★★★★☆</div>
+      <span class="text-[#666] text-base">(183 reviews)</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="font-semibold text-[#333] text-2xl">Rs13,300 NPR - Rs26,500 NPR</span>
+      <span class="line-through text-[#999] text-base">Rs14,800 NPR - Rs29,500 NPR</span>
+    </div>
+    <p class="text-lg text-gray-700">
+      Experience the power of Himalayan botanicals with our signature "I Am Protected" serum. Crafted with pure, natural ingredients, this formula helps shield your skin from environmental stressors, leaving it radiant and nourished.
+    </p>
+    <div>
+      <label for="size" class="block text-sm font-medium mb-1">Size</label>
+      <select id="size" class="px-4 py-2 border border-gray-300 rounded-md bg-white text-base cursor-pointer">
+        <option>30mL</option>
+        <option>50mL</option>
+      </select>
+    </div>
+    <button class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 rounded-lg font-semibold text-lg transition w-full md:w-auto">
+      Add to Cart
+    </button>
+  </div>
+</main>
+
+  <!-- ======= SIMILAR PRODUCTS SECTION ======= -->
+  <section class="max-w-5xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Similar Products</h2>
+  <div class="relative">
+    <!-- Slider viewport -->
+    <div id="similar-slider-viewport" class="overflow-hidden">
+      <div id="similar-slider" class="flex gap-6 transition-transform duration-300">
+        <!-- Cards will be injected by JS -->
+      </div>
+    </div>
+    <!-- Navigation Arrows -->
+    <button id="similar-arrow-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10" style="display:none;">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="similar-arrow-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+  // ===== Navbar Dropdown Script (for Shop, Guides, etc) =====
+  document.querySelectorAll('.group > button').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = btn.parentElement;
+      document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+        if (!parent.contains(el)) el.style.display = 'none';
+      });
+      const dropdown = parent.querySelector('.group-hover\\:block');
+      if (dropdown) {
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+      }
+    });
+  });
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
+      if (!el.contains(e.target) && !el.parentElement.contains(e.target)) {
+        el.style.display = 'none';
+      }
+    });
+  });
+  // Footer forms
+  document.getElementById('footer-message-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('footer-name').value = '';
+    document.getElementById('footer-message').value = '';
+    document.getElementById('footer-message-success').classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('footer-message-success').classList.add('hidden');
+    }, 3000);
+  });
+  // ===== Product Review Form Script =====
+  document.getElementById('review-form')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('review-name').value.trim();
+    const rating = document.getElementById('review-rating').value;
+    const text = document.getElementById('review-text').value.trim();
+    if (name && rating && text) {
+      const reviewsList = document.getElementById('reviews-list');
+      const reviewDiv = document.createElement('div');
+      reviewDiv.className = "bg-white rounded-lg shadow p-4";
+      reviewDiv.innerHTML = `
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-semibold text-[#18382c]">${name}</span>
+          <span class="text-yellow-400 text-sm">${'★'.repeat(rating)}${'☆'.repeat(5-rating)}</span>
+        </div>
+        <p class="text-gray-700 text-sm">${text}</p>
+      `;
+      reviewsList.appendChild(reviewDiv);
+      document.getElementById('review-form').reset();
+      document.getElementById('review-success').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('review-success').classList.add('hidden');
+      }, 2500);
+    }
+  });
+
+  // Similar Products Slider
+  const similarProducts = [
+    {
+      name: "I Am Radiant",
+      price: "Rs9,800 NPR",
+      img: "/placeholder.svg?height=180&width=140",
+      link: "product-details.html"
+    },
+    {
+      name: "I Am Calm",
+      price: "Rs11,200 NPR",
+      img: "/placeholder.svg?height=180&width=140",
+      link: "product-details.html"
+    },
+    {
+      name: "I Am Nourished",
+      price: "Rs13,000 NPR",
+      img: "/placeholder.svg?height=180&width=140",
+      link: "product-details.html"
+    },
+    // Add more products as needed
+  ];
+
+  const slider = document.getElementById('similar-slider');
+  const leftBtn = document.getElementById('similar-arrow-left');
+  const rightBtn = document.getElementById('similar-arrow-right');
+  let similarScroll = 0;
+  const cardWidth = 240; // card width + gap
+
+  // Render cards
+  if (slider) {
+    slider.innerHTML = similarProducts.map(p => `
+      <div class="min-w-[220px] bg-white rounded-xl shadow-md hover:shadow-lg transition p-4 flex flex-col items-center">
+        <img src="${p.img}" alt="${p.name}" class="w-32 h-32 object-cover rounded-md mb-3">
+        <a href="${p.link}" class="font-semibold text-lg text-[#18382c] hover:underline mb-1">${p.name}</a>
+        <span class="text-[#333] text-sm font-medium mb-1">${p.price}</span>
+        <button class="bg-[#18382c] text-white px-4 py-1 rounded text-xs hover:bg-[#285c44] transition">View</button>
+      </div>
+    `).join('');
+  }
+
+  // Slider navigation
+  function updateSlider() {
+    if (slider) {
+      slider.style.transform = `translateX(-${similarScroll}px)`;
+    }
+    // Show/hide arrows
+    if (leftBtn) leftBtn.style.display = similarScroll > 0 ? 'block' : 'none';
+    if (rightBtn) rightBtn.style.display = (similarScroll < (cardWidth * (similarProducts.length - 2))) ? 'block' : 'none';
+  }
+
+  if (leftBtn) {
+    leftBtn.addEventListener('click', () => {
+      similarScroll = Math.max(0, similarScroll - cardWidth);
+      updateSlider();
+    });
+  }
+  if (rightBtn) {
+    rightBtn.addEventListener('click', () => {
+      similarScroll = Math.min(cardWidth * (similarProducts.length - 2), similarScroll + cardWidth);
+      updateSlider();
+    });
+  }
+
+  // Initial state
+  updateSlider();
+</script>
+
+  <!-- ======= PRODUCT REVIEWS SECTION ======= -->
+  <section class="max-w-5xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Product Reviews</h2>
+    <div id="reviews-list" class="space-y-6 mb-8">
+      <!-- Example Review -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-semibold text-[#18382c]">Anisha</span>
+          <span class="text-yellow-400 text-sm">★★★★★</span>
+        </div>
+        <p class="text-gray-700 text-sm">Amazing serum! My skin feels protected and soft.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-semibold text-[#18382c]">Suman</span>
+          <span class="text-yellow-400 text-sm">★★★★☆</span>
+        </div>
+        <p class="text-gray-700 text-sm">Good for daily use. Not greasy, absorbs well.</p>
+      </div>
+      <!-- More reviews will be appended here -->
+    </div>
+    <form id="review-form" class="bg-[#f8f8f8] rounded-lg p-6 shadow space-y-4 max-w-lg">
+      <div>
+        <label for="review-name" class="block text-xs font-medium mb-1 text-[#18382c]">Your Name</label>
+        <input type="text" id="review-name" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+      </div>
+      <div>
+        <label for="review-rating" class="block text-xs font-medium mb-1 text-[#18382c]">Rating</label>
+        <select id="review-rating" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+      </div>
+      <div>
+        <label for="review-text" class="block text-xs font-medium mb-1 text-[#18382c]">Review</label>
+        <textarea id="review-text" rows="3" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required></textarea>
+      </div>
+      <button type="submit" class="bg-[#18382c] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#285c44] transition">Submit Review</button>
+      <div id="review-success" class="hidden text-green-500 text-sm mt-2">Thank you for your review!</div>
+    </form>
+  </section>
 
   <!-- ======= FOOTER ======= -->
-<footer class="w-full bg-[#18382c] text-white py-10 px-4 mt-0">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+<footer class="w-full bg-[#18382c] text-white py-6 px-4 mt-0 border-t border-[#2c3e50] shadow-inner">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-4">
     <!-- Brand and Social -->
-    <div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
-      <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-2">Hariyali Botanic</a>
-      <p class="text-sm text-gray-200 mb-2">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
-      <div class="flex space-x-4 mt-2">
+    <div class="flex flex-col items-center md:items-start mb-6 md:mb-0">
+      <a href="index.html" class="text-2xl font-bold font-playfair tracking-wider mb-1">Hariyali Botanic</a>
+      <p class="text-sm md:text-base text-gray-200 mb-1">Ancient Wisdom. Botanical Beauty. Ayurvedic Healing.</p>
+      <div class="flex space-x-3 mt-1">
         <a href="https://www.facebook.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.instagram.com" target="_blank" class="hover:text-[#8B4513]"><i class="fab fa-instagram"></i></a>
         <a href="https://www.daraz.com.np" target="_blank" class="hover:text-[#8B4513]"><i class="fas fa-shopping-bag"></i></a>
       </div>
     </div>
     <!-- Quick Links -->
-    <div class="flex-1 flex flex-col items-center md:items-start mb-8 md:mb-0">
-      <div class="mb-4 font-semibold text-lg">Quick Links</div>
-      <div class="flex flex-wrap gap-3 text-sm text-gray-200">
+    <div class="flex-1 flex flex-col items-center md:items-start mb-6 md:mb-0">
+      <div class="mb-2 font-semibold text-lg">Quick Links</div>
+      <div class="flex flex-wrap gap-2 text-xs md:text-sm text-gray-200">
         <a href="index.html" class="hover:text-[#8B4513]">Home</a>
         <span>|</span>
         <a href="shop.html" class="hover:text-[#8B4513]">Shop</a>
@@ -199,88 +398,42 @@
         <a href="blog.html" class="hover:text-[#8B4513]">Blog</a>
         <span>|</span>
         <a href="contact.html" class="hover:text-[#8B4513]">Contact Us</a>
-        <span>|</span>
-        <a href="propage.html" class="hover:text-[#8B4513]">Skincare</a>
       </div>
-      <a href="#" class="block mt-4 text-xs text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
+      <a href="#" class="block mt-2 text-xs md:text-sm text-gray-400 hover:text-[#8B4513] underline">Terms and Conditions</a>
     </div>
     <!-- Email Signup & Message -->
     <div class="flex-1 flex flex-col items-center md:items-end w-full">
-      <form class="w-full max-w-xs mb-6">
-        <label for="footer-email-signup" class="block text-sm text-[#e0e7ef] mb-1">Sign up for updates</label>
+      <form class="w-full max-w-xs mb-4">
+        <label for="footer-email-signup" class="block text-xs text-[#e0e7ef] mb-1">Sign up for updates</label>
         <div class="flex">
-          <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition" required>
-          <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-4 py-2 rounded-r-lg font-semibold transition">Sign Up</button>
+          <input type="email" id="footer-email-signup" placeholder="Your email" class="flex-1 px-3 py-2 rounded-l-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition text-xs" required>
+          <button type="submit" class="bg-[#8B4513] hover:bg-[#a86c3c] text-white px-3 py-2 rounded-r-lg font-semibold transition text-xs">Sign Up</button>
         </div>
       </form>
-      <div class="bg-[#22343a] rounded-xl p-6 shadow-lg border border-[#2c3e50] w-full max-w-xs">
-        <form id="footer-message-form" class="space-y-3">
+      <div class="bg-[#22343a] rounded-xl p-4 shadow-lg border border-[#2c3e50] w-full max-w-xs">
+        <form id="footer-message-form" class="space-y-2">
           <div>
             <label for="footer-name" class="block text-xs text-[#e0e7ef] mb-1">Name</label>
             <input type="text" id="footer-name" name="footer-name" autocomplete="off"
-              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition"
+              class="w-full px-2 py-1 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition text-xs"
               required>
           </div>
           <div>
             <label for="footer-message" class="block text-xs text-[#e0e7ef] mb-1">Message</label>
             <textarea id="footer-message" name="footer-message" rows="2"
-              class="w-full px-3 py-2 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none"
+              class="w-full px-2 py-1 rounded-lg bg-[#18222b] text-white border border-[#31404d] focus:outline-none focus:ring-2 focus:ring-[#8B4513] transition resize-none text-xs"
               required></textarea>
           </div>
           <button type="submit"
-            class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-2 rounded-lg font-mono font-semibold text-base flex items-center justify-center gap-2 transition">
+            class="w-full bg-[#8B4513] hover:bg-[#a86c3c] text-white py-1 rounded-lg font-mono font-semibold text-xs flex items-center justify-center gap-2 transition">
             <span>&#9993;</span> Send Message
           </button>
         </form>
-        <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-sm">Thank you for your message!</div>
+        <div id="footer-message-success" class="hidden text-green-300 mt-2 text-center text-xs">Thank you for your message!</div>
       </div>
     </div>
   </div>
-  <div class="text-center text-xs text-gray-300 mt-8">
+  <div class="text-center text-xs text-gray-300 mt-4">
     &copy; 2025 Hariyali Botanic. All rights reserved.
   </div>
 </footer>
-
-  <script>
-    // Mobile menu toggle
-    const toggle = document.getElementById('mobile-toggle');
-    const menu = document.getElementById('mobile-menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-      });
-    }
-    // ===== Navbar Dropdown Script (for Shop, Guides, etc) =====
-    document.querySelectorAll('.group > button').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const parent = btn.parentElement;
-        document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
-          if (!parent.contains(el)) el.style.display = 'none';
-        });
-        const dropdown = parent.querySelector('.group-hover\\:block');
-        if (dropdown) {
-          dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-        }
-      });
-    });
-    document.addEventListener('click', function(e) {
-      document.querySelectorAll('.group .group-hover\\:block').forEach(el => {
-        if (!el.contains(e.target) && !el.parentElement.contains(e.target)) {
-          el.style.display = 'none';
-        }
-      });
-    });
-    // Footer forms
-    document.getElementById('footer-message-form')?.addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('footer-name').value = '';
-      document.getElementById('footer-message').value = '';
-      document.getElementById('footer-message-success').classList.remove('hidden');
-      setTimeout(() => {
-        document.getElementById('footer-message-success').classList.add('hidden');
-      }, 3000);
-    });
-  </script>
-</body>
-</html>
