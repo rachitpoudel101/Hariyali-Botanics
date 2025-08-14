@@ -1,0 +1,227 @@
+{% load static %}
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e5e5e5] shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+      <div class="flex items-center h-16 md:h-18 relative">
+        <!-- Left Logo and Nav Links -->
+        <div class="flex items-center flex-1">
+          <!-- Logo - Left aligned on mobile -->
+          <div class="md:hidden flex items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+              <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-10 w-auto object-contain shadow-sm group-hover:scale-105 transition-transform duration-200" />
+            </a>
+          </div>
+          
+          <!-- Left Nav Links -->
+          <div class="hidden md:flex space-x-8 text-sm font-semibold justify-start text-[#18382c]">
+            <!-- Shop Dropdown -->
+            <div class="nav-item relative group">
+              <div class="flex items-center gap-1 nav-link cursor-pointer hover:text-sage transition-colors duration-200 px-2 py-1 rounded-lg">
+                Shop
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+              </div>
+              <div class="nav-dropdown absolute bg-white/95 shadow-xl border border-sage/30 rounded-xl mt-1 z-20 py-2">
+                <div class="megamenu-content">
+                  <div class="px-4 py-2 border-b border-gray-100">
+                    <span class="text-xs font-bold text-[#18382c]">Categories</span>
+                  </div>
+                  <a href="shop.html?category=skin" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                      <i class="fas fa-spa text-[#8B4513]"></i>
+                    </div>
+                    <div>
+                      <span class="block font-medium">Skin</span>
+                      <span class="text-xs text-gray-500">Natural skincare products</span>
+                    </div>
+                  </a>
+                  <a href="shop.html?category=hair" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                      <i class="fas fa-leaf text-[#8B4513]"></i>
+                    </div>
+                    <div>
+                      <span class="block font-medium">Hair</span>
+                      <span class="text-xs text-gray-500">Herbal hair care</span>
+                    </div>
+                  </a>
+                  <div class="px-4 py-3 border-t border-gray-100 mt-2">
+                    <a href="shop.html" class="text-sage hover:underline text-sm font-medium">View All Products →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Digital Guides Dropdown -->
+            <div class="nav-item relative group">
+              <div class="flex items-center gap-1 nav-link cursor-pointer hover:text-sage transition-colors duration-200 px-2 py-1 rounded-lg">
+                Digital Guides
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+              </div>
+              <div class="nav-dropdown absolute bg-white/95 shadow-xl border border-sage/30 rounded-xl mt-1 z-20 py-2">
+                <a href="digital.html" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                    <i class="fas fa-book text-[#8B4513]"></i>
+                  </div>
+                  <div>
+                    <span class="block font-medium">Guides</span>
+                    <span class="text-xs text-gray-500">Ayurvedic lifestyle guides</span>
+                  </div>
+                </a>
+                <a href="blog.html" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                    <i class="fas fa-pen-fancy text-[#8B4513]"></i>
+                  </div>
+                  <div>
+                    <span class="block font-medium">Blog</span>
+                    <span class="text-xs text-gray-500">Wellness articles & tips</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Ayuretreat Dropdown -->
+            <div class="nav-item relative group">
+              <div class="flex items-center gap-1 nav-link cursor-pointer hover:text-sage transition-colors duration-200 px-2 py-1 rounded-lg">
+                Ayuretreat
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+              </div>
+              <div class="nav-dropdown absolute bg-white/95 shadow-xl border border-sage/30 rounded-xl mt-1 z-20 py-2">
+                <div class="px-4 py-2 border-b border-gray-100">
+                  <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Network Partners</span>
+                </div>
+                <a href="Ayuretreat.html" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200">
+                  <span class="block font-medium">Upcoming Retreats</span>
+                  <span class="text-xs text-gray-500">Schedule and locations</span>
+                </a>
+                <a href="Ayuretreat.html#illness" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200">
+                  <span class="block font-medium">Illness Retreat</span>
+                  <span class="text-xs text-gray-500">Healing-focused programs</span>
+                </a>
+                <a href="Ayuretreat.html#waitlist" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200">
+                  <span class="block font-medium">Waitlist Your Interest</span>
+                  <span class="text-xs text-gray-500">Reserve your spot</span>
+                </a>
+                <a href="Ayuretreat.html#form" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200">
+                  <span class="block font-medium">Form Fill Up</span>
+                  <span class="text-xs text-gray-500">Register for retreats</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Center Logo - Desktop only -->
+        <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 z-30 hidden md:flex">
+          <a href="index.html" class="flex items-center gap-2 group">
+            <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-200" />
+          </a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-4 text-sm flex-1 justify-end">
+          <!-- About Us Link -->
+          <a href="aboutus.html" class="nav-link ml-4 px-3 py-1.5 rounded-full hover:text-sage font-semibold hidden md:inline-block transition-all duration-200">About Us</a>
+          
+          <!-- Membership Dropdown -->
+          <div class="nav-item relative hidden md:inline-block group">
+            <div class="flex items-center gap-1 nav-link ml-2 px-3 py-1.5 rounded-full hover:text-sage font-semibold transition-all duration-200 cursor-pointer">
+              Membership
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+            </div>
+            <div class="nav-dropdown absolute right-0 bg-white/95 shadow-xl border border-sage/30 rounded-xl mt-1 z-20 py-2">
+              <a href="https://nas.io" target="_blank" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                  <i class="fas fa-star text-[#8B4513]"></i>
+                </div>
+                <span class="font-medium">nas.io</span>
+              </a>
+              <a href="#" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                  <i class="fas fa-tag text-[#8B4513]"></i>
+                </div>
+                <span class="font-medium">Discount for Membership</span>
+              </a>
+              <div class="border-t my-1"></div>
+              <div class="px-4 py-2 text-xs text-gray-500">
+                <span class="block font-medium">Special Offers</span>
+                <span>Inquire with Daraz for unique code or complimentary product</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Search Button -->
+          <button>
+            <i class="fas fa-search"></i>
+          </button>
+          
+          <!-- Shop Icon (Daraz) -->
+          <a href="https://www.daraz.com.np" target="_blank" >
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+          
+          <!-- Mobile Menu Icon -->
+          <div class="md:hidden">
+            <button id="mobile-toggle" class="text-2xl focus:outline-none">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t px-4 pb-4 mobile-nav-enter">
+      <!-- Shop Submenu Mobile -->
+      <div class="py-3 border-b border-gray-100">
+        <div class="mobile-dropdown-toggle flex items-center justify-between">
+          <span class="font-medium">Shop</span>
+          <i class="fas fa-plus text-xs"></i>
+        </div>
+        <div class="mobile-dropdown-content hidden pt-2 pl-4">
+          <a href="shop.html?category=skin" class="block py-2 text-gray-700">Skin</a>
+          <a href="shop.html?category=hair" class="block py-2 text-gray-700">Hair</a>
+          <a href="shop.html" class="block py-2 text-sage">View All</a>
+        </div>
+      </div>
+      
+      <!-- Digital Guides Submenu Mobile -->
+      <div class="py-3 border-b border-gray-100">
+        <div class="mobile-dropdown-toggle flex items-center justify-between">
+          <span class="font-medium">Digital Guides</span>
+          <i class="fas fa-plus text-xs"></i>
+        </div>
+        <div class="mobile-dropdown-content hidden pt-2 pl-4">
+          <a href="digital.html" class="block py-2 text-gray-700">Guides</a>
+          <a href="blog.html" class="block py-2 text-gray-700">Blog</a>
+        </div>
+      </div>
+      
+      <!-- Ayuretreat Submenu Mobile -->
+      <div class="py-3 border-b border-gray-100">
+        <div class="mobile-dropdown-toggle flex items-center justify-between">
+          <span class="font-medium">Ayuretreat</span>
+          <i class="fas fa-plus text-xs"></i>
+        </div>
+        <div class="mobile-dropdown-content hidden pt-2 pl-4">
+          <a href="Ayuretreat.html" class="block py-2 text-gray-700">Upcoming Retreats</a>
+          <a href="Ayuretreat.html#illness" class="block py-2 text-gray-700">Illness Retreat</a>
+          <a href="Ayuretreat.html#waitlist" class="block py-2 text-gray-700">Waitlist Your Interest</a>
+          <a href="Ayuretreat.html#form" class="block py-2 text-gray-700">Form Fill Up</a>
+        </div>
+      </div>
+      
+      <!-- Other Menu Items Mobile -->
+      <a href="aboutus.html" class="block py-3 border-b border-gray-100">About Us</a>
+      
+      <div class="py-3 border-b border-gray-100">
+        <div class="mobile-dropdown-toggle flex items-center justify-between">
+          <span class="font-medium">Membership</span>
+          <i class="fas fa-plus text-xs"></i>
+        </div>
+        <div class="mobile-dropdown-content hidden pt-2 pl-4">
+          <a href="https://nas.io" target="_blank" class="block py-2 text-gray-700">nas.io</a>
+          <a href="#" class="block py-2 text-gray-700">Discount for Membership</a>
+        </div>
+      </div>
+      
+      <a href="contact.html" class="block py-3 border-b border-gray-100">Contact Us</a>
+    </div>
+  </nav>
