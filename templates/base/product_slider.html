@@ -8,8 +8,8 @@
       <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative flex">
         <!-- Bestseller Label aligned with product cards, now slightly lower -->
         <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8">
-          <a href="shop.html" class="vertical hidden lg:flex" style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);">BESTSELLERS</a>
-          <a href="shop.html" class="horizontal flex lg:hidden">BESTSELLERS</a>
+            <a href="{% url 'shop' %}" class="vertical hidden lg:flex" style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);">BESTSELLERS</a>
+            <a href="{% url 'shop' %}" class="horizontal flex lg:hidden">BESTSELLERS</a>
         </div>
         <div id="horizontal-slider" class="flex gap-0 w-full min-w-0">
           <!-- Product Card (Repeat as needed) -->

@@ -2,5 +2,11 @@ from django.shortcuts import render
 from .models import Product
 
 def index(request):
-    products = Product.objects.all()  # Get all products
-    return render(request, 'Normal/index.html', {'products': products})
+    # products = Product.objects.all()  # Get all products
+    return render(request, 'Normal/index.html')
+
+def shop(request):  
+     return render(request, "Normal/shop.html")
+ 
+def prodec(request):
+    return render(request, "Normal/product-details.html")

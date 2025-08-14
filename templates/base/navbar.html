@@ -6,7 +6,7 @@
         <div class="flex items-center flex-1">
           <!-- Logo - Left aligned on mobile -->
           <div class="md:hidden flex items-center">
-            <a href="index.html" class="flex items-center gap-2 group">
+            <a href="{% url 'index' %}" class="flex items-center gap-2 group">
               <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-10 w-auto object-contain shadow-sm group-hover:scale-105 transition-transform duration-200" />
             </a>
           </div>
@@ -24,7 +24,7 @@
                   <div class="px-4 py-2 border-b border-gray-100">
                     <span class="text-xs font-bold text-[#18382c]">Categories</span>
                   </div>
-                  <a href="shop.html?category=skin" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                  <a href="{% url 'shop' %}" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
                       <i class="fas fa-spa text-[#8B4513]"></i>
                     </div>
@@ -33,7 +33,7 @@
                       <span class="text-xs text-gray-500">Natural skincare products</span>
                     </div>
                   </a>
-                  <a href="shop.html?category=hair" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                  <a href="{% url 'shop' %}" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
                       <i class="fas fa-leaf text-[#8B4513]"></i>
                     </div>
@@ -43,7 +43,7 @@
                     </div>
                   </a>
                   <div class="px-4 py-3 border-t border-gray-100 mt-2">
-                    <a href="shop.html" class="text-sage hover:underline text-sm font-medium">View All Products →</a>
+                    <a href="{% url 'shop' %}" class="text-sage hover:underline text-sm font-medium">View All Products →</a>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
         
         <!-- Center Logo - Desktop only -->
         <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 z-30 hidden md:flex">
-          <a href="index.html" class="flex items-center gap-2 group">
+          <a href="{% url 'index' %}" class="flex items-center gap-2 group">
             <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-200" />
           </a>
         </div>

@@ -1,0 +1,48 @@
+{% load static %}
+
+<!-- ======= CLINICALLY PROVEN RESULTS FULL-WIDTH SECTION ======= -->
+<section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-0">
+  <section class="w-full bg-[#f9f7f3] rounded-2xl shadow-md p-6 flex flex-col gap-6 border border-[#e5e5e5]">
+    <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-2 text-center">Consumer results</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
+      
+      <!-- Results Text -->
+      <div class="flex-1 flex flex-col gap-4">
+        <div>
+          <h3 class="text-lg font-semibold text-[#8B4513] mb-1">Clinical Results</h3>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl md:text-4xl font-bold text-[#18382c]">100%</span>
+              <span class="text-base md:text-lg text-gray-700">Demonstrated a reduction in the appearance of pore size*</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#8B4513] mb-1">Consumer Results</h3>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl md:text-4xl font-bold text-[#18382c]">97%</span>
+              <span class="text-base md:text-lg text-gray-700">Agree skin feels nourished**</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-3xl md:text-4xl font-bold text-[#18382c]">94%</span>
+              <span class="text-base md:text-lg text-gray-700">Agree skin texture feels more refined</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-gray-500 mt-2">
+          *Based on a clinical study. **Based on a consumer perception study.
+        </div>
+      </div>
+
+      <!-- Results Images -->
+      <div class="flex-1 flex flex-row items-center justify-center gap-4">
+        <img src="{% static 'images/rits1.png' %}" alt="Clinical Results 1" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+        <img src="{% static 'images/rits2.png' %}" alt="Clinical Results 2" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+      </div>
+
+    </div>
+  </section>
+</section>

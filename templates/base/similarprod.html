@@ -1,0 +1,100 @@
+<!-- ======= PRODUCT DETAILS FULL-WIDTH SECTIONS ======= -->
+<section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-12">
+    <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
+      <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
+        <h2 class="text-xl font-bold text-[#18382c] mb-2">Benefits</h2>
+        <ul class="list-disc pl-6 text-gray-700 space-y-1 text-base">
+          <li>Shields skin from environmental stressors</li>
+          <li>Promotes radiant, nourished complexion</li>
+          <li>100% natural, Ayurvedic ingredients</li>
+          <li>Free from parabens, sulfates, and artificial fragrances</li>
+          <li>Suitable for all skin types</li>
+        </ul>
+      </div>
+      <div class="flex-1 flex items-center justify-center order-2 md:order-2">
+        <img src="./Photos/rits2.png" alt="Benefits" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+      </div>
+    </section>
+    <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
+      <div class="flex-1 flex items-center justify-center order-2 md:order-1">
+        <img src="./Photos/rits3.png" alt="How to Use" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+      </div>
+      <div class="flex-1 flex flex-col gap-2 order-1 md:order-2">
+        <h2 class="text-xl font-bold text-[#18382c] mb-2">How to Use</h2>
+        <div class="text-gray-700 text-base">Apply 2-3 drops to cleansed face and neck, morning and night. Gently massage until absorbed. Follow with your favorite moisturizer.</div>
+      </div>
+    </section>
+    <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
+      <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
+        <h2 class="text-xl font-bold text-[#18382c] mb-2">Ingredients</h2>
+        <div class="text-gray-700 text-base">Lotus Extract, Saffron, Ashwagandha, Rosehip Oil, Himalayan Botanicals, Vitamin E, Essential Oils Blend.</div>
+      </div>
+      <div class="flex-1 flex items-center justify-center order-2 md:order-2">
+        <img src="./Photos/herbal.png" alt="Ingredients" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+      </div>
+    </section>
+</section>
+<!-- ======= SIMILAR PRODUCTS SECTION ======= -->
+<section class="max-w-5xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Similar Products</h2>
+  <div class="relative">
+    <!-- Slider viewport -->
+    <div id="similar-slider-viewport" class="overflow-hidden">
+      <div id="similar-slider" class="flex gap-6 transition-transform duration-300">
+        <!-- Cards will be injected by JS -->
+      </div>
+    </div>
+    <!-- Navigation Arrows -->
+    <button id="similar-arrow-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10" style="display:none;">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="similar-arrow-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+<!-- ======= PRODUCT REVIEWS SECTION ======= -->
+<section class="max-w-5xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Product Reviews</h2>
+    <div id="reviews-list" class="space-y-6 mb-8">
+      <!-- Example Review -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-semibold text-[#18382c]">Anisha</span>
+          <span class="text-yellow-400 text-sm">★★★★★</span>
+        </div>
+        <p class="text-gray-700 text-sm">Amazing serum! My skin feels protected and soft.</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-semibold text-[#18382c]">Suman</span>
+          <span class="text-yellow-400 text-sm">★★★★☆</span>
+        </div>
+        <p class="text-gray-700 text-sm">Good for daily use. Not greasy, absorbs well.</p>
+      </div>
+      <!-- More reviews will be appended here -->
+    </div>
+    <form id="review-form" class="bg-[#f8f8f8] rounded-lg p-6 shadow space-y-4 max-w-lg">
+      <div>
+        <label for="review-name" class="block text-xs font-medium mb-1 text-[#18382c]">Your Name</label>
+        <input type="text" id="review-name" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+      </div>
+      <div>
+        <label for="review-rating" class="block text-xs font-medium mb-1 text-[#18382c]">Rating</label>
+        <select id="review-rating" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+      </div>
+      <div>
+        <label for="review-text" class="block text-xs font-medium mb-1 text-[#18382c]">Review</label>
+        <textarea id="review-text" rows="3" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required></textarea>
+      </div>
+      <button type="submit" class="bg-[#18382c] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#285c44] transition">Submit Review</button>
+      <div id="review-success" class="hidden text-green-500 text-sm mt-2">Thank you for your review!</div>
+    </form>
+  </section>

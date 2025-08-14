@@ -1,0 +1,51 @@
+  <!-- ======= PRODUCT DETAILS SECTION ======= -->
+  <main class="max-w-7xl mx-auto px-4 py-10 md:py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <!-- Product Gallery -->
+    <div class="w-full flex flex-col gap-6">
+      <div class="w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden flex items-center justify-center relative shadow-lg">
+        <img id="main-product-img" src="./Photos/Untitled.jpeg" alt="I Am Protected" class="object-cover w-full h-full transition-all duration-300" />
+        <!-- Optional: Sale badge or similar -->
+        <span class="absolute top-4 left-4 bg-[#8B4513] text-white text-xs font-bold px-3 py-1 rounded-full shadow">Best Seller</span>
+      </div>
+      <!-- Thumbnails -->
+      <div class="flex gap-3 justify-center">
+        <img src="./Photos/Untitled.jpeg" alt="I Am Protected" class="w-20 h-20 object-cover rounded-lg border-2 border-[#8B4513] cursor-pointer ring-2 ring-[#8B4513]" onclick="document.getElementById('main-product-img').src='./Photos/Untitled.jpeg'">
+        <img src="./Photos/pro1.png" alt="I Am Protected Alt" class="w-20 h-20 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-[#8B4513]" onclick="document.getElementById('main-product-img').src='./Photos/pro1.png'">
+        <img src="./Photos/pro2.png" alt="I Am Protected Alt 2" class="w-20 h-20 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-[#8B4513]" onclick="document.getElementById('main-product-img').src='./Photos/pro2.png'">
+      </div>
+
+      <!-- Clinically Proven Results Section moved below main grid -->
+    </div>
+    <!-- Product Info & Actions -->
+    <div class="w-full flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start bg-white/90 z-20 rounded-2xl shadow-lg p-6">
+      <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c]">I Am Protected</h1>
+      <div class="flex items-center gap-3">
+        <!-- <div class="flex items-center text-yellow-400 text-xl">
+          <span>★★★★☆</span>
+        </div> -->
+        <span class="text-[#666] text-base">183 reviews</span>
+        <a href="#reviews-list" class="text-xs text-[#8B4513] underline ml-2">See all reviews</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="font-bold text-2xl md:text-3xl text-[#18382c]">Rs13,300 NPR</span>
+        <span class="line-through text-[#999] text-lg">Rs14,800 NPR</span>
+      </div>
+      <div class="text-base md:text-lg text-gray-700 leading-relaxed">
+        Experience the power of Himalayan botanicals with our signature "I Am Protected" serum. Crafted with pure, natural ingredients, this formula helps shield your skin from environmental stressors, leaving it radiant and nourished.
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="size" class="block text-sm font-medium mb-1">Size</label>
+        <select id="size" class="px-4 py-2 border border-gray-300 rounded-md bg-white text-base cursor-pointer w-40">
+          <option>30mL</option>
+          <option>50mL</option>
+        </select>
+      </div>
+      <button class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 rounded-lg font-semibold text-lg transition w-full md:w-1/2 mt-2 shadow-lg">Add to Cart</button>
+      <div class="flex items-center gap-3 mt-2 flex-wrap">
+        <span class="text-xs text-gray-500 whitespace-nowrap">Free shipping on orders over Rs5,000</span>
+        <span class="text-xs text-gray-500">|</span>
+        <span class="text-xs text-gray-500 whitespace-nowrap">Handcrafted in Nepal</span>
+      </div>
+    </div>
+
+  </main>
