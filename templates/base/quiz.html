@@ -1,0 +1,28 @@
+{% load static %}
+
+<!-- ======= SKINCARE QUIZ SECTION ======= -->
+<section class="w-full bg-[#fdfaf6] py-10 px-2 sm:py-20 sm:px-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center w-full max-w-6xl mx-auto">
+    <!-- Left: 2 stacked images -->
+    <div class="flex flex-col gap-2 sm:gap-4">
+      <img src="{% static 'images/rits1.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+      <img src="{% static 'images/rits2.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+    </div>
+
+    <!-- Center: Text and CTA -->
+    <div class="flex flex-col items-center md:items-start text-center md:text-left">
+      <h2 class="text-3xl md:text-5xl font-bold text-[#18382c] mb-6 leading-tight">
+        SKINCARE<br>
+        <span class="italic font-playfair text-4xl md:text-6xl font-bold">Ritual Quiz</span>
+      </h2>
+      <p class="text-lg md:text-2xl text-[#18382c] mb-10 font-medium">Your personalized ritual in minutes</p>
+      <a href="quiz.html" class="bg-[#18382c] text-white px-10 py-4 rounded-xl text-lg md:text-2xl font-bold tracking-wide hover:bg-[#285c44] transition">TAKE THE QUIZ</a>
+    </div>
+
+    <!-- Right: 2 stacked images -->
+    <div class="flex flex-col gap-2 sm:gap-4">
+      <img src="{% static 'images/rits3.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+      <img src="{% static 'images/rits4.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+    </div>
+  </div>
+</section>
