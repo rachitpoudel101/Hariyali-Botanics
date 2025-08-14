@@ -10,3 +10,6 @@ def shop(request):
  
 def prodec(request):
     return render(request, "Normal/product-details.html")
+
+def aboutus(request):
+    return render(request, "Normal/About-Us.html")
