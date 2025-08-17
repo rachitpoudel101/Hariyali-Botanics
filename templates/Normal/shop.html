@@ -6,9 +6,23 @@
 {% endblock %}
 
 {% block shop %}
-  {%include "base/shop-main.html"%}
+  <!-- Shop page only: sticky footer via flex layout -->
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    /* Make shop main grow to fill space so footer sits at bottom */
+    main.shop-page-main { flex: 1 0 auto; }
+    /* Footer look + ensure not fixed */
+    footer {
+      background-color: #0f2a23 !important;
+      position: static !important;
+      z-index: 1 !important;
+      margin-top: 0; /* body flex handles spacing */
+    }
+  </style>
+  {% include "base/shop-main.html" %}
 {% endblock %}
 
 {% block footer%}
-    {% include "base/footer.html"%}
+  {% include "base/footer.html"%}
 {% endblock %}

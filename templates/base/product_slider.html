@@ -1,150 +1,67 @@
 {% load static %}
 <section class="py-4 px-2 sm:py-8 sm:px-4 bg-[#fffaf4]">
     <div class="slider-section w-full relative">
-      <!-- Slider Navigation Buttons -->
-      <button id="slider-left" aria-label="Scroll left" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex"><i class="fas fa-chevron-left"></i></button>
-      <button id="slider-right" aria-label="Scroll right" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex"><i class="fas fa-chevron-right"></i></button>
-      <!-- Horizontal Product Slider -->
-      <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative flex">
-        <!-- Bestseller Label aligned with product cards, now slightly lower -->
-        <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8">
-            <a href="{% url 'shop' %}" class="vertical hidden lg:flex" style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);">BESTSELLERS</a>
-            <a href="{% url 'shop' %}" class="horizontal flex lg:hidden">BESTSELLERS</a>
+        <!-- Slider Navigation Buttons -->
+        <button id="slider-left" aria-label="Scroll left" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="slider-right" aria-label="Scroll right" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Horizontal Product Slider -->
+        <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative flex">
+
+            <!-- Bestseller Label -->
+            <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8">
+                <a href="{% url 'shop' %}" class="vertical hidden lg:flex">BESTSELLERS</a>
+                <a href="{% url 'shop' %}" class="horizontal flex lg:hidden">BESTSELLERS</a>
+            </div>
+
+            <div id="horizontal-slider" class="flex gap-0 w-full min-w-0">
+
+                {% if products %}
+                    {% for product in products|slice:":6" %}
+                        <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
+                            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
+                                {% else %}
+                                    <img src="{% static 'images/default.png' %}" alt="No Image" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
+                                {% endif %}
+                            </div>
+                            <div class="flex flex-col gap-2 mt-4 items-center w-full">
+                                <!-- Product Name linking to detail page -->
+                                <a href="{% url 'product-details' product.id %}" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                                    {{ product.name }}
+                                </a>
+                                <div class="flex flex-col gap-1 items-center">
+                                    <span class="font-medium text-[#333] text-[11px]">{{ product.price }} NPR</span>
+                                    {% if product.original_price %}
+                                        <span class="line-through text-[#999] text-[10px]">{{ product.original_price }} NPR</span>
+                                    {% endif %}
+                                </div>
+                                <div class="flex gap-3 items-center mt-2 justify-center w-full">
+                                    <a href="{% url 'product-details' product.id %}" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">
+                                        View Details
+                                    </a>
+                                    {% if product.external_url %}
+                                        <a href="{{ product.external_url }}" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">
+                                            Shop Now
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center text-[#333] font-semibold py-10 w-full">No products available.</p>
+                {% endif %}
+
+            </div>
         </div>
-        <div id="horizontal-slider" class="flex gap-0 w-full min-w-0">
-          <!-- Product Card (Repeat as needed) -->
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/pro1.png' %}" alt="I Am Protected" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                I Am Protected
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-medium text-[#333] text-[11px]">Rs13,300 NPR - Rs26,500 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs14,800 NPR - Rs29,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <!-- Repeat for other product cards, updating src and details as needed -->
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/pro2.png' %}" alt="I Am Protected" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                I Am Protected
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-medium text-[#333] text-[11px]">Rs13,300 NPR - Rs26,500 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs14,800 NPR - Rs29,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/pro3.png' %}" alt="I Am Protected" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                I Am Protected
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-medium text-[#333] text-[11px]">Rs13,300 NPR - Rs26,500 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs14,800 NPR - Rs29,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/pro4.png' %}" alt="I Am Protected" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                I Am Protected
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-medium text-[#333] text-[11px]">Rs13,300 NPR - Rs26,500 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs14,800 NPR - Rs29,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <!-- More product cards for slider testing -->
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/lipbalm.png' %}" alt="Lip Balm" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                Herbal Lip Balm
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-semibold text-[#333] text-[11px]">Rs500 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs700 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border-2 border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold rounded-md hover:bg-sage hover:text-white transition-all duration-300">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border-2 border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/ho.png' %}" alt="Herbal Oil" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                Herbal Oil
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-semibold text-[#333] text-[11px]">Rs2,000 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs2,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border-2 border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold rounded-md hover:bg-sage hover:text-white transition-all duration-300">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border-2 border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Shop Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-none p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card">
-            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
-              <img src="{% static 'images/fw.png'%}" alt="Face Wash" class="w-full h-full object-cover" style="max-width:180px;max-height:180px;">
-            </div>
-            <div class="flex flex-col gap-2 mt-4 items-center w-full">
-              <a href="product-details.html" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
-                Face Wash
-              </a>
-              <div class="flex flex-col gap-1 items-center">
-                <span class="font-semibold text-[#333] text-[11px]">Rs1,200 NPR</span>
-                <span class="line-through text-[#999] text-[10px]">Rs1,500 NPR</span>
-              </div>
-              <div class="flex gap-3 items-center mt-2 justify-center w-full">
-                <a href="product-details.html" class="border-2 border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold rounded-md hover:bg-sage hover:text-white transition-all duration-300">View Details</a>
-                <a href="https://www.daraz.com.np" target="_blank" class="border-2 border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold rounded-md uppercase hover:bg-[#333] hover:text-white transition-all duration-300">Shop Now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
 <style>
 .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -154,37 +71,12 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Vertical Text */
-.vertical {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  font-family: 'Playfair Display', serif;
-}
+.slider-viewport { align-items: flex-start; }
 
-/* Optional: Hover effect for vertical label */
-.bestseller-label a:hover {
-  color: #f59e0b; /* Golden accent on hover */
-  transform: rotate(180deg) scale(1.05);
-  transition: all 0.3s ease-in-out;
-}
-
-/* Adjust gap between icon and text */
-.bestseller-label i {
-  color: #fbbf24; /* Golden star color */
-}
-.slider-viewport {
-  align-items: flex-start;
-}
-.bestseller-label {
-  min-width: 40px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  /* Remove absolute positioning */
-}
 .vertical {
-  /* ...existing code... */
-  margin-bottom: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'Playfair Display', serif;
 }
 </style>
