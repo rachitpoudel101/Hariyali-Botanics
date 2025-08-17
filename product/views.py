@@ -13,3 +13,6 @@ def prodec(request):
 
 def aboutus(request):
     return render(request, "Normal/About-Us.html")
+
+def club(request):
+    return render(request, "Normal/Club.html")
