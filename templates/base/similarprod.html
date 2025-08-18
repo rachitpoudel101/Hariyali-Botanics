@@ -1,39 +1,107 @@
-<!-- ======= PRODUCT DETAILS FULL-WIDTH SECTIONS ======= -->
+{% load static %}
+
+<!--benefits/How to usae /Ingredients -->
 <section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-12">
+    <!-- Benefits Section -->
     <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
       <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
         <h2 class="text-xl font-bold text-[#18382c] mb-2">Benefits</h2>
-        <ul class="list-disc pl-6 text-gray-700 space-y-1 text-base">
-          <li>Shields skin from environmental stressors</li>
-          <li>Promotes radiant, nourished complexion</li>
-          <li>100% natural, Ayurvedic ingredients</li>
-          <li>Free from parabens, sulfates, and artificial fragrances</li>
-          <li>Suitable for all skin types</li>
-        </ul>
+        {% if benefits %}
+          <ul class="list-disc pl-6 text-gray-700 space-y-1 text-base">
+            {% for benefit in benefits %}
+              <li>{{ benefit.benefit }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-gray-500">No benefits information available for this product.</p>
+        {% endif %}
       </div>
       <div class="flex-1 flex items-center justify-center order-2 md:order-2">
-        <img src="./Photos/rits2.png" alt="Benefits" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+        {% if benefits %}
+          {% with has_image=False %}
+            {% for benefit in benefits %}
+              {% if benefit.image and not has_image %}
+                <img src="{{ benefit.image.url }}" alt="Benefits" 
+                     class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+                {% with has_image=True %}{% endwith %}
+              {% endif %}
+            {% endfor %}
+          {% endwith %}
+        {% else %}
+          <div class="text-center text-gray-500">
+            No benefits data available.
+          </div>
+        {% endif %}
       </div>
     </section>
+
+    <!-- How to Use Section -->
     <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
-      <div class="flex-1 flex items-center justify-center order-2 md:order-1">
-        <img src="./Photos/rits3.png" alt="How to Use" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
-      </div>
-      <div class="flex-1 flex flex-col gap-2 order-1 md:order-2">
+      <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
         <h2 class="text-xl font-bold text-[#18382c] mb-2">How to Use</h2>
-        <div class="text-gray-700 text-base">Apply 2-3 drops to cleansed face and neck, morning and night. Gently massage until absorbed. Follow with your favorite moisturizer.</div>
+        {% if how_to_use %}
+          <div class="text-gray-700 text-base">
+            {% for step in how_to_use %}
+              <p>{{ step.step }}</p>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-gray-500">No usage instructions available for this product.</p>
+        {% endif %}
+      </div>
+      <div class="flex-1 flex items-center justify-center order-2 md:order-2">
+        {% if how_to_use %}
+          {% with has_image=False %}
+            {% for step in how_to_use %}
+              {% if step.image and not has_image %}
+                <img src="{{ step.image.url }}" alt="How to Use" 
+                     class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+                {% with has_image=True %}{% endwith %}
+              {% endif %}
+            {% endfor %}
+          {% endwith %}
+        {% else %}
+          <div class="text-center text-gray-500">
+            No usage instructions data available.
+          </div>
+        {% endif %}
       </div>
     </section>
+
+    <!-- Ingredients Section -->
     <section class="flex flex-col md:flex-row gap-6 items-center bg-white/80 border rounded-xl p-6">
       <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
         <h2 class="text-xl font-bold text-[#18382c] mb-2">Ingredients</h2>
-        <div class="text-gray-700 text-base">Lotus Extract, Saffron, Ashwagandha, Rosehip Oil, Himalayan Botanicals, Vitamin E, Essential Oils Blend.</div>
+        {% if ingredients %}
+          <div class="text-gray-700 text-base">
+            {% for item in ingredients %}
+              <p>{{ item.ingredient }}</p>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-gray-500">No ingredient information available for this product.</p>
+        {% endif %}
       </div>
       <div class="flex-1 flex items-center justify-center order-2 md:order-2">
-        <img src="./Photos/herbal.png" alt="Ingredients" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+        {% if ingredients %}
+          {% with has_image=False %}
+            {% for item in ingredients %}
+              {% if item.image and not has_image %}
+                <img src="{{ item.image.url }}" alt="Ingredients" 
+                     class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+                {% with has_image=True %}{% endwith %}
+              {% endif %}
+            {% endfor %}
+          {% endwith %}
+        {% else %}
+          <div class="text-center text-gray-500">
+            No ingredients data available.
+          </div>
+        {% endif %}
       </div>
     </section>
 </section>
+
 <!-- ======= SIMILAR PRODUCTS SECTION ======= -->
 <section class="max-w-5xl mx-auto px-4 py-10">
   <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Similar Products</h2>

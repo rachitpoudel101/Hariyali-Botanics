@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import Product, SIZE_CHOICES, Review, ProductImage
+from .models import Product, SIZE_CHOICES, Review, ProductImage, CustomerResult, Benefits, HowToUse, Ingredients
 import json
 
 def index(request):
@@ -30,12 +30,22 @@ def prodec(request, id):
             primary_image = ProductImage.objects.filter(product=similar_product).first()
         similar_product.primary_image = primary_image
     
+    # Fetch customer results, benefits, how to use, and ingredients
+    customer_results = CustomerResult.objects.filter(product=product)
+    benefits = Benefits.objects.filter(product=product)
+    how_to_use = HowToUse.objects.filter(product=product)
+    ingredients = Ingredients.objects.filter(product=product)
+    
     return render(request, "Normal/product-details.html", {  
         "product": product,
         "size_choices": SIZE_CHOICES,
         "product_images": product_images,
         "reviews": reviews,
         "similar_products": similar_products,
+        "customer_results": customer_results,
+        "benefits": benefits,
+        "how_to_use": how_to_use,
+        "ingredients": ingredients,
     })
 
 def aboutus(request):

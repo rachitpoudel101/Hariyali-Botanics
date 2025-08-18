@@ -11,3 +11,8 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.name
+        
+    def get_tags(self):
+        if self.tags:
+            return [tag.strip() for tag in self.tags.split(',')]
+        return []

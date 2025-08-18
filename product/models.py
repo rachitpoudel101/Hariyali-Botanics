@@ -107,3 +107,31 @@ def update_review_count_on_delete(sender, instance, **kwargs):
     product = instance.product
     product.review_count = max(0, product.review_count - 1)  # Ensure count doesn't go negative
     product.save(update_fields=['review_count'])
+
+class CustomerResult(models.Model):
+    class Meta:
+        db_table = "customer_result"
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    result = models.TextField()
+    image = models.ImageField(upload_to="customer/results/", null=True, blank=True)
+
+class Benefits(models.Model):
+    class Meta:
+        db_table = "product_benefits"
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    benefit = models.TextField()
+    image = models.ImageField(upload_to="product/benefits/", null=True, blank=True)
+
+class HowToUse(models.Model):
+    class Meta:
+        db_table = "how_to_use"
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    step = models.TextField()
+    image = models.ImageField(upload_to="product/how_to_use/", null=True, blank=True)
+
+class Ingredients(models.Model):
+    class Meta:
+        db_table = "product_ingredients"
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    ingredient = models.TextField()
+    image = models.ImageField(upload_to="product/ingredients/", null=True, blank=True)
