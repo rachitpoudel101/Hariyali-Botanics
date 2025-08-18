@@ -14,7 +14,7 @@ ENV/
 *.log
 *.pot
 media/*
-static/*
+# static/*
 local_settings.py
 db.sqlite3
 
