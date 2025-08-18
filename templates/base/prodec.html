@@ -4,7 +4,18 @@
   <!-- Product Gallery -->
   <div class="w-full flex flex-col gap-6">
     <div class="w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden flex items-center justify-center relative shadow-lg">
-      <img id="main-product-img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+      {# Use first product image (primary first), else default #}
+      {% if product_images %}
+        {% with product_images|first as primary_image %}
+          {% if primary_image.image %}
+            <img id="main-product-img" src="{{ primary_image.image.url }}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+          {% else %}
+            <img id="main-product-img" src="{% static 'images/default.png' %}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+          {% endif %}
+        {% endwith %}
+      {% else %}
+        <img id="main-product-img" src="{% static 'images/default.png' %}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+      {% endif %}
       {% if product.best_seller %}
       <span class="absolute top-4 left-4 bg-[#8B4513] text-white text-xs font-bold px-3 py-1 rounded-full shadow">Best Seller</span>
       {% endif %}
@@ -12,12 +23,11 @@
 
     <!-- Thumbnails -->
     <div class="flex gap-3 justify-center">
-      {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover rounded-lg border-2 border-[#8B4513] cursor-pointer ring-2 ring-[#8B4513]" onclick="document.getElementById('main-product-img').src='{{ product.image.url }}'">
+      {% if product_images %}
+        {% for img in product_images %}
+          <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-[#8B4513]" onclick="document.getElementById('main-product-img').src='{{ img.image.url }}'">
+        {% endfor %}
       {% endif %}
-      {% for img in product.additional_images.all %}
-        <img src="{{ img.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-[#8B4513]" onclick="document.getElementById('main-product-img').src='{{ img.url }}'">
-      {% endfor %}
     </div>
   </div>
 
@@ -25,8 +35,10 @@
   <div class="w-full flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start bg-white/90 z-20 rounded-2xl shadow-lg p-6">
     <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c]">{{ product.name }}</h1>
     <div class="flex items-center gap-3">
-      <span class="text-[#666] text-base">{{ product.reviews_count }} reviews</span>
-      <a href="#reviews-list" class="text-xs text-[#8B4513] underline ml-2">See all reviews</a>
+      <span class="text-[#666] text-base">{{ product.review_count }} reviews</span>
+      {% if product.review_count > 0 %}
+        <a href="#reviews-list" class="text-xs text-[#8B4513] underline ml-2">See all reviews</a>
+      {% endif %}
     </div>
 
     <div class="flex items-center gap-4">

@@ -12,6 +12,8 @@ urlpatterns = [
     path('guide/', views.guide, name='guide'),
     path('aayutreat/', views.aayutreat, name='aayutreat'),
     path('quiz/', views.quiz, name='quiz'),
+    path('product/<int:id>/', views.prodec, name='prodec'),
+    path('product/<int:product_id>/review/', views.submit_review, name='submit_review'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
