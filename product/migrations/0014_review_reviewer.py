@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0013_product_similar_products'),
+        ("product", "0013_product_similar_products"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='review',
-            name='reviewer',
+            model_name="review",
+            name="reviewer",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
     ]

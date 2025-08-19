@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0003_product_is_active'),
+        ("product", "0003_product_is_active"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='external_url',
+            model_name="product",
+            name="external_url",
             field=models.URLField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='product',
-            name='original_price',
+            model_name="product",
+            name="original_price",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='product',
-            name='reviews_count',
+            model_name="product",
+            name="reviews_count",
             field=models.IntegerField(default=0),
         ),
     ]

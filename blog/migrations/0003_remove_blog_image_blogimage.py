@@ -5,23 +5,40 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0002_alter_blog_table'),
+        ("blog", "0002_alter_blog_table"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='blog',
-            name='image',
+            model_name="blog",
+            name="image",
         ),
         migrations.CreateModel(
-            name='BlogImage',
+            name="BlogImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='blog/images/')),
-                ('is_primary', models.BooleanField(default=False)),
-                ('blog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='blog.blog')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to="blog/images/"),
+                ),
+                ("is_primary", models.BooleanField(default=False)),
+                (
+                    "blog",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="images",
+                        to="blog.blog",
+                    ),
+                ),
             ],
         ),
     ]

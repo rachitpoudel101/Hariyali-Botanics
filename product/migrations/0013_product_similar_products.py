@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0012_product_review_count'),
+        ("product", "0012_product_review_count"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='similar_products',
-            field=models.ManyToManyField(blank=True, related_name='related_to', to='product.product'),
+            model_name="product",
+            name="similar_products",
+            field=models.ManyToManyField(
+                blank=True, related_name="related_to", to="product.product"
+            ),
         ),
     ]

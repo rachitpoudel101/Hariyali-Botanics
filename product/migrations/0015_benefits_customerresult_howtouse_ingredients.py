@@ -5,57 +5,127 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0014_review_reviewer'),
+        ("product", "0014_review_reviewer"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Benefits',
+            name="Benefits",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('benefit', models.TextField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='product/benefits/')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("benefit", models.TextField()),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="product/benefits/"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'product_benefits',
+                "db_table": "product_benefits",
             },
         ),
         migrations.CreateModel(
-            name='CustomerResult',
+            name="CustomerResult",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('result', models.TextField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='customer/results/')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("result", models.TextField()),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="customer/results/"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'customer_result',
+                "db_table": "customer_result",
             },
         ),
         migrations.CreateModel(
-            name='HowToUse',
+            name="HowToUse",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('step', models.TextField()),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("step", models.TextField()),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'how_to_use',
+                "db_table": "how_to_use",
             },
         ),
         migrations.CreateModel(
-            name='Ingredients',
+            name="Ingredients",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ingredient', models.TextField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='product/ingredients/')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ingredient", models.TextField()),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="product/ingredients/"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'product_ingredients',
+                "db_table": "product_ingredients",
             },
         ),
     ]

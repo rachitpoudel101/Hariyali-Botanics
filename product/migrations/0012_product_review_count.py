@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0011_remove_product_reviews_count_remove_review_user'),
+        ("product", "0011_remove_product_reviews_count_remove_review_user"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='review_count',
+            model_name="product",
+            name="review_count",
             field=models.IntegerField(default=0),
         ),
     ]

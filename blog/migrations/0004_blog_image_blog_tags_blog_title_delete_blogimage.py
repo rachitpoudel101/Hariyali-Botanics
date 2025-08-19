@@ -4,28 +4,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0003_remove_blog_image_blogimage'),
+        ("blog", "0003_remove_blog_image_blogimage"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blog',
-            name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='blog/images/'),
+            model_name="blog",
+            name="image",
+            field=models.ImageField(blank=True, null=True, upload_to="blog/images/"),
         ),
         migrations.AddField(
-            model_name='blog',
-            name='tags',
+            model_name="blog",
+            name="tags",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AddField(
-            model_name='blog',
-            name='title',
+            model_name="blog",
+            name="title",
             field=models.CharField(default=None, max_length=100, null=True),
         ),
         migrations.DeleteModel(
-            name='BlogImage',
+            name="BlogImage",
         ),
     ]

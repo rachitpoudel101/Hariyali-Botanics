@@ -4,22 +4,21 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0006_alter_product_description'),
+        ("product", "0006_alter_product_description"),
     ]
 
     operations = [
         migrations.AlterModelTable(
-            name='category',
-            table='category',
+            name="category",
+            table="category",
         ),
         migrations.AlterModelTable(
-            name='product',
-            table='product',
+            name="product",
+            table="product",
         ),
         migrations.AlterModelTable(
-            name='skintype',
-            table='skintype',
+            name="skintype",
+            table="skintype",
         ),
     ]

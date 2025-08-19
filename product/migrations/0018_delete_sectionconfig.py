@@ -4,13 +4,12 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('product', '0017_sectionconfig'),
+        ("product", "0017_sectionconfig"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='SectionConfig',
+            name="SectionConfig",
         ),
     ]
