@@ -14,13 +14,14 @@ from .models import (
 from hero.models import Hero
 
 def index(request):
-    print("Index view accessed")
+    # print("Index view accessed")
     try:
         hero_video = Hero.objects.last()
-        print(f"Hero video fetched: {hero_video}")
+        # print(f"Hero video fetched: {hero_video}")
         video_url = hero_video.video.url if hero_video and hero_video.video else None
+        # print(f"Video URL: {video_url}")  # Add this line
         products = Product.objects.all().order_by("-id")[:6]
-        print(f"Products fetched: {products.count()} items")
+        # print(f"Products fetched: {products.count()} items")
         return render(request, "Normal/index.html", {"products": products, "video_url": video_url})
     except Exception as e:
         # traceback.print_exc()

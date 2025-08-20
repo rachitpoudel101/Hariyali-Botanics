@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
-# from decouple import config
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "product",
     "blog",
-    "hero"
+    "hero",
+    "storages",  # Add this for django-storages
 ]
 
 MIDDLEWARE = [
@@ -89,21 +90,21 @@ WSGI_APPLICATION = "core.wsgi.application"
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
-    ),
-}
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": config("DB_NAME"),
-#         "USER": config("DB_USER"),
-#         "PASSWORD": config("DB_PASSWORD"),
-#         "HOST": config("DB_HOST"),
-#         "PORT": config("DB_PORT"),
-#     }
+#     "default": dj_database_url.parse(
+#         "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
+#     ),
 # }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
+    }
+}
 
 
 # Password validation
@@ -146,7 +147,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# --- S3 Media Storage for Production ---
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default=None)
+    AWS_QUERYSTRING_AUTH = False  # Make media files public
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
+# ---------------------------------------
 
 # Include Whitenoise in installed apps if not there already
 if "whitenoise.runserver_nostatic" not in INSTALLED_APPS:

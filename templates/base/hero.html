@@ -2,7 +2,7 @@
 <section class="w-full min-h-[400px] md:min-h-screen overflow-hidden relative flex items-center justify-center pt-12 sm:pt-16 md:pt-20">
     <!-- Hero Video -->
     {% if video_url %}
-    <video autoplay muted loop playsinline class="w-full h-full object-cover absolute inset-0 z-0" id="heroVideo">
+    <video src="{{ video_url }}" autoplay muted loop playsinline class="w-full h-full object-cover absolute inset-0 z-0" id="heroVideo">
         <source src="{{ video_url }}" type="video/mp4">
     </video>
     {% else %}
