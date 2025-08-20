@@ -1,6 +1,4 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -15,5 +13,4 @@ urlpatterns = [
     path("product/<int:id>/", views.prodec, name="prodec"),
     path("product/<int:product_id>/review/", views.submit_review, name="submit_review"),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

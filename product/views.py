@@ -11,11 +11,21 @@ from .models import (
     HowToUse,
     Ingredients,
 )
-
+from hero.models import Hero
 
 def index(request):
-    products = Product.objects.all().order_by("-id")[:6]
-    return render(request, "Normal/index.html", {"products": products})
+    print("Index view accessed")
+    try:
+        hero_video = Hero.objects.last()
+        print(f"Hero video fetched: {hero_video}")
+        video_url = hero_video.video.url if hero_video and hero_video.video else None
+        products = Product.objects.all().order_by("-id")[:6]
+        print(f"Products fetched: {products.count()} items")
+        return render(request, "Normal/index.html", {"products": products, "video_url": video_url})
+    except Exception as e:
+        # traceback.print_exc()
+        # Handle the exception (e.g., log it, show an error message, etc.)
+        return render(request, "Normal/index.html", {"products": [], "video_url": None})
 
 
 def shop(request):
