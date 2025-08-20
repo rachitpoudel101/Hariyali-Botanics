@@ -90,21 +90,21 @@ WSGI_APPLICATION = "core.wsgi.application"
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
-    ),
-}
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": config("DB_NAME"),
-#         "USER": config("DB_USER"),
-#         "PASSWORD": config("DB_PASSWORD"),
-#         "HOST": config("DB_HOST"),
-#         "PORT": config("DB_PORT"),
-#     }
+#     "default": dj_database_url.parse(
+#         "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
+#     ),
 # }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
+    }
+}
 
 
 # Password validation
@@ -149,17 +149,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# --- S3 Media Storage for Production ---
-# if not DEBUG:
-#     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-#     AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-#     AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
-#     AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
-#     AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default=None)
-#     AWS_QUERYSTRING_AUTH = False  # Make media files public
-#     MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
-# ---------------------------------------
-
 # Include Whitenoise in installed apps if not there already
 if "whitenoise.runserver_nostatic" not in INSTALLED_APPS:
     INSTALLED_APPS.insert(
@@ -176,14 +165,6 @@ if "whitenoise.middleware.WhiteNoiseMiddleware" not in MIDDLEWARE:
 # Add these additional settings
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 WHITENOISE_USE_FINDERS = True
-
-# For production: serve media files via Django (not recommended for high-traffic)
-if not DEBUG:
-    # Reminder: Add this to your urls.py
-    # from django.conf import settings
-    # from django.conf.urls.static import static
-    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    pass
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
