@@ -90,21 +90,21 @@ WSGI_APPLICATION = "core.wsgi.application"
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
-#     ),
-# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "PORT": config("DB_PORT"),
-    }
+    "default": dj_database_url.parse(
+        "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
+    ),
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": config("DB_NAME"),
+#         "USER": config("DB_USER"),
+#         "PASSWORD": config("DB_PASSWORD"),
+#         "HOST": config("DB_HOST"),
+#         "PORT": config("DB_PORT"),
+#     }
+# }
 
 
 # Password validation
