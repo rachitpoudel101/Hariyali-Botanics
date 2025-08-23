@@ -4,12 +4,24 @@
   <!-- Categories -->
   <div class="flex overflow-x-auto pb-3 hide-scrollbar mb-8">
     <div class="flex gap-2 sm:gap-4 px-1 sm:justify-center min-w-max mx-auto">
-      <button class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap">All Products</button>
-      {% for category in categories %}
-        <button class="category-btn bg-white text-sage border border-sage px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-sage hover:text-white transition-colors whitespace-nowrap">
-          {{ category.name }}
-        </button>
-      {% endfor %}
+      {% if not active_category %}
+        <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold">
+          All Products
+        </a>
+        {% for category in categories %}
+          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors">
+            {{ category.name }}
+          </a>
+        {% endfor %}
+      {% else %}
+        {% for category in categories %}
+          {% if active_category|default:'' == category.id|stringformat:'s' %}
+            <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold transition-colors">
+              {{ category.name }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 
