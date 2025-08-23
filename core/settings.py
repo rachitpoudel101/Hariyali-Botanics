@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+
 # import dj_database_url
 from decouple import config
 
@@ -38,16 +39,18 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "admin_interface",
-    "colorfield",
+    # "admin_interface",
+    # "colorfield",
     "django.contrib.admin",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "product",
     "blog",
     "hero",
-    # "cloudinary", 
-    # "cloudinary_storage"
+    "guides",
+    "ShopByConcern",
+    "Review",
+    "ayuretreat",
 ]
 
 MIDDLEWARE = [

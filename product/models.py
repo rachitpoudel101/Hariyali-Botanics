@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from ShopByConcern.models import ShopByConcern
 
 SIZE_CHOICES = [
     ("30ml", "30 mL"),
@@ -49,6 +50,9 @@ class Product(models.Model):
     size = models.CharField(max_length=10, choices=SIZE_CHOICES, default="30ml")
     similar_products = models.ManyToManyField(
         "self", symmetrical=False, blank=True, related_name="related_to"
+    )
+    shopbyconcern = models.ManyToManyField(
+        ShopByConcern, related_name="products", blank=True
     )
 
     def __str__(self):

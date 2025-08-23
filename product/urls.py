@@ -12,5 +12,6 @@ urlpatterns = [
     path("quiz/", views.quiz, name="quiz"),
     path("product/<int:id>/", views.prodec, name="prodec"),
     path("product/<int:product_id>/review/", views.submit_review, name="submit_review"),
+    path("guides/", views.guides_list, name="guides-list"),
+    path("guides/<int:guide_id>/", views.guide_detail, name="guide-detail"),
 ]
-

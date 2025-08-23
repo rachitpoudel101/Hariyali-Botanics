@@ -1,4 +1,4 @@
-  <!-- ======= COMMUNITY TESTIMONIALS SECTION ======= -->
+<!-- ======= COMMUNITY TESTIMONIALS SECTION ======= -->
   <section class="w-full bg-[#fdfaf6] py-10 px-2 sm:py-16 sm:px-4 flex flex-col items-center">
     <h3 class="text-xl md:text-2xl font-bold text-[#18382c] mb-8">Hariyali Community <span class="text-[#8B4513]">|</span> Love Notes</h3>
     <div class="w-full max-w-md sm:max-w-2xl relative">
@@ -6,45 +6,26 @@
         <blockquote class="text-lg md:text-xl italic text-[#18382c] font-playfair min-h-[100px]" id="testimonial-quote">
           "The products have transformed my skin! Love the natural feel."
         </blockquote>
-        <div class="mt-4 text-[#8B4513] font-semibold text-sm" id="testimonial-author">
-          – Anisha, Kathmandu
-        </div>
       </div>
     </div>
     
     <!-- Love Notes Gallery -->
     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-      <div class="bg-white p-4 rounded-lg shadow">
-        <div class="flex items-center mb-3">
-          <div class="w-10 h-10 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold">P</div>
-          <div class="ml-3">
-            <div class="font-semibold">Prerana</div>
-            <div class="text-xs text-gray-500">Lalitpur</div>
+      {% for review in reviews %}
+        <div class="bg-white p-4 rounded-lg shadow">
+          <div class="flex items-center mb-3">
+            <div class="w-10 h-10 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold">
+              {{ review.name|slice:":1" }}
+            </div>
+            <div class="ml-3">
+              <div class="font-semibold">{{ review.name }}</div>
+              <div class="text-xs text-gray-500">{{ review.location }}</div>
+            </div>
           </div>
+          <p class="text-sm text-gray-700">"{{ review.testimonial }}"</p>
         </div>
-        <p class="text-sm text-gray-700">"Hariyali is more than skincare, it's a ritual of self-love. My skin glows every morning."</p>
-      </div>
-      
-      <div class="bg-white p-4 rounded-lg shadow">
-        <div class="flex items-center mb-3">
-          <div class="w-10 h-10 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold">S</div>
-          <div class="ml-3">
-            <div class="font-semibold">Suman</div>
-            <div class="text-xs text-gray-500">Pokhara</div>
-          </div>
-        </div>
-        <p class="text-sm text-gray-700">"I struggled with acne for years. After using Hariyali, my skin feels calm and clear."</p>
-      </div>
-      
-      <div class="bg-white p-4 rounded-lg shadow">
-        <div class="flex items-center mb-3">
-          <div class="w-10 h-10 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold">R</div>
-          <div class="ml-3">
-            <div class="font-semibold">Ritu</div>
-            <div class="text-xs text-gray-500">Butwal</div>
-          </div>
-        </div>
-        <p class="text-sm text-gray-700">"Natural, gentle, and effective. I recommend Hariyali to everyone who cares about their skin."</p>
-      </div>
+      {% empty %}
+        <p class="col-span-full text-center text-gray-500">No reviews available.</p>
+      {% endfor %}
     </div>
   </section>

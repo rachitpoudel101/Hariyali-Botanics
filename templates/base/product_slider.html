@@ -1,6 +1,12 @@
 {% load static %}
 <section class="py-4 px-2 sm:py-8 sm:px-4 bg-[#fffaf4]">
-    <div class="slider-section w-full relative">
+    <div class="slider-section w-full relative flex items-start">
+        <!-- Fixed Bestseller Label -->
+        <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8 min-w-[80px]">
+            <a href="{% url 'shop' %}?filter=bestsellers" class="vertical hidden lg:flex">BESTSELLERS</a>
+            <a href="{% url 'shop' %}?filter=bestsellers" class="horizontal flex lg:hidden">BESTSELLERS</a>
+        </div>
+
         <!-- Slider Navigation Buttons -->
         <button id="slider-left" aria-label="Scroll left" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex">
             <i class="fas fa-chevron-left"></i>
@@ -11,12 +17,6 @@
 
         <!-- Horizontal Product Slider -->
         <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative flex">
-
-            <!-- Bestseller Label -->
-            <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8">
-                <a href="{% url 'shop' %}?filter=bestsellers" class="vertical hidden lg:flex">BESTSELLERS</a>
-                <a href="{% url 'shop' %}?filter=bestsellers" class="horizontal flex lg:hidden">BESTSELLERS</a>
-            </div>
 
             <div id="horizontal-slider" class="flex gap-0 w-full min-w-0">
 
@@ -74,5 +74,7 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 
+.slider-section { display: flex; }
+.bestseller-label { flex-shrink: 0; }
 .slider-viewport { align-items: flex-start; }
 </style>
