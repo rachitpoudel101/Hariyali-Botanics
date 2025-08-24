@@ -1,4 +1,6 @@
 {% load static %}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <section class="w-full bg-gradient-to-br from-green-50 to-green-100 py-16 px-4 flex flex-col items-center">
   <!-- Guide Hero Section - More Seamless Integration -->
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
@@ -37,21 +39,31 @@
   <!-- Guides List Section -->
   <div class="max-w-6xl mx-auto w-full mb-12">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-green-900 mb-8">Our Guides</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {% for guide in guides %}
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
-        {% if guide.image %}
-          <img src="{{ guide.image.url }}" alt="{{ guide.title }}" class="w-full h-48 object-cover">
-        {% endif %}
-        <div class="p-5 flex-1 flex flex-col">
-          <h3 class="text-lg font-bold text-green-900 mb-2">{{ guide.title }}</h3>
-          <p class="text-gray-700 text-sm mb-4">{{ guide.description }}</p>
-          <a href="{% url 'guide-detail' guide.id %}" class="mt-auto inline-block bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-medium text-xs transition">View Guide</a>
+    <div class="swiper guides-swiper">
+      <div class="swiper-wrapper">
+        {% for guide in guides %}
+        <div class="swiper-slide">
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+            {% if guide.image %}
+              <img src="{{ guide.image.url }}" alt="{{ guide.title }}" class="w-full h-48 object-cover">
+            {% endif %}
+            <div class="p-5 flex-1 flex flex-col">
+              <h3 class="text-lg font-bold text-green-900 mb-2">{{ guide.title }}</h3>
+              <p class="text-gray-700 text-sm mb-4">{{ guide.description }}</p>
+              <a href="{% url 'guide-detail' guide.id %}" class="mt-auto inline-block bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded font-medium text-xs transition">View Guide</a>
+            </div>
+          </div>
         </div>
+        {% empty %}
+        <div class="swiper-slide">
+          <p class="col-span-full text-center text-gray-500">No guides available.</p>
+        </div>
+        {% endfor %}
       </div>
-      {% empty %}
-      <p class="col-span-full text-center text-gray-500">No guides available.</p>
-      {% endfor %}
+      <!-- Swiper navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 
@@ -184,3 +196,29 @@
     </div>
   </div>
 </section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper('.guides-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      }
+    }
+  });
+</script>
