@@ -14,7 +14,7 @@ from .models import (
 )
 from hero.models import Hero
 from ShopByConcern.models import ShopByConcern
-from guides.models import Guide
+from guides.models import Guide, FAQ
 from Review.models import CustomerReview
 from blog.models import Blog  
 
@@ -138,7 +138,16 @@ def club(request):
 
 
 def guide(request):
-    return render(request, "Normal/Guide.html")
+    guides = Guide.objects.all()
+    faqs = FAQ.objects.all()
+    return render(
+        request,
+        "Normal/Guide.html",
+        {
+            "guides": guides,
+            "faqs": faqs,
+        },
+    )
 
 
 def aayutreat(request):
