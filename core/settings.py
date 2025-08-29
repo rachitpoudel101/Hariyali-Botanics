@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "ShopByConcern",
     "Review",
     "ayuretreat",
+    "quiz"
 ]
 
 MIDDLEWARE = [
