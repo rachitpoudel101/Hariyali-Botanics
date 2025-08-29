@@ -85,6 +85,22 @@ class Product(models.Model):
         # Return only the requested count
         return similar[:count]
 
+    # Add a helper for quiz filtering
+    @staticmethod
+    def filter_for_quiz(skin_type=None, concerns=None, budget=None):
+        qs = Product.objects.filter(is_active=True)
+        if skin_type:
+            qs = qs.filter(skin_types__name__iexact=skin_type)
+        if concerns:
+            for concern in concerns:
+                qs = qs.filter(shopbyconcern__name__iexact=concern)
+        if budget == "low":
+            qs = qs.filter(price__lt=60)
+        elif budget == "medium":
+            qs = qs.filter(price__lt=100)
+        # For "high", no price filter
+        return qs.distinct()
+
 
 class ProductImage(models.Model):
     class Meta:

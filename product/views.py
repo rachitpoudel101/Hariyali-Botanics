@@ -17,6 +17,7 @@ from ShopByConcern.models import ShopByConcern
 from guides.models import Guide, FAQ
 from Review.models import CustomerReview
 from blog.models import Blog  
+from quiz.models import Quiz, Question, Option
 
 
 def index(request):
@@ -228,3 +229,45 @@ def guide_detail(request, guide_id):
             "customer_says": customer_says,
         }
     )
+
+
+def quiz_page(request):
+    quiz = Quiz.objects.first()
+    return render(request, 'base/quiz-dec.html', {'quiz': quiz})
+
+
+def quiz_questions_api(request):
+    quiz_id = request.GET.get('quiz_id')
+    questions = Question.objects.filter(quiz_id=quiz_id).order_by('order')
+    data = []
+    for q in questions:
+        options = Option.objects.filter(question=q)
+        data.append({
+            'id': q.id,
+            'text': q.text,
+            'options': [{'id': o.id, 'text': o.text, 'value': o.value} for o in options]
+        })
+    return JsonResponse({'questions': data})
+
+
+def quiz_recommendations_api(request):
+    # Expect POST with answers[] (skin_type, concerns, budget, etc.)
+    answers = request.POST.getlist('answers[]')
+    skin_type = None
+    concerns = []
+    budget = None
+    for ans in answers:
+        if ans in ['oily', 'dry', 'combination', 'sensitive']:
+            skin_type = ans
+        elif ans in ['acne', 'aging', 'pigmentation', 'dullness', 'dryness']:
+            concerns.append(ans)
+        elif ans in ['low', 'medium', 'high']:
+            budget = ans
+    products = Product.filter_for_quiz(skin_type=skin_type, concerns=concerns, budget=budget)
+    prod_list = [{
+        'name': p.name,
+        'price': float(p.price),
+        'image': p.images.first().image.url if p.images.exists() else '',
+        'link': p.external_url or ''
+    } for p in products]
+    return JsonResponse({'products': prod_list})
