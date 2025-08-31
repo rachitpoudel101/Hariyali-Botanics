@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    # "admin_interface",
-    # "colorfield",
+    "admin_interface",
+    "colorfield",
     "django.contrib.admin",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -94,11 +94,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
-# }
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         "postgresql://botanics_user:UN4qwHMw9aWD6K6QkUFcLy3u7tgLXTKQ@dpg-d2hfcgogjchc73c4tbe0-a.oregon-postgres.render.com/botanics"
-#     ),
 # }
 DATABASES = {
     "default": {
@@ -155,21 +150,21 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Include Whitenoise in installed apps if not there already
-if "whitenoise.runserver_nostatic" not in INSTALLED_APPS:
-    INSTALLED_APPS.insert(
-        INSTALLED_APPS.index("django.contrib.staticfiles"),
-        "whitenoise.runserver_nostatic",
-    )
+# if "whitenoise.runserver_nostatic" not in INSTALLED_APPS:
+#     INSTALLED_APPS.insert(
+#         INSTALLED_APPS.index("django.contrib.staticfiles"),
+#         "whitenoise.runserver_nostatic",
+#     )
 
-# Make sure Whitenoise middleware is included
-if "whitenoise.middleware.WhiteNoiseMiddleware" not in MIDDLEWARE:
-    # Add after SecurityMiddleware
-    security_index = MIDDLEWARE.index("django.middleware.security.SecurityMiddleware")
-    MIDDLEWARE.insert(security_index + 1, "whitenoise.middleware.WhiteNoiseMiddleware")
+# # Make sure Whitenoise middleware is included
+# if "whitenoise.middleware.WhiteNoiseMiddleware" not in MIDDLEWARE:
+#     # Add after SecurityMiddleware
+#     security_index = MIDDLEWARE.index("django.middleware.security.SecurityMiddleware")
+#     MIDDLEWARE.insert(security_index + 1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
-# Add these additional settings
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-WHITENOISE_USE_FINDERS = True
+# # Add these additional settings
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# WHITENOISE_USE_FINDERS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
