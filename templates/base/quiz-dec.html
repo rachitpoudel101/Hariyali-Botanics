@@ -15,7 +15,7 @@
       <!-- Steps (only one visible at a time) -->
       <div id="step1" class="quiz-step">
       <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">Let's get to know you</h2>
-      <form class="space-y-6">
+        <form class="space-y-6">
           <input type="text" id="userName" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:border-[#18382c] transition"/>
           <select id="userAge" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:border-[#18382c] transition">
           <option value="">Select your age range</option>
@@ -26,41 +26,22 @@
           <option value="56+">56+</option>
           </select>
           <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition">Next</button>
-      </form>
+      </form>      
       </div>
       <div id="step2" class="quiz-step hidden">
-      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What is your skin type?</h2>
-      <div class="grid grid-cols-1 gap-4">
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'oily')">
-          <span class="font-medium">Oily</span>
-          <span class="block text-sm text-gray-600">Shiny, enlarged pores, prone to breakouts</span>
-          </button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'dry')">
-          <span class="font-medium">Dry</span>
-          <span class="block text-sm text-gray-600">Tight, flaky, rough texture</span>
-          </button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'combination')">
-          <span class="font-medium">Combination</span>
-          <span class="block text-sm text-gray-600">Oily T-zone, dry cheeks</span>
-          </button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('skinType', 'sensitive')">
-          <span class="font-medium">Sensitive</span>
-          <span class="block text-sm text-gray-600">Easily irritated, reactive to products</span>
-          </button>
-      </div>
-      </div>
+  <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What is your skin type?</h2>
+  <div class="grid grid-cols-1 gap-4">
+    <!-- Skin types will be loaded here by JS -->
+  </div>
+</div>
       <div id="step3" class="quiz-step hidden">
-      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What are your main skin concerns?</h2>
-      <p class="text-gray-600 mb-4 text-center">Select all that apply</p>
-      <div class="grid grid-cols-1 gap-4">
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('acne')">Acne & Breakouts</button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('aging')">Fine Lines & Aging</button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('pigmentation')">Dark Spots & Pigmentation</button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('dullness')">Dullness & Uneven Tone</button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="toggleConcern('dryness')">Dryness & Dehydration</button>
-      </div>
-      <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-6">Next</button>
-      </div>
+  <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What are your main skin concerns?</h2>
+  <p class="text-gray-600 mb-4 text-center">Select one</p>
+  <div class="grid grid-cols-1 gap-4">
+    <!-- Concerns will be loaded here by JS -->
+  </div>
+  <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-6">Next</button>
+</div>
       <div id="step4" class="quiz-step hidden">
       <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">How much time do you spend on skincare?</h2>
       <div class="grid grid-cols-1 gap-4">
@@ -74,26 +55,45 @@
           20+ minutes <span class="block text-sm text-gray-600">Comprehensive multi-step routine</span>
           </button>
       </div>
+      <button type="button" onclick="nextStep()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-6">Next</button>
       </div>
       <div id="step5" class="quiz-step hidden">
-      <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What's your skincare budget?</h2>
-      <div class="grid grid-cols-1 gap-4">
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'low')">
-          Under $100 <span class="block text-sm text-gray-600">Essential products only</span>
-          </button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'medium')">
-          $100 - $300 <span class="block text-sm text-gray-600">Quality products with some luxury</span>
-          </button>
-          <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('budget', 'high')">
-          $300+ <span class="block text-sm text-gray-600">Premium luxury skincare</span>
-          </button>
-      </div>
-      </div>
-      <div id="step6" class="quiz-step hidden">
-      <h2 class="text-2xl font-semibold text-[#18382c] mb-4 text-center">Your Personalized Skincare Ritual</h2>
-      <p class="text-gray-600 mb-6 text-center">Based on your answers, here are our recommendations:</p>
-      <div id="recommendations" class="space-y-6"></div>
-      <button type="button" onclick="restartQuiz()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-8">Retake Quiz</button>
+  <h2 class="text-2xl font-semibold text-[#18382c] mb-6 text-center">What's your skincare budget?</h2>
+  <div class="grid grid-cols-1 gap-4">
+    <!-- Budget choices will be loaded here by JS -->
+  </div>
+</div>
+      <div id="step6" class="quiz-step {% if not recommendations %}hidden{% endif %}">
+        <h2 class="text-2xl font-semibold text-[#18382c] mb-4 text-center">Your Personalized Skincare Ritual</h2>
+        <p class="text-gray-600 mb-6 text-center">
+          Hello {{ quiz_data.name }}!<br>
+          Based on your {{ quiz_data.skin_type }} skin type and concerns about {{ quiz_data.concerns|join:", " }}, here's your personalized routine:
+        </p>
+        <div id="recommendations" class="space-y-6">
+          {% for product in recommendations %}
+            <div class="bg-white bg-opacity-90 p-6 rounded-lg border border-gray-200">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-medium text-lg">{{ product.name }}</h4>
+                <span class="text-xl font-bold text-gray-800">${{ product.price }}</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-4">Step {{ forloop.counter }} of your routine</p>
+              <button class="bg-gray-800 text-white px-6 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
+                ADD TO CART
+              </button>
+            </div>
+          {% endfor %}
+          {% if recommendations %}
+            <div class="bg-gray-800 text-white p-6 rounded-lg text-center">
+              <h4 class="text-xl font-medium mb-2">Complete Routine</h4>
+              <p class="text-2xl font-bold mb-4">
+              </p>
+              <button class="bg-white text-gray-800 px-8 py-3 font-medium hover:bg-gray-100 transition-colors">
+                GET YOUR COMPLETE ROUTINE
+              </button>
+            </div>
+          {% endif %}
+        </div>
+        <button type="button" onclick="restartQuiz()" class="w-full bg-[#18382c] text-white py-3 rounded-lg font-semibold hover:bg-[#285c44] transition mt-8">Retake Quiz</button>
       </div>
     </div>
     <!-- Decorative Bottom Image -->

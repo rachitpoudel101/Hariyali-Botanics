@@ -17,8 +17,14 @@ from ShopByConcern.models import ShopByConcern
 from guides.models import Guide, FAQ
 from Review.models import CustomerReview
 from blog.models import Blog  
-from quiz.models import Quiz, Question, Option
+from django.http import JsonResponse
+from product.models import Product, Skintype
+from ShopByConcern.models import ShopByConcern
+from quiz.models import CustomerQuizLog
 
+from django.views.decorators.csrf import csrf_exempt
+
+from django.core import serializers
 
 def index(request):
     try:
@@ -230,44 +236,94 @@ def guide_detail(request, guide_id):
         }
     )
 
-
-def quiz_page(request):
-    quiz = Quiz.objects.first()
-    return render(request, 'base/quiz-dec.html', {'quiz': quiz})
-
-
-def quiz_questions_api(request):
-    quiz_id = request.GET.get('quiz_id')
-    questions = Question.objects.filter(quiz_id=quiz_id).order_by('order')
-    data = []
-    for q in questions:
-        options = Option.objects.filter(question=q)
-        data.append({
-            'id': q.id,
-            'text': q.text,
-            'options': [{'id': o.id, 'text': o.text, 'value': o.value} for o in options]
-        })
-    return JsonResponse({'questions': data})
+@csrf_exempt
+def quiz_create(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        age_range = request.POST.get("age_range")
+        quiz_log = CustomerQuizLog.objects.create(name=name, age_range=age_range)
+        return JsonResponse({"quiz_id": quiz_log.id})
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 
-def quiz_recommendations_api(request):
-    # Expect POST with answers[] (skin_type, concerns, budget, etc.)
-    answers = request.POST.getlist('answers[]')
-    skin_type = None
-    concerns = []
-    budget = None
-    for ans in answers:
-        if ans in ['oily', 'dry', 'combination', 'sensitive']:
-            skin_type = ans
-        elif ans in ['acne', 'aging', 'pigmentation', 'dullness', 'dryness']:
-            concerns.append(ans)
-        elif ans in ['low', 'medium', 'high']:
-            budget = ans
-    products = Product.filter_for_quiz(skin_type=skin_type, concerns=concerns, budget=budget)
-    prod_list = [{
-        'name': p.name,
-        'price': float(p.price),
-        'image': p.images.first().image.url if p.images.exists() else '',
-        'link': p.external_url or ''
-    } for p in products]
-    return JsonResponse({'products': prod_list})
+@csrf_exempt
+def quiz_update_skin_type(request):
+    if request.method == "POST":
+        quiz_id = request.POST.get("quiz_id")
+        skin_type_id = request.POST.get("skin_type_id")
+        quiz_log = CustomerQuizLog.objects.get(id=quiz_id)
+        quiz_log.skin_type_id = skin_type_id
+        quiz_log.save()
+        return JsonResponse({"success": True})
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+@csrf_exempt
+def quiz_update_skin_concern(request):
+    if request.method == "POST":
+        quiz_id = request.POST.get("quiz_id")
+        skin_concern_id = request.POST.get("skin_concern_id")
+        quiz_log = CustomerQuizLog.objects.get(id=quiz_id)
+        quiz_log.skin_concern_id = skin_concern_id
+        quiz_log.save()
+        return JsonResponse({"success": True})
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+@csrf_exempt
+def quiz_update_price_range(request):
+    if request.method == "POST":
+        quiz_id = request.POST.get("quiz_id")
+        price_range = request.POST.get("price_range")
+        quiz_log = CustomerQuizLog.objects.get(id=quiz_id)
+        quiz_log.price_range = price_range
+        quiz_log.save()
+        return JsonResponse({"success": True})
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+def get_skin_types(request):
+    skin_types = Skintype.objects.all()
+    data = [{"id": st.id, "name": st.name} for st in skin_types]
+    return JsonResponse({"skin_types": data})
+
+def get_skin_concerns(request):
+    concerns = ShopByConcern.objects.all()
+    data = [{"id": c.id, "name": c.title} for c in concerns]
+    return JsonResponse({"concerns": data})
+
+def get_price_choices(request):
+    choices = CustomerQuizLog.PriceRange.choices
+    data = [{"value": v, "label": l} for v, l in choices]
+    return JsonResponse({"price_choices": data})
+
+def get_age_ranges(request):
+    choices = CustomerQuizLog.AgeRange.choices
+    data = [{"value": v, "label": l} for v, l in choices]
+    return JsonResponse({"age_ranges": data})
+
+def quiz_recommendations(request):
+    quiz_id = request.GET.get("quiz_id") or request.POST.get("quiz_id")
+    if quiz_id:
+        quiz_log = CustomerQuizLog.objects.get(id=quiz_id)
+        products = Product.objects.all()
+        # Filter by skin type
+        if quiz_log.skin_type_id:
+            products = products.filter(skin_types__id=quiz_log.skin_type_id)
+        # Filter by price range
+        if quiz_log.price_range == "under_100":
+            products = products.filter(price__lt=100)
+        elif quiz_log.price_range == "100_300":
+            products = products.filter(price__gte=100, price__lte=300)
+        elif quiz_log.price_range == "over_300":
+            products = products.filter(price__gt=300)
+        # Return all filtered products
+        recommendations = [
+            {
+                "name": p.name,
+                "price": p.price,
+                "id": p.id,
+                "image": p.primary_image.url if hasattr(p, "primary_image") and p.primary_image else "",
+                "step": i + 1
+            }
+            for i, p in enumerate(products)
+        ]
+        return JsonResponse({"recommendations": recommendations})
+    return JsonResponse({"error": "Invalid request"}, status=400)

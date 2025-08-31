@@ -23,7 +23,19 @@ function type() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => { if (heroTexts.length) type(); });
+document.addEventListener("DOMContentLoaded", () => {
+    if (heroTexts.length) type();
+    // Load age ranges dynamically for quiz step 1
+    fetch("/get-age-ranges/")
+        .then(res => res.json())
+        .then(data => {
+            const ageSelect = document.getElementById("userAge");
+            ageSelect.innerHTML = `<option value="">Select your age range</option>` +
+                data.age_ranges.map(ar =>
+                    `<option value="${ar.value}">${ar.label}</option>`
+                ).join('');
+        });
+});
 
 
 // ===== Product Slider Script =====
@@ -66,6 +78,54 @@ document.addEventListener("DOMContentLoaded", () => { if (heroTexts.length) type
     }
   })();
 
+ // ===== Chatbot Script =====
+  // Remove DOMContentLoaded so the script runs immediately after elements are loaded
+
+   const chatbotBtn = document.getElementById('chatbot-btn');
+
+  const chatbotPopup = document.getElementById('chatbot-popup');
+  const chatbotForm = document.getElementById('chatbot-form');
+  const chatbotInput = document.getElementById('chatbot-input');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+
+  if (chatbotBtn && chatbotPopup) {
+    chatbotBtn.addEventListener('click', () => {
+      // Always show the popup when clicked
+      chatbotPopup.style.display = 'block';
+      chatbotMessages.innerHTML = '';
+      chatbotInput.value = '';
+      chatbotInput.focus();
+    });
+  }
+
+  if (chatbotForm && chatbotMessages && chatbotInput) {
+    chatbotForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const userMsg = chatbotInput.value.trim();
+      if (userMsg) {
+        chatbotMessages.innerHTML = `
+          <div class="mb-2"><span class="font-semibold text-[#18382c]">You:</span> ${userMsg}</div>
+          <div class="mb-2"><span class="font-semibold text-[#18382c]">Bot:</span> Hello customer, we are Hariyali Botanic.<br>
+          For more details, contact us on WhatsApp.</div>
+          <a href="https://wa.me/9848553543" target="_blank" class="inline-block bg-[#25D366] text-white px-3 py-1 rounded mt-2 font-semibold text-xs hover:bg-[#128C7E] transition">
+            WhatsApp Chat
+          </a>
+        `;
+        chatbotInput.value = '';
+      }
+    });
+  }
+
+  // Optional: Close popup when clicking outside
+  document.addEventListener('click', function(e) {
+    if (
+      chatbotPopup &&
+      !chatbotPopup.contains(e.target) &&
+      !chatbotBtn.contains(e.target)
+    ) {
+      chatbotPopup.style.display = 'none';
+    }
+  });
 
 
 //product detauils page 
@@ -157,179 +217,227 @@ document.addEventListener("DOMContentLoaded", () => { if (heroTexts.length) type
 
 //quiz page
 
-    let currentStep = 1
+    let currentStep = 1;
     let quizData = {
+    quizId: null,
     name: "",
     age: "",
     skinType: "",
+    skinTypeId: null,
     concerns: [],
+    concernId: null,
     routine: "",
     budget: "",
-    }
+    priceRange: ""
+};
 
-    const products = {
-    cleansers: [
-        { name: "Gentle Cleansing Oil", price: 45, skinTypes: ["dry", "sensitive"], concerns: ["dryness"] },
-        { name: "Purifying Foam Cleanser", price: 38, skinTypes: ["oily", "combination"], concerns: ["acne"] },
-        { name: "Brightening Gel Cleanser", price: 42, skinTypes: ["all"], concerns: ["dullness", "pigmentation"] },
-    ],
-    serums: [
-        {
-        name: "Vitamin C Brightening Serum",
-        price: 85,
-        skinTypes: ["all"],
-        concerns: ["dullness", "pigmentation", "aging"],
-        },
-        { name: "Hyaluronic Acid Serum", price: 65, skinTypes: ["dry", "sensitive"], concerns: ["dryness", "aging"] },
-        { name: "Niacinamide Serum", price: 55, skinTypes: ["oily", "combination"], concerns: ["acne", "pigmentation"] },
-        { name: "Retinol Renewal Serum", price: 95, skinTypes: ["all"], concerns: ["aging", "acne"] },
-    ],
-    moisturizers: [
-        { name: "Hydrating Night Cream", price: 75, skinTypes: ["dry", "sensitive"], concerns: ["dryness", "aging"] },
-        { name: "Lightweight Day Moisturizer", price: 58, skinTypes: ["oily", "combination"], concerns: ["acne"] },
-        { name: "Anti-Aging Moisturizer", price: 88, skinTypes: ["all"], concerns: ["aging", "dryness"] },
-    ],
-    treatments: [
-        { name: "Exfoliating Mask", price: 68, skinTypes: ["oily", "combination"], concerns: ["acne", "dullness"] },
-        { name: "Hydrating Sheet Mask Set", price: 45, skinTypes: ["dry", "sensitive"], concerns: ["dryness"] },
-        { name: "Brightening Treatment", price: 125, skinTypes: ["all"], concerns: ["pigmentation", "dullness"] },
-    ],
-    }
-
-    function nextStep() {
-    // Validate current step
+function nextStep() {
     if (currentStep === 1) {
-        const name = document.getElementById("userName").value
-        const age = document.getElementById("userAge").value
-
+        const name = document.getElementById("userName").value;
+        const age = document.getElementById("userAge").value;
         if (!name || !age) {
-        alert("Please fill in all fields")
-        return
+            alert("Please fill in all fields");
+            return;
         }
-
-        quizData.name = name
-        quizData.age = age
+        quizData.name = name;
+        quizData.age = age;
+        // AJAX to create quiz log
+        fetch("/quiz-create/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: `name=${encodeURIComponent(name)}&age_range=${encodeURIComponent(age)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            quizData.quizId = data.quiz_id;
+            loadSkinTypes();
+            showNextStep();
+        });
+        return;
     }
-
-    if (currentStep === 3 && quizData.concerns.length === 0) {
-        alert("Please select at least one skin concern")
-        return
+    if (currentStep === 2) {
+        // Wait for skin type selection
+        if (!quizData.skinTypeId) {
+            alert("Please select a skin type");
+            return;
+        }
+        fetch("/quiz-update-skin-type/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: `quiz_id=${quizData.quizId}&skin_type_id=${quizData.skinTypeId}`
+        })
+        .then(() => {
+            loadSkinConcerns();
+            showNextStep();
+        });
+        return;
     }
+    if (currentStep === 3) {
+        if (!quizData.concernId) {
+            alert("Please select a skin concern");
+            return;
+        }
+        fetch("/quiz-update-skin-concern/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: `quiz_id=${quizData.quizId}&skin_concern_id=${quizData.concernId}`
+        })
+        .then(() => showNextStep());
+        return;
+    }
+    if (currentStep === 4) {
+        if (!quizData.routine) {
+            alert("Please select your routine time");
+            return;
+        }
+        showNextStep();
+        return;
+    }
+    if (currentStep === 5) {
+        if (!quizData.priceRange) {
+            alert("Please select a budget");
+            return;
+        }
+        fetch("/quiz-update-price-range/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: `quiz_id=${quizData.quizId}&price_range=${quizData.priceRange}`
+        })
+        .then(() => showNextStep());
+        return;
+    }
+    showNextStep();
+}
 
-    // Hide current step
-    document.getElementById(`step${currentStep}`).classList.add("hidden")
-
-    // Show next step
-    currentStep++
+function showNextStep() {
+    document.getElementById(`step${currentStep}`).classList.add("hidden");
+    currentStep++;
     if (currentStep <= 6) {
-        document.getElementById(`step${currentStep}`).classList.remove("hidden")
-        document.getElementById(`step${currentStep}`).classList.add("slide-in")
-
-        // Update progress bar
-        const progress = (currentStep / 6) * 100
-        document.getElementById("progressBar").style.width = progress + "%"
-
-        // Generate recommendations on final step
+        document.getElementById(`step${currentStep}`).classList.remove("hidden");
+        document.getElementById(`step${currentStep}`).classList.add("slide-in");
+        const progress = (currentStep / 6) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+        // Dynamically load price choices when step 5 is shown
+        if (currentStep === 5) {
+            loadPriceChoices();
+        }
         if (currentStep === 6) {
-        generateRecommendations()
+            generateRecommendations();
         }
     }
+}
+
+function loadSkinTypes() {
+    fetch("/get-skin-types/")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById("step2");
+        const grid = container.querySelector(".grid");
+        grid.innerHTML = data.skin_types.map(st =>
+            `<button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectSkinType('${st.id}', '${st.name}')">
+                <span class="font-medium">${st.name}</span>
+            </button>`
+        ).join('');
+    });
+}
+
+function selectSkinType(id, name) {
+    quizData.skinTypeId = id;
+    quizData.skinType = name;
+    document.querySelectorAll("#step2 .quiz-option").forEach(opt => opt.classList.remove("selected"));
+    event.target.closest(".quiz-option").classList.add("selected");
+    setTimeout(() => nextStep(), 500);
+}
+
+function loadSkinConcerns() {
+    fetch("/get-skin-concerns/")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById("step3");
+        const grid = container.querySelector(".grid");
+        grid.innerHTML = data.concerns.map(c =>
+            `<button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectSkinConcern('${c.id}', '${c.name}')">
+                ${c.name}
+            </button>`
+        ).join('');
+    });
+}
+
+function selectSkinConcern(id, name) {
+    quizData.concernId = id;
+    quizData.concerns = [name];
+    document.querySelectorAll("#step3 .quiz-option").forEach(opt => opt.classList.remove("selected"));
+    event.target.closest(".quiz-option").classList.add("selected");
+    setTimeout(() => nextStep(), 500);
+}
+
+// Add this function to handle routine selection
+function selectOption(type, value) {
+    if (type === 'routine') {
+        quizData.routine = value;
+        document.querySelectorAll("#step4 .quiz-option").forEach(opt => opt.classList.remove("selected"));
+        event.target.closest(".quiz-option").classList.add("selected");
     }
+}
 
-    function selectOption(category, value) {
-    quizData[category] = value
+function loadPriceChoices() {
+    fetch("/get-price-choices/")
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById("step5");
+        const grid = container.querySelector(".grid");
+        grid.innerHTML = data.price_choices.map(pc =>
+            `<button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectBudget('${pc.value}')">
+                ${pc.label}
+            </button>`
+        ).join('');
+    });
+}
 
-    // Remove selected class from all options in this step
-    const currentStepElement = document.getElementById(`step${currentStep}`)
-    const options = currentStepElement.querySelectorAll(".quiz-option")
-    options.forEach((option) => option.classList.remove("selected"))
+function selectBudget(value) {
+    quizData.priceRange = value;
+    document.querySelectorAll("#step5 .quiz-option").forEach(opt => opt.classList.remove("selected"));
+    event.target.closest(".quiz-option").classList.add("selected");
+    setTimeout(() => nextStep(), 500);
+}
 
-    // Add selected class to clicked option
-    event.target.closest(".quiz-option").classList.add("selected")
-
-    // Auto-advance after selection (except for concerns step)
-    if (category !== "concerns") {
-        setTimeout(() => {
-        nextStep()
-        }, 500)
-    }
-    }
-
-    function toggleConcern(concern) {
-    const index = quizData.concerns.indexOf(concern)
-    const option = event.target.closest(".quiz-option")
-
-    if (index > -1) {
-        quizData.concerns.splice(index, 1)
-        option.classList.remove("selected")
-    } else {
-        quizData.concerns.push(concern)
-        option.classList.add("selected")
-    }
-    }
-
-    function generateRecommendations() {
-    const recommendationsContainer = document.getElementById("recommendations")
-    let recommendations = []
-
-    // Get cleanser recommendation
-    const cleanser =
-        products.cleansers.find(
-        (product) => product.skinTypes.includes(quizData.skinType) || product.skinTypes.includes("all"),
-        ) || products.cleansers[0]
-
-    // Get serum recommendation based on concerns
-    const serum =
-        products.serums.find((product) => product.concerns.some((concern) => quizData.concerns.includes(concern))) ||
-        products.serums[0]
-
-    // Get moisturizer recommendation
-    const moisturizer =
-        products.moisturizers.find(
-        (product) => product.skinTypes.includes(quizData.skinType) || product.skinTypes.includes("all"),
-        ) || products.moisturizers[0]
-
-    // Get treatment recommendation based on budget and concerns
-    let treatment = null
-    if (quizData.budget !== "low") {
-        treatment = products.treatments.find((product) =>
-        product.concerns.some((concern) => quizData.concerns.includes(concern)),
-        )
-    }
-
-    recommendations = [cleanser, serum, moisturizer]
-    if (treatment) recommendations.push(treatment)
-
-    // Filter by budget
-    if (quizData.budget === "low") {
-        recommendations = recommendations.filter((product) => product.price < 60)
-    } else if (quizData.budget === "medium") {
-        recommendations = recommendations.filter((product) => product.price < 100)
-    }
-
-    // Generate HTML
-    let html = `<div class="bg-white bg-opacity-90 p-6 rounded-lg mb-6">
+function generateRecommendations() {
+    const recommendationsContainer = document.getElementById("recommendations");
+    fetch(`/quiz-recommendations/?quiz_id=${quizData.quizId}`)
+    .then(response => response.json())
+    .then(data => {
+        let html = `<div class="bg-white bg-opacity-90 p-6 rounded-lg mb-6">
             <h3 class="text-xl font-medium mb-2">Hello ${quizData.name}!</h3>
             <p class="text-gray-600">Based on your ${quizData.skinType} skin type and concerns about ${quizData.concerns.join(", ")}, here's your personalized routine:</p>
-        </div>`
-
-    recommendations.forEach((product, index) => {
-        html += `
+        </div>`;
+        data.recommendations.forEach((product, index) => {
+            html += `
                 <div class="bg-white bg-opacity-90 p-6 rounded-lg border border-gray-200">
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-medium text-lg">${product.name}</h4>
                         <span class="text-xl font-bold text-gray-800">$${product.price}</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-4">Step ${index + 1} of your routine</p>
+                    <p class="text-sm text-gray-600 mb-4">Step ${product.step} of your routine</p>
                     <button class="bg-gray-800 text-white px-6 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
                         ADD TO CART
                     </button>
                 </div>
-            `
-    })
-
-    const totalPrice = recommendations.reduce((sum, product) => sum + product.price, 0)
-    html += `
+            `;
+        });
+        const totalPrice = data.recommendations.reduce((sum, product) => sum + product.price, 0);
+        html += `
             <div class="bg-gray-800 text-white p-6 rounded-lg text-center">
                 <h4 class="text-xl font-medium mb-2">Complete Routine</h4>
                 <p class="text-2xl font-bold mb-4">$${totalPrice}</p>
@@ -337,10 +445,26 @@ document.addEventListener("DOMContentLoaded", () => { if (heroTexts.length) type
                     GET YOUR COMPLETE ROUTINE
                 </button>
             </div>
-        `
+        `;
+        recommendationsContainer.innerHTML = html;
+    });
+}
 
-    recommendationsContainer.innerHTML = html
+// Helper to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
+    return cookieValue;
+}
 
     function restartQuiz() {
     currentStep = 1
