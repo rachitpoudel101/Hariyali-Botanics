@@ -1,13 +1,13 @@
 {% load static %}
 <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e5e5e5] shadow-lg transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-      <div class="flex items-center h-16 md:h-18 relative">
+      <div class="flex items-center h-24 md:h-28 relative">
         <!-- Left Logo and Nav Links -->
         <div class="flex items-center flex-1">
           <!-- Logo - Left aligned on mobile -->
           <div class="md:hidden flex items-center">
             <a href="{% url 'index' %}" class="flex items-center gap-2 group">
-              <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-10 w-auto object-contain shadow-sm group-hover:scale-105 transition-transform duration-200" />
+              <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-20 w-auto object-contain shadow-sm group-hover:scale-105 transition-transform duration-200" />
             </a>
           </div>
           
@@ -103,7 +103,7 @@
         <!-- Center Logo - Desktop only -->
         <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 z-30 hidden md:flex">
           <a href="{% url 'index' %}" class="flex items-center gap-2 group">
-            <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-200" />
+            <img src="{% static 'images/logo.png' %}" alt="Hariyali Logo" class="h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-200" />
           </a>
         </div>
 
@@ -161,7 +161,7 @@
       <!-- Digital Guides Submenu Mobile -->
       <div class="py-3 border-b border-gray-100">
         <div class="mobile-dropdown-toggle flex items-center justify-between">
-          <span class="font-medium">Digital Guides</span>
+          <span class="font-medium ">Digital Guides</span>
           <i class="fas fa-plus text-xs"></i>
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">
