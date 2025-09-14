@@ -1,47 +1,53 @@
- <main class="max-w-4xl mx-auto px-4 py-16">
+{% comment %}
+DEBUG: retreat={{ retreat }}
+highlights={{ highlights }}
+program_days={{ who_is_it_for }}
+{% endcomment %}
+<main class="max-w-4xl mx-auto px-4 py-16">
     <!-- Intro Section -->
     <section class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-sage mb-6 font-playfair text-center">Ayurvedic Retreat in Nepal</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-sage mb-6 font-playfair text-center">{{ retreat.title }}</h1>
       <p class="text-lg md:text-xl text-gray-700 mb-4 text-center">
-        Experience a transformative journey at our partner wellness centers in Nepal, blending authentic Panchakarma therapies, Ayurvedic massages, nourishing meals, and guided resets.
+        {{ retreat.description }}
       </p>
       <div class="flex flex-col md:flex-row gap-8 items-center justify-center mb-8">
-        <!-- Intro images -->
-        <img src="kerala-retreat-1.jpg" alt="Nepal Retreat" class="shadow-lg w-full md:w-1/2 h-64 object-cover"/>
-        <img src="kerala-retreat-2.jpg" alt="Nepal Wellness" class="shadow-lg w-full md:w-1/2 h-64 object-cover"/>
+        {% if retreat.image %}
+          <img src="{{ retreat.image.url }}" alt="{{ retreat.title }}" class="shadow-lg w-full md:w-1/2 h-64 object-cover"/>
+        {% endif %}
       </div>
     </section>
     <!-- Retreat Highlights -->
     <section class="mb-10">
       <h2 class="text-2xl md:text-3xl font-bold text-[#285c44] mb-4">Retreat Highlights</h2>
       <ul class="list-disc pl-6 text-lg text-gray-700 space-y-2">
-        <li>Authentic Panchakarma detox therapies</li>
-        <li>Daily Ayurvedic massages and treatments</li>
-        <li>Personalized meal plans based on your dosha</li>
-        <li>Guided yoga, meditation, and mindfulness sessions</li>
-        <li>Nature walks and cultural immersion in Nepal</li>
-        <li>Expert Ayurvedic doctors and therapists</li>
+        {% for highlight in highlights %}
+          <li>{{ highlight.content|safe }}</li>
+        {% empty %}
+          <li>No highlights available.</li>
+        {% endfor %}
       </ul>
     </section>
     <!-- Program Overview -->
     <section class="mb-10">
-      <h2 class="text-2xl md:text-3xl font-bold text-[#285c44] mb-4">3–5 Day Program Overview</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-[#285c44] mb-4">Program Overview</h2>
       <div class="bg-[#fdfaf6] p-6 shadow mb-4">
         <ul class="list-disc pl-6 text-gray-700 space-y-2">
-          <li><b>Day 1:</b> Arrival, Ayurvedic consultation, gentle detox</li>
-          <li><b>Day 2:</b> Panchakarma therapies, massage, yoga</li>
-          <li><b>Day 3:</b> Deep cleansing, meditation, nature walk</li>
-          <li><b>Day 4:</b> (Optional) Advanced therapies, cultural immersion</li>
-          <li><b>Day 5:</b> Integration, closing rituals, departure</li>
+          {% for day in program_days %}
+            <li><b>Day {{ day.day_number }}:</b> {{ day.content|safe }}</li>
+          {% empty %}
+            <li>No program days available.</li>
+          {% endfor %}
         </ul>
       </div>
     </section>
     <!-- Who It's For -->
     <section class="mb-10">
       <h2 class="text-2xl md:text-3xl font-bold text-[#285c44] mb-4">Who is it for?</h2>
-      <p class="text-lg text-gray-700 mb-2">
-        This retreat is ideal for anyone seeking a holistic reset, relief from stress, or support for chronic health concerns. Perfect for individuals, couples, or small groups.
-      </p>
+      {% for who in who_is_it_for %}
+        <p class="text-lg text-gray-700 mb-2">{{ who.description }}</p>
+      {% empty %}
+        <p class="text-lg text-gray-700 mb-2">No information available.</p>
+      {% endfor %}
     </section>
     <!-- Booking Inquiry Form -->
     <section class="mb-10">
@@ -63,5 +69,28 @@
         <button type="submit" class="bg-[#285c44] text-white py-3 font-semibold hover:bg-[#18382c] transition">Plan My Retreat</button>
         <div id="retreat-success" class="hidden text-green-600 mt-2 text-center text-sm">Thank you! We'll contact you soon.</div>
       </form>
+      
+      <!-- <script>
+        // Paste your deployed Google Apps Script Web App URL below (should end with /exec)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwBCvKK5CeLN4DFB5oLsUCunozBaBnORKKAcJ6qIF4gU_5Kc6aQoXiPkfoswn7Ox3mj/exec';
+        const form = document.getElementById('retreat-inquiry-form');
+        const successDiv = document.getElementById('retreat-success');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => {
+              if (response.ok) {
+                successDiv.classList.remove('hidden');
+                form.reset();
+              } else {
+                alert('There was an error submitting your inquiry.');
+              }
+            })
+            .catch(error => {
+              alert('There was an error submitting your inquiry.');
+            });
+        });
+      </script> -->
     </section>
   </main>
