@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'tinymce',
     "product",
     "blog",
     "hero",

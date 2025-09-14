@@ -21,6 +21,8 @@ from django.http import JsonResponse
 from product.models import Product, Skintype
 from ShopByConcern.models import ShopByConcern
 from quiz.models import CustomerQuizLog
+from ayuretreat.models import AyureTreat, RetreatHighlight, ProgramDay, Whoisitfor
+from django.http import Http404
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -37,6 +39,7 @@ def index(request):
         guides = Guide.objects.all()[:5]  
         reviews = CustomerReview.objects.all()
         blogs = Blog.objects.all().order_by("-id")[:4]  
+        retreats = AyureTreat.objects.all()
         return render(
             request,
             "Normal/index.html",
@@ -49,6 +52,7 @@ def index(request):
                 "guides": guides,  
                 "reviews": reviews,  
                 "blogs": blogs,  
+                "retreats": retreats,
             },
         )
     except Exception:
@@ -64,6 +68,7 @@ def index(request):
                 "guides": Guide.objects.all()[:5],
                 "reviews": CustomerReview.objects.all(),  
                 "blogs": Blog.objects.all().order_by("-id")[:4],  
+                "retreats": AyureTreat.objects.all(),
             },
         )
 
@@ -158,8 +163,21 @@ def guide(request):
 
 
 def aayutreat(request):
-    return render(request, "Normal/aayutreat.html")
+    retreats = AyureTreat.objects.all()
+    return render(request, "Normal/aayutreat.html", {"retreats": retreats})
 
+def ayuretreat_detail(request, pk):
+    retreat = get_object_or_404(AyureTreat, pk=pk)
+    highlights = RetreatHighlight.objects.filter(ayure_treat=retreat)
+    program_days = ProgramDay.objects.filter(ayure_treat=retreat).order_by('day_number')
+    who_is_it_for = Whoisitfor.objects.filter(ayure_treat=retreat)
+    context = {
+        'retreat': retreat,
+        'highlights': highlights,
+        'program_days': program_days,
+        'who_is_it_for': who_is_it_for,
+    }
+    return render(request, "Normal/ayuretreat-detail.html", context)
 
 def quiz(request):
     return render(request, "Normal/Quiz.html")
@@ -327,3 +345,7 @@ def quiz_recommendations(request):
         ]
         return JsonResponse({"recommendations": recommendations})
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+def ayuretreat_list(request):
+    retreats = AyureTreat.objects.all()
+    return render(request, "base/ayuretreat.html", {"retreats": retreats})
