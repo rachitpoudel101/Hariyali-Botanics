@@ -67,16 +67,16 @@ class  Whoisitfor(models.Model):
     def __str__(self):
         return f"Who is it for? {self.ayure_treat.title}"
 
-# class BookingInquiry(models.Model):
-#     class Meta:
-#         db_table = "booking_inquiries"
-#         ordering = ['-created_at']
+class BookingInquiry(models.Model):
+    class Meta:
+        db_table = "booking_inquiries"
+        ordering = ['-created_at']
     
-#     ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='booking_inquiries')
-#     name = models.CharField(max_length=100, null=False, blank=False)
-#     email = models.EmailField(null=False, blank=False)
-#     reason_for_retreat = models.TextField(help_text="Why the person wants to join the retreat")
-#     created_at = models.DateTimeField(auto_now_add=True)
+    ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='booking_inquiries')
+    name = models.CharField(max_length=100, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    reason_for_retreat = models.TextField(help_text="Why the person wants to join the retreat")
+    created_at = models.DateTimeField(auto_now_add=True)
     
-#     def __str__(self):
-#         return f"{self.name} - {self.ayure_treat.title}"
+    def __str__(self):
+        return f"{self.name} - {self.ayure_treat.title}"

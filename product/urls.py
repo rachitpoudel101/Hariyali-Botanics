@@ -24,4 +24,6 @@ urlpatterns = [
     path('get-price-choices/', views.get_price_choices, name='get_price_choices'),
     path('get-age-ranges/', views.get_age_ranges, name='get_age_ranges'),
     path('ayuretreat/<int:pk>/', views.ayuretreat_detail, name='ayuretreat_detail'),
+    path('ayuretreat/<int:retreat_id>/booking-inquiry/', views.submit_booking_inquiry, name='submit_booking_inquiry'),
+    
 ]

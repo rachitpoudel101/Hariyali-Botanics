@@ -346,6 +346,22 @@ def quiz_recommendations(request):
         return JsonResponse({"recommendations": recommendations})
     return JsonResponse({"error": "Invalid request"}, status=400)
 
-def ayuretreat_list(request):
-    retreats = AyureTreat.objects.all()
-    return render(request, "base/ayuretreat.html", {"retreats": retreats})
+def submit_booking_inquiry(request, retreat_id):
+    from ayuretreat.models import BookingInquiry, AyureTreat
+    if request.method == "POST":
+        try:
+            retreat = get_object_or_404(AyureTreat, id=retreat_id)
+            name = request.POST.get("name")
+            email = request.POST.get("email")
+            reason_for_retreat = request.POST.get("reason_for_retreat")
+            inquiry = BookingInquiry(
+                ayure_treat=retreat,
+                name=name,
+                email=email,
+                reason_for_retreat=reason_for_retreat,
+            )
+            inquiry.save()
+            messages.success(request, "Your inquiry has been submitted!")
+        except Exception as e:
+            messages.error(request, f"Error submitting inquiry: {str(e)}")
+    return redirect("ayuretreat_detail", pk=retreat_id)
