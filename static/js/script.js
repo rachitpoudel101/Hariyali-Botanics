@@ -430,22 +430,12 @@ function generateRecommendations() {
                         <span class="text-xl font-bold text-gray-800">$${product.price}</span>
                     </div>
                     <p class="text-sm text-gray-600 mb-4">Step ${product.step} of your routine</p>
-                    <button class="bg-gray-800 text-white px-6 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
-                        ADD TO CART
-                    </button>
+                    <a href="/product-details/${product.id}/" class="bg-gray-800 text-white px-6 py-2 text-sm font-medium hover:bg-gray-900 transition-colors block text-center" style="text-decoration:none;">
+                        View Product
+                    </a>
                 </div>
             `;
         });
-        const totalPrice = data.recommendations.reduce((sum, product) => sum + product.price, 0);
-        html += `
-            <div class="bg-gray-800 text-white p-6 rounded-lg text-center">
-                <h4 class="text-xl font-medium mb-2">Complete Routine</h4>
-                <p class="text-2xl font-bold mb-4">$${totalPrice}</p>
-                <button class="bg-white text-gray-800 px-8 py-3 font-medium hover:bg-gray-100 transition-colors">
-                    GET YOUR COMPLETE ROUTINE
-                </button>
-            </div>
-        `;
         recommendationsContainer.innerHTML = html;
     });
 }
