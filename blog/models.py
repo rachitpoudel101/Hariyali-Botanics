@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class Blog(models.Model):
@@ -7,7 +8,8 @@ class Blog(models.Model):
 
     name = models.CharField(max_length=50, null=True, blank=False, default=None)
     title = models.CharField(max_length=100, null=True, blank=False, default=None)
-    description = models.CharField(max_length=1000, null=True, default=None)
+    # description = models.CharField(max_length=1000, null=True, default=None)
+    content = HTMLField(null=True, blank=True)
     image = models.ImageField(upload_to="blog/images/", null=True, blank=True)
     tags = models.CharField(max_length=100, null=True, blank=True)
 

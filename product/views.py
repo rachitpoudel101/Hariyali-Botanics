@@ -16,7 +16,7 @@ from hero.models import Hero
 from ShopByConcern.models import ShopByConcern
 from guides.models import Guide, FAQ
 from Review.models import CustomerReview
-from blog.models import Blog  
+from blog.models import Blog
 from django.http import JsonResponse
 from product.models import Product, Skintype
 from ShopByConcern.models import ShopByConcern
@@ -28,6 +28,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.core import serializers
 
+
 def index(request):
     try:
         hero_video = Hero.objects.last()
@@ -36,10 +37,11 @@ def index(request):
         hero_description = hero_video.description if hero_video else ""
         products = Product.objects.all().order_by("-id")[:6]
         concerns = ShopByConcern.objects.all()
-        guides = Guide.objects.all()[:5]  
+        guides = Guide.objects.all()[:5]
         reviews = CustomerReview.objects.all()
-        blogs = Blog.objects.all().order_by("-id")[:4]  
+        blogs = Blog.objects.all().order_by("-id")[:4]
         retreats = AyureTreat.objects.all()
+        categories = Category.objects.all()  # Added categories
         return render(
             request,
             "Normal/index.html",
@@ -49,10 +51,11 @@ def index(request):
                 "hero_title": hero_title,
                 "hero_description": hero_description,
                 "concerns": concerns,
-                "guides": guides,  
-                "reviews": reviews,  
-                "blogs": blogs,  
+                "guides": guides,
+                "reviews": reviews,
+                "blogs": blogs,
                 "retreats": retreats,
+                "categories": categories,  # Pass categories to the template
             },
         )
     except Exception:
@@ -66,9 +69,10 @@ def index(request):
                 "hero_description": "",
                 "concerns": ShopByConcern.objects.all(),
                 "guides": Guide.objects.all()[:5],
-                "reviews": CustomerReview.objects.all(),  
-                "blogs": Blog.objects.all().order_by("-id")[:4],  
+                "reviews": CustomerReview.objects.all(),
+                "blogs": Blog.objects.all().order_by("-id")[:4],
                 "retreats": AyureTreat.objects.all(),
+                "categories": Category.objects.all(),  # Pass categories in case of exception
             },
         )
 
@@ -88,7 +92,7 @@ def shop(request):
         products = products.filter(category__id=category_id)
 
     concerns = ShopByConcern.objects.all()
-    categories = Category.objects.all()  
+    categories = Category.objects.all()  # Ensure categories are fetched
 
     return render(
         request,
@@ -97,7 +101,7 @@ def shop(request):
             "products": products,
             "active_filter": filter_param,
             "concerns": concerns,
-            "categories": categories,  
+            "categories": categories,  # Pass categories to the template
             "active_concern": concern_id,
             "active_category": category_id,
         },
@@ -166,18 +170,20 @@ def aayutreat(request):
     retreats = AyureTreat.objects.all()
     return render(request, "Normal/aayutreat.html", {"retreats": retreats})
 
+
 def ayuretreat_detail(request, pk):
     retreat = get_object_or_404(AyureTreat, pk=pk)
     highlights = RetreatHighlight.objects.filter(ayure_treat=retreat)
-    program_days = ProgramDay.objects.filter(ayure_treat=retreat).order_by('day_number')
+    program_days = ProgramDay.objects.filter(ayure_treat=retreat).order_by("day_number")
     who_is_it_for = Whoisitfor.objects.filter(ayure_treat=retreat)
     context = {
-        'retreat': retreat,
-        'highlights': highlights,
-        'program_days': program_days,
-        'who_is_it_for': who_is_it_for,
+        "retreat": retreat,
+        "highlights": highlights,
+        "program_days": program_days,
+        "who_is_it_for": who_is_it_for,
     }
     return render(request, "Normal/ayuretreat-detail.html", context)
+
 
 def quiz(request):
     return render(request, "Normal/Quiz.html")
@@ -251,8 +257,9 @@ def guide_detail(request, guide_id):
             "modules": modules,
             "faqs": faqs,
             "customer_says": customer_says,
-        }
+        },
     )
+
 
 @csrf_exempt
 def quiz_create(request):
@@ -275,6 +282,7 @@ def quiz_update_skin_type(request):
         return JsonResponse({"success": True})
     return JsonResponse({"error": "Invalid request"}, status=400)
 
+
 @csrf_exempt
 def quiz_update_skin_concern(request):
     if request.method == "POST":
@@ -285,6 +293,7 @@ def quiz_update_skin_concern(request):
         quiz_log.save()
         return JsonResponse({"success": True})
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 @csrf_exempt
 def quiz_update_price_range(request):
@@ -297,25 +306,30 @@ def quiz_update_price_range(request):
         return JsonResponse({"success": True})
     return JsonResponse({"error": "Invalid request"}, status=400)
 
+
 def get_skin_types(request):
     skin_types = Skintype.objects.all()
     data = [{"id": st.id, "name": st.name} for st in skin_types]
     return JsonResponse({"skin_types": data})
+
 
 def get_skin_concerns(request):
     concerns = ShopByConcern.objects.all()
     data = [{"id": c.id, "name": c.title} for c in concerns]
     return JsonResponse({"concerns": data})
 
+
 def get_price_choices(request):
     choices = CustomerQuizLog.PriceRange.choices
     data = [{"value": v, "label": l} for v, l in choices]
     return JsonResponse({"price_choices": data})
 
+
 def get_age_ranges(request):
     choices = CustomerQuizLog.AgeRange.choices
     data = [{"value": v, "label": l} for v, l in choices]
     return JsonResponse({"age_ranges": data})
+
 
 def quiz_recommendations(request):
     quiz_id = request.GET.get("quiz_id") or request.POST.get("quiz_id")
@@ -338,16 +352,22 @@ def quiz_recommendations(request):
                 "name": p.name,
                 "price": p.price,
                 "id": p.id,
-                "image": p.primary_image.url if hasattr(p, "primary_image") and p.primary_image else "",
-                "step": i + 1
+                "image": (
+                    p.primary_image.url
+                    if hasattr(p, "primary_image") and p.primary_image
+                    else ""
+                ),
+                "step": i + 1,
             }
             for i, p in enumerate(products)
         ]
         return JsonResponse({"recommendations": recommendations})
     return JsonResponse({"error": "Invalid request"}, status=400)
 
+
 def submit_booking_inquiry(request, retreat_id):
     from ayuretreat.models import BookingInquiry, AyureTreat
+
     if request.method == "POST":
         try:
             retreat = get_object_or_404(AyureTreat, id=retreat_id)

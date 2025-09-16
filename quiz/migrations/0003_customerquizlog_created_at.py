@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0002_remove_question_quiz_customerquizlog_delete_option_and_more'),
+        ("quiz", "0002_remove_question_quiz_customerquizlog_delete_option_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customerquizlog',
-            name='created_at',
+            model_name="customerquizlog",
+            name="created_at",
             field=models.DateTimeField(auto_now_add=True, null=True),
         ),
     ]

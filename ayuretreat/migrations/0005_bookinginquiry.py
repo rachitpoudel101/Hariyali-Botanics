@@ -7,23 +7,43 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ayuretreat', '0004_remove_ayuretreat_date_ayuretreat_event_start_date'),
+        ("ayuretreat", "0004_remove_ayuretreat_date_ayuretreat_event_start_date"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BookingInquiry',
+            name="BookingInquiry",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('email', models.EmailField(max_length=254)),
-                ('reason_for_retreat', models.TextField(help_text='Why the person wants to join the retreat')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('ayure_treat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='booking_inquiries', to='ayuretreat.ayuretreat')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("email", models.EmailField(max_length=254)),
+                (
+                    "reason_for_retreat",
+                    models.TextField(
+                        help_text="Why the person wants to join the retreat"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "ayure_treat",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="booking_inquiries",
+                        to="ayuretreat.ayuretreat",
+                    ),
+                ),
             ],
             options={
-                'db_table': 'booking_inquiries',
-                'ordering': ['-created_at'],
+                "db_table": "booking_inquiries",
+                "ordering": ["-created_at"],
             },
         ),
     ]

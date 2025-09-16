@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block guide_detail %}
-<section class="max-w-5xl mx-auto py-12 px-4 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-xl">
+<section class="max-w-5xl mx-auto py-12 px-4 bg-white rounded-2xl shadow-2xl border border-gray-100">
   <div class="mb-8 flex flex-col md:flex-row gap-8 items-center">
     {% if guide.image %}
-      <img src="{{ guide.image.url }}" alt="{{ guide.title }}" class="w-full md:w-1/3 h-48 object-cover rounded-xl shadow-2xl mb-4 md:mb-0 border-4 border-green-200"/>
+      <img src="{{ guide.image.url }}" alt="{{ guide.title }}" class="w-full md:w-1/3 h-48 object-cover rounded-xl shadow-2xl mb-4 md:mb-0 border-4 border-gray-200"/>
     {% endif %}
     <div class="flex-1">
       <h1 class="text-4xl font-bold text-green-900 mb-2 font-playfair drop-shadow-lg">{{ guide.title }}</h1>
@@ -25,7 +25,7 @@
           <img src="{{ module.image.url }}" alt="{{ module.title }}" class="w-full h-32 object-cover rounded mb-3 border-2 border-green-100"/>
         {% endif %}
         <h3 class="font-semibold text-green-800 mb-2 text-lg">{{ module.title }}</h3>
-        <p class="text-gray-600 text-base">{{ module.description }}</p>
+        <div class="text-gray-600 text-base">{{ module.content|safe }}</div>
       </div>
     {% empty %}
       <p class="col-span-full text-center text-gray-500">No modules available.</p>

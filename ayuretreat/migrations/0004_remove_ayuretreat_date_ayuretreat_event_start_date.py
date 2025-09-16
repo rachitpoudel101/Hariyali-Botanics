@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ayuretreat', '0003_remove_retreathighlight_description_and_more'),
+        ("ayuretreat", "0003_remove_retreathighlight_description_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='ayuretreat',
-            name='date',
+            model_name="ayuretreat",
+            name="date",
         ),
         migrations.AddField(
-            model_name='ayuretreat',
-            name='event_start_date',
+            model_name="ayuretreat",
+            name="event_start_date",
             field=models.DateField(null=True),
         ),
     ]

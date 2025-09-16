@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'tinymce',
+    "tinymce",
     "product",
     "blog",
     "hero",
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "ShopByConcern",
     "Review",
     "ayuretreat",
-    "quiz"
+    "quiz",
 ]
 
 MIDDLEWARE = [

@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ayuretreat', '0001_initial'),
+        ("ayuretreat", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='programday',
+            name="programday",
             options={},
         ),
         migrations.AlterUniqueTogether(
-            name='programday',
+            name="programday",
             unique_together=set(),
         ),
         migrations.AlterModelTable(
-            name='programday',
-            table='program_days',
+            name="programday",
+            table="program_days",
         ),
     ]

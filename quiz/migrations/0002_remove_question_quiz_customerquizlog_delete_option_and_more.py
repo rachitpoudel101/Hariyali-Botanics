@@ -7,34 +7,83 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ShopByConcern', '0001_initial'),
-        ('product', '0019_product_shopbyconcern'),
-        ('quiz', '0001_initial'),
+        ("ShopByConcern", "0001_initial"),
+        ("product", "0019_product_shopbyconcern"),
+        ("quiz", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='question',
-            name='quiz',
+            model_name="question",
+            name="quiz",
         ),
         migrations.CreateModel(
-            name='CustomerQuizLog',
+            name="CustomerQuizLog",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('age_range', models.CharField(blank=True, choices=[('<18', '<18'), ('18-24', '18-24'), ('25-40', '25-40'), ('40+', '40+')], max_length=10, null=True)),
-                ('price_range', models.CharField(blank=True, choices=[('under_100', 'Under 100'), ('100_300', '100–300'), ('over_300', '300+')], max_length=10, null=True)),
-                ('skin_concern', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='ShopByConcern.shopbyconcern')),
-                ('skin_type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='product.skintype')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                (
+                    "age_range",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("<18", "<18"),
+                            ("18-24", "18-24"),
+                            ("25-40", "25-40"),
+                            ("40+", "40+"),
+                        ],
+                        max_length=10,
+                        null=True,
+                    ),
+                ),
+                (
+                    "price_range",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("under_100", "Under 100"),
+                            ("100_300", "100–300"),
+                            ("over_300", "300+"),
+                        ],
+                        max_length=10,
+                        null=True,
+                    ),
+                ),
+                (
+                    "skin_concern",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="ShopByConcern.shopbyconcern",
+                    ),
+                ),
+                (
+                    "skin_type",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="product.skintype",
+                    ),
+                ),
             ],
         ),
         migrations.DeleteModel(
-            name='Option',
+            name="Option",
         ),
         migrations.DeleteModel(
-            name='Question',
+            name="Question",
         ),
         migrations.DeleteModel(
-            name='Quiz',
+            name="Quiz",
         ),
     ]

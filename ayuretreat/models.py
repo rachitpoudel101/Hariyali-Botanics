@@ -2,6 +2,7 @@ from django.db import models
 from tinymce.models import HTMLField
 from datetime import timedelta, date
 
+
 class AyureTreat(models.Model):
     class Meta:
         db_table = "ayuretreat"
@@ -13,7 +14,9 @@ class AyureTreat(models.Model):
     tags = models.CharField(max_length=100, null=True, blank=True)
     # date = models.DateField(auto_now_add=True)
     address = models.CharField(max_length=200, null=True, blank=False, default=None)
-    days_count = models.PositiveIntegerField(default=7, help_text="Number of days for the retreat")
+    days_count = models.PositiveIntegerField(
+        default=7, help_text="Number of days for the retreat"
+    )
 
     def __str__(self):
         return self.title
@@ -36,47 +39,61 @@ class AyureTreat(models.Model):
             return max(remaining, 0)
         return None
 
+
 class RetreatHighlight(models.Model):
     class Meta:
         db_table = "retreat_highlights"
-    
-    ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='highlights')
+
+    ayure_treat = models.ForeignKey(
+        AyureTreat, on_delete=models.CASCADE, related_name="highlights"
+    )
     content = HTMLField(null=True, blank=True)
 
     def __str__(self):
         return super().__str__()
 
+
 class ProgramDay(models.Model):
     class Meta:
         db_table = "program_days"
-    
-    ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='program_days')
+
+    ayure_treat = models.ForeignKey(
+        AyureTreat, on_delete=models.CASCADE, related_name="program_days"
+    )
     day_number = models.PositiveIntegerField()
     content = HTMLField()
-    
+
     def __str__(self):
         return f"{self.ayure_treat.title} - Day {self.day_number}"
 
-class  Whoisitfor(models.Model):
+
+class Whoisitfor(models.Model):
     class Meta:
         db_table = "who_is_it_for"
-    
-    ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='who_is_it_for')
+
+    ayure_treat = models.ForeignKey(
+        AyureTreat, on_delete=models.CASCADE, related_name="who_is_it_for"
+    )
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"Who is it for? {self.ayure_treat.title}"
 
+
 class BookingInquiry(models.Model):
     class Meta:
         db_table = "booking_inquiries"
-        ordering = ['-created_at']
-    
-    ayure_treat = models.ForeignKey(AyureTreat, on_delete=models.CASCADE, related_name='booking_inquiries')
+        ordering = ["-created_at"]
+
+    ayure_treat = models.ForeignKey(
+        AyureTreat, on_delete=models.CASCADE, related_name="booking_inquiries"
+    )
     name = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(null=False, blank=False)
-    reason_for_retreat = models.TextField(help_text="Why the person wants to join the retreat")
+    reason_for_retreat = models.TextField(
+        help_text="Why the person wants to join the retreat"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.name} - {self.ayure_treat.title}"
