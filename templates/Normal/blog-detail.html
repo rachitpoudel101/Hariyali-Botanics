@@ -20,7 +20,7 @@
       {% endif %}
       
       <div class="prose prose-lg max-w-none text-gray-700 mb-8 leading-relaxed">
-        {{ blog.description|linebreaks }}
+        {{ blog.content|safe }}
       </div>
       
       {% if blog.tags %}

@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0003_customerquizlog_created_at'),
+        ("quiz", "0003_customerquizlog_created_at"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customerquizlog',
-            name='age_range',
-            field=models.CharField(blank=True, choices=[('18-25', '18-25'), ('26-35', '26-35'), ('36-45', '36-45'), ('46-55', '46-55'), ('56+', '56+')], max_length=10, null=True),
+            model_name="customerquizlog",
+            name="age_range",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("18-25", "18-25"),
+                    ("26-35", "26-35"),
+                    ("36-45", "36-45"),
+                    ("46-55", "46-55"),
+                    ("56+", "56+"),
+                ],
+                max_length=10,
+                null=True,
+            ),
         ),
     ]

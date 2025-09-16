@@ -24,24 +24,17 @@
                   <div class="px-4 py-2 border-b border-gray-100">
                     <span class="text-xs font-bold text-[#18382c]">Categories</span>
                   </div>
-                  <a href="{% url 'shop' %}" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
-                      <i class="fas fa-spa text-[#8B4513]"></i>
-                    </div>
-                    <div>
-                      <span class="block font-medium">Skin</span>
-                      <span class="text-xs text-gray-500">Natural skincare products</span>
-                    </div>
-                  </a>
-                  <a href="{% url 'shop' %}" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
-                      <i class="fas fa-leaf text-[#8B4513]"></i>
-                    </div>
-                    <div>
-                      <span class="block font-medium">Hair</span>
-                      <span class="text-xs text-gray-500">Herbal hair care</span>
-                    </div>
-                  </a>
+                  {% for category in categories %}
+                    <a href="{% url 'shop' %}?category={{ category.slug }}" class="block px-4 py-3 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-[#f8f5f0] flex items-center justify-center">
+                        <i class="fas fa-leaf text-[#8B4513]"></i>
+                      </div>
+                      <div>
+                        <span class="block font-medium">{{ category.name }}</span>
+                        <span class="text-xs text-gray-500">{{ category.description|default:"Explore our products" }}</span>
+                      </div>
+                    </a>
+                  {% endfor %}
                   <div class="px-4 py-3 border-t border-gray-100 mt-2">
                     <a href="{% url 'shop' %}" class="text-sage hover:underline text-sm font-medium">View All Products →</a>
                   </div>
@@ -152,9 +145,10 @@
           <i class="fas fa-plus text-xs"></i>
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">
-          <a href="shop.html?category=skin" class="block py-2 text-gray-700">Skin</a>
-          <a href="shop.html?category=hair" class="block py-2 text-gray-700">Hair</a>
-          <a href="shop.html" class="block py-2 text-sage">View All</a>
+          {% for category in categories %}
+            <a href="{% url 'shop' %}?category={{ category.slug }}" class="block py-2 text-gray-700">{{ category.name }}</a>
+          {% endfor %}
+          <a href="{% url 'shop' %}" class="block py-2 text-sage">View All</a>
         </div>
       </div>
       

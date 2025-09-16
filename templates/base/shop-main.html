@@ -5,21 +5,22 @@
   <div class="flex overflow-x-auto pb-3 hide-scrollbar mb-8">
     <div class="flex gap-2 sm:gap-4 px-1 sm:justify-center min-w-max mx-auto">
       {% if not active_category %}
-        <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold">
+        <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold hover:bg-[#285c44] hover:text-white transition-all">
           All Products
         </a>
         {% for category in categories %}
-          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-colors">
+          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
             {{ category.name }}
           </a>
         {% endfor %}
       {% else %}
+        <a href="{% url 'shop' %}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
+          All Products
+        </a>
         {% for category in categories %}
-          {% if active_category|default:'' == category.id|stringformat:'s' %}
-            <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold transition-colors">
-              {{ category.name }}
-            </a>
-          {% endif %}
+          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-all {% if active_category|default:'' == category.id|stringformat:'s' %}bg-sage text-white font-bold{% else %}bg-gray-200 text-gray-700{% endif %} hover:bg-[#285c44] hover:text-white">
+            {{ category.name }}
+          </a>
         {% endfor %}
       {% endif %}
     </div>
