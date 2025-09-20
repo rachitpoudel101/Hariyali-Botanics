@@ -163,25 +163,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-          // Focus first link in dropdown
-          const firstLink = dropdown.querySelector('a');
-          if (firstLink) firstLink.focus();
-      // Close dropdown when Tab out
-      item.addEventListener('focusout', function(e) {
-        if (!item.contains(e.relatedTarget)) {
-          dropdown.classList.remove('visible-dropdown');
-        }
-      });
-
-  
-  // Close all dropdowns on escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.visible-dropdown').forEach(el => {
-        el.classList.remove('visible-dropdown');
-      });
-    }
-  });
-      document.querySelectorAll('.visible-dropdown').forEach(el => {
-        el.classList.remove('visible-dropdown');
-      });
