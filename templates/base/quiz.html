@@ -5,24 +5,40 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center w-full max-w-6xl mx-auto">
     <!-- Left: 2 stacked images -->
     <div class="flex flex-col gap-2 sm:gap-4">
-      <img src="{% static 'images/rits1.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
-      <img src="{% static 'images/rits2.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+      {% if quiz_images|length >= 1 and quiz_images.0.image %}
+        <img src="{{ quiz_images.0.image.url }}" alt="{{ quiz_images.0.alt_text|default:'' }}" class="w-full h-56 md:h-64 object-cover"/>
+      {% else %}
+        <img src="{% static 'images/rits1.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/> <!-- Fallback -->
+      {% endif %}
+      {% if quiz_images|length >= 2 and quiz_images.1.image %}
+        <img src="{{ quiz_images.1.image.url }}" alt="{{ quiz_images.1.alt_text|default:'' }}" class="w-full h-56 md:h-64 object-cover"/>
+      {% else %}
+        <img src="{% static 'images/rits2.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/> <!-- Fallback -->
+      {% endif %}
     </div>
 
     <!-- Center: Text and CTA -->
     <div class="flex flex-col items-center md:items-start text-center md:text-left font-['Open_Sans']">
       <h2 class="text-3xl md:text-5xl font-bold text-[#18382c] mb-6 leading-tight font-['Open_Sans']">
-        SKINCARE<br>
-        <span class="italic font-playfair text-4xl md:text-6xl font-bold">Ritual Quiz</span>
+        {% if quiz %}{{ quiz.title }}{% else %}SKINCARE{% endif %}<br>
+        <span class="italic font-playfair text-4xl md:text-6xl font-bold">{% if quiz %}{{ quiz.description|default:'Ritual Quiz' }}{% else %}Ritual Quiz{% endif %}</span>
       </h2>
-      <p class="text-lg md:text-2xl text-[#18382c] mb-10 font-medium font-['Open_Sans']">Your personalized ritual in minutes</p>
+      <p class="text-lg md:text-2xl text-[#18382c] mb-10 font-medium font-['Open_Sans']">{% if quiz and quiz.description %}{{ quiz.description }}{% else %}Your personalized ritual in minutes{% endif %}</p>
       <a href="{% url 'quiz' %}" class="bg-[#18382c] text-white px-10 py-4 rounded-xl text-lg md:text-2xl font-bold tracking-wide hover:bg-[#285c44] transition font-['Open_Sans']">TAKE THE QUIZ</a>
     </div>
 
     <!-- Right: 2 stacked images -->
     <div class="flex flex-col gap-2 sm:gap-4">
-      <img src="{% static 'images/rits3.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
-      <img src="{% static 'images/rits4.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/>
+      {% if quiz_images|length >= 3 and quiz_images.2.image %}
+        <img src="{{ quiz_images.2.image.url }}" alt="{{ quiz_images.2.alt_text|default:'' }}" class="w-full h-56 md:h-64 object-cover"/>
+      {% else %}
+        <img src="{% static 'images/rits3.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/> <!-- Fallback -->
+      {% endif %}
+      {% if quiz_images|length >= 4 and quiz_images.3.image %}
+        <img src="{{ quiz_images.3.image.url }}" alt="{{ quiz_images.3.alt_text|default:'' }}" class="w-full h-56 md:h-64 object-cover"/>
+      {% else %}
+        <img src="{% static 'images/rits4.png' %}" alt="" class="w-full h-56 md:h-64 object-cover"/> <!-- Fallback -->
+      {% endif %}
     </div>
   </div>
 </section>
