@@ -14,7 +14,7 @@
         {% for blog in blogs %}
         <!-- Blog Slide -->
         <div class="blog-slide px-2 sm:px-3">
-          <div class="bg-[#fdfaf6] shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 h-full rounded-lg">
+          <div class="bg-[#fdfaf6] shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 h-full">
             {% if blog.image %}
             <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-40 sm:h-48 object-cover"/>
             {% else %}
@@ -27,13 +27,13 @@
               <div class="text-gray-700 mb-4 flex-1 text-sm">
                 <div class="line-clamp-3">{{ blog.content|safe|truncatewords:15 }}...</div>
               </div>
-              <a href="{% url 'blog_detail' blog.id %}" class="text-[#18382c] font-semibold hover:underline mt-auto text-sm bg-green-100 px-4 py-2 rounded-full text-center transition-colors hover:bg-green-200">Read More</a>
+              <a href="{% url 'blog_detail' blog.id %}" class="text-[#18382c] font-semibold hover:underline mt-auto text-sm bg-green-100 px-4 py-2 text-center transition-colors hover:bg-green-200">Read More</a>
             </div>
           </div>
         </div>
         {% empty %}
         <div class="blog-slide px-3">
-          <div class="bg-[#fdfaf6] shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 h-full rounded-lg">
+          <div class="bg-[#fdfaf6] shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 h-full ">
             <div class="p-6 flex flex-col flex-1 text-center">
               <h4 class="text-lg font-bold text-[#18382c] mb-2 font-playfair">No Blogs Available</h4>
               <p class="text-gray-700 mb-4 flex-1">Check back soon for new blog posts!</p>
@@ -46,12 +46,12 @@
     
     <!-- Navigation Arrows -->
     {% if blogs|length > 1 %}
-    <button onclick="previousSlide()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50 transition-colors z-10">
+    <button onclick="previousSlide()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white shadow- p-2 hover:bg-gray-50 transition-colors z-10">
       <svg class="w-5 h-5 text-[#18382c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
-    <button onclick="nextSlide()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50 transition-colors z-10">
+    <button onclick="nextSlide()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg  p-2 hover:bg-gray-50 transition-colors z-10">
       <svg class="w-5 h-5 text-[#18382c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>
@@ -62,7 +62,7 @@
     {% if blogs|length > 1 %}
     <div class="flex justify-center mt-6 space-x-2">
       {% for blog in blogs %}
-      <button onclick="goToSlide({{ forloop.counter0 }})" class="blog-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#18382c] transition-colors" id="dot{{ forloop.counter0 }}"></button>
+      <button onclick="goToSlide({{ forloop.counter0 }})" class="blog-dot w-3 h-3  bg-gray-300 hover:bg-[#18382c] transition-colors" id="dot{{ forloop.counter0 }}"></button>
       {% endfor %}
     </div>
     {% endif %}
@@ -70,7 +70,7 @@
   
   <!-- View All Blogs Button -->
   <div class="mt-8">
-    <a href="{% url 'blog' %}" class="bg-[#18382c] text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors">View All Blogs</a>
+    <a href="{% url 'blog' %}" class="bg-[#18382c] text-white px-6 py-3 l font-semibold hover:bg-green-700 transition-colors">View All Blogs</a>
   </div>
 </section>
 

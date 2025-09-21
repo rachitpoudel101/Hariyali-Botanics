@@ -36,7 +36,7 @@
           </div>
           <div class="flex items-center text-xs">
             {% for tag in retreats.0.get_tags %}
-              <span class="bg-[#e6f2ea] text-[#18382c] px-2 py-1 rounded mr-2">{{ tag }}</span>
+              <span class="bg-[#e6f2ea] text-[#18382c] px-2 py-1">{{ tag }}</span>
             {% endfor %}
             <span class="ml-3 text-gray-600">{{ retreats.0.days_count }} days of rejuvenation</span>
             {% if retreats.0.days_remaining is not None %}

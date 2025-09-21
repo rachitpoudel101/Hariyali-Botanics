@@ -50,7 +50,7 @@
           {% for result in customer_results %}
             {% if result.image and forloop.counter <= 2 %}
               <img src="{{ result.image.url }}" alt="Clinical Results {{ forloop.counter }}" 
-                   class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-xl border-2 border-[#8B4513] shadow" />
+                   class="w-40 h-40 md:w-56 md:h-56 object-cover shadow" />
             {% endif %}
           {% empty %}
             <div class="text-center text-gray-500">
