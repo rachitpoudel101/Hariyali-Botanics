@@ -18,13 +18,87 @@
     <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-8 md:pb-10 ">
         <!-- Typing Animation Text -->
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg mb-4 font-sans">
-            {{ hero_title }}
-            <span id="cursor" class="inline-block w-1 md:w-1.5 bg-white animate-blink ml-1"></span>
+            <!-- Replace static title with a container that will type multiple words at a time -->
+            <span id="typed-word" aria-hidden="true"></span>
+            <span id="cursor" class="inline-block w-1 md:w-1.5 bg-white ml-1"></span>
+            <span class="sr-only">{{ hero_title }}</span> <!-- keep original title for screen readers -->
         </h1>
         <!-- Paragraph CTA -->
         <p class="text-base md:text-lg lg:text-xl text-white/90 max-w-3xl font-light drop-shadow font-sans">
             {{ hero_description }}
         </p>
     </div>
+
+    <!-- Typing script: types 3-4 words at a time from hero_title -->
+    <style>
+    /* fallback blink if not provided by utilities */
+    @keyframes cp-blink { 50% { opacity: 0; } }
+    #cursor { animation: cp-blink 1s step-end infinite; }
+    </style>
+
+    <script>
+    (function() {
+        var heroTitle = "{{ hero_title|escapejs }}";
+        if (!heroTitle) return;
+
+        var words = heroTitle.trim().split(/\s+/).filter(Boolean);
+        if (!words.length) return;
+
+        // Configure how many words to show at once:
+        var minChunk = 3; // minimum words per chunk
+        var maxChunk = 4; // maximum words per chunk (will not exceed total words)
+        // Choose a fixed chunk size between min and max, but not larger than available words
+        var chunkSize = Math.min(words.length, Math.max(minChunk, Math.min(maxChunk, minChunk)));
+
+        // If you prefer variability between 3 and 4: uncomment below
+        // var chunkSize = Math.min(words.length, Math.floor(Math.random() * (maxChunk - minChunk + 1)) + minChunk);
+
+        // Build sliding groups (wrap-around) so each displayed item contains chunkSize words
+        var groups = [];
+        for (var i = 0; i < words.length; i++) {
+            var parts = [];
+            for (var j = 0; j < chunkSize; j++) {
+                parts.push(words[(i + j) % words.length]);
+            }
+            groups.push(parts.join(' '));
+        }
+
+        var el = document.getElementById('typed-word');
+        var wIndex = 0;
+        var charIndex = 0;
+        var typing = true;
+        var typeSpeed = 90;   // ms per char
+        var deleteSpeed = 45; // ms per char when deleting
+        var pauseAfterWord = 1400; // ms pause after full chunk typed
+
+        function typeLoop() {
+            var current = groups[wIndex];
+            if (typing) {
+                if (charIndex < current.length) {
+                    charIndex++;
+                    el.textContent = current.slice(0, charIndex);
+                    setTimeout(typeLoop, typeSpeed);
+                } else {
+                    typing = false;
+                    setTimeout(typeLoop, pauseAfterWord);
+                }
+            } else {
+                if (charIndex > 0) {
+                    charIndex--;
+                    el.textContent = current.slice(0, charIndex);
+                    setTimeout(typeLoop, deleteSpeed);
+                } else {
+                    // move to next group
+                    wIndex = (wIndex + 1) % groups.length;
+                    typing = true;
+                    setTimeout(typeLoop, typeSpeed);
+                }
+            }
+        }
+
+        // Start after small delay to allow page to settle
+        setTimeout(typeLoop, 300);
+    })();
+    </script>
 </section>
 
