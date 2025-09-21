@@ -176,18 +176,19 @@
   </div>
 
     <!-- FAQ Section -->
-    <div class="bg-white shadow-lg p-8 mb-12">
-      <h2 class="text-2xl font-bold text-center text-green-900 mb-8">Frequently Asked Questions</h2>
-      
-      <div class="space-y-6">
-        {% for faq in faqs %}
-        <div>
-          <h3 class="font-bold text-green-800 mb-2">{{ faq.question }}</h3>
-          <p class="text-gray-600">{{ faq.answer }}</p>
+    <div class="mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-green-900 mb-8">Frequently Asked Questions</h2>
+      <div class="max-w-4xl mx-auto">
+        <div class="divide-y divide-green-100">
+          {% for faq in faqs %}
+          <div class="py-6">
+            <h3 class="text-xl md:text-2xl font-semibold text-green-800 mb-2">{{ faq.question }}</h3>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">{{ faq.answer }}</p>
+          </div>
+          {% empty %}
+          <p class="text-gray-500 text-center py-6">No FAQs available.</p>
+          {% endfor %}
         </div>
-        {% empty %}
-        <p class="text-gray-500 text-center">No FAQs available.</p>
-        {% endfor %}
       </div>
     </div>
     
