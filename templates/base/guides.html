@@ -25,10 +25,11 @@
     </div>
     <div class="w-full md:w-1/2 relative">
       <div class="relative z-10">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" class="w-full h-auto shadow-xl object-cover" />
-        <!-- Removed gradient overlay; keep caption without background -->
+        <!-- show full image without zoom/crop, limit max height and center -->
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="w-full max-h-64 md:max-h-80 mx-auto shadow-xl object-contain" />
+        <!-- caption with subtle gradient for contrast -->
         <div class="absolute inset-0 flex items-end">
-          <div class="p-4 text-white">
+          <div class="p-4 w-full text-white bg-gradient-to-t from-black/40 to-transparent">
             <span class="font-semibold">Transform your wellness journey</span>
           </div>
         </div>
