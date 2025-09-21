@@ -162,8 +162,8 @@
           <i class="fas fa-plus text-xs"></i>
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">
-          <a href="digital.html" class="block py-2 text-gray-700">Guides</a>
-          <a href="blog.html" class="block py-2 text-gray-700">Blog</a>
+          <a href="{% url 'guide' %}" class="block py-2 text-gray-700">Guides</a>
+          <a href="{% url 'blog' %}" class="block py-2 text-gray-700">Blog</a>
         </div>
       </div>
       
@@ -174,15 +174,13 @@
           <i class="fas fa-plus text-xs"></i>
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">
-          <a href="Ayuretreat.html" class="block py-2 text-gray-700">Upcoming Retreats</a>
-          <a href="Ayuretreat.html#illness" class="block py-2 text-gray-700">Illness Retreat</a>
-          <a href="Ayuretreat.html#waitlist" class="block py-2 text-gray-700">Waitlist Your Interest</a>
-          <a href="Ayuretreat.html#form" class="block py-2 text-gray-700">Form Fill Up</a>
+          <a href="{% url 'aayutreat' %}" class="block py-2 text-gray-700">Upcoming Retreats</a>
+          <a href="{% url 'aayutreat' %}#retreat-inquiry-form" class="block py-2 text-gray-700">Form Fill Up</a>
         </div>
       </div>
       
       <!-- Other Menu Items Mobile -->
-      <a href="aboutus.html" class="block py-3 border-b border-gray-100">About Us</a>
+      <a href="{% url 'about-us' %}" class="block py-3 border-b border-gray-100">About Us</a>
       
       <div class="py-3 border-b border-gray-100">
         <div class="mobile-dropdown-toggle flex items-center justify-between">
@@ -194,7 +192,5 @@
           <a href="#" class="block py-2 text-gray-700">Discount for Membership</a>
         </div>
       </div>
-      
-      <a href="contact.html" class="block py-3 border-b border-gray-100">Contact Us</a>
     </div>
   </nav>
