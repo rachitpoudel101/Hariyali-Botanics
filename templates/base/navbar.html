@@ -1,14 +1,8 @@
 {% load static %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  .navbar-font {
-    font-family: 'Open Sans', sans-serif;
-  }
-  * { font-family: 'Open Sans', sans-serif; }  /* Added for global consistency */
-</style>
-<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e5e5e5] shadow-lg transition-all duration-300 navbar-font">
+
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e5e5e5] shadow-lg transition-all duration-300 navbar-font font-sans">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
       <div class="flex items-center h-24 md:h-28 relative">
         <!-- Left Logo and Nav Links -->
@@ -155,7 +149,7 @@
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">
           {% for category in categories %}
-            <a href="{% url 'shop' %}?category={{ category.slug }}" class="block py-2 text-gray-700">{{ category.name }}</a>
+            <a href="{% url 'shop' %}?category={{ category.slug }}" class="block py-2 text-gray-700 font-sans">{{ category.name }}</a>
           {% endfor %}
           <a href="{% url 'shop' %}" class="block py-2 text-sage">View All</a>
         </div>
@@ -164,7 +158,7 @@
       <!-- Digital Guides Submenu Mobile -->
       <div class="py-3 border-b border-gray-100">
         <div class="mobile-dropdown-toggle flex items-center justify-between">
-          <h2 class="font-medium">Digital Guides</h2>
+          <h2 class="font-medium font-sans">Digital Guides</h2>
           <i class="fas fa-plus text-xs"></i>
         </div>
         <div class="mobile-dropdown-content hidden pt-2 pl-4">

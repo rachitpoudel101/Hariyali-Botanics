@@ -1,10 +1,7 @@
 {% load static %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { font-family: 'Open Sans', sans-serif; }
-</style>
+
 <section class="w-full min-h-[400px] md:min-h-screen overflow-hidden relative flex items-center justify-center pt-12 sm:pt-16 md:pt-20">
     <!-- Hero Video -->
     {% if video_url %}
@@ -18,14 +15,14 @@
     {% endif %}
 
     <!-- Overlay with Text at bottom -->
-    <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-8 md:pb-10">
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-8 md:pb-10 ">
         <!-- Typing Animation Text -->
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg mb-4">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg mb-4 font-sans">
             {{ hero_title }}
             <span id="cursor" class="inline-block w-1 md:w-1.5 bg-white animate-blink ml-1"></span>
         </h1>
         <!-- Paragraph CTA -->
-        <p class="text-base md:text-lg lg:text-xl text-white/90 max-w-3xl font-light drop-shadow">
+        <p class="text-base md:text-lg lg:text-xl text-white/90 max-w-3xl font-light drop-shadow font-sans">
             {{ hero_description }}
         </p>
     </div>

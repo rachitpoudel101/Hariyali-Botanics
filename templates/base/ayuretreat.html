@@ -1,15 +1,16 @@
 {% load static %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { font-family: 'Open Sans', sans-serif; }
-</style>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> -->
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
 
 <!-- ======= AYURETREAT SECTION ======= -->
 <section class="w-full bg-[#fffaf4] py-8 px-4 sm:py-14">
   <div class="max-w-6xl mx-auto">
-    <h3 class="text-xl md:text-2xl font-bold text-[#18382c] mb-8 text-center">Ayuretreat: Rejuvenate &amp; Heal</h3>
+    <h3 class="md:text-2xl mb-8 text-center font-medium font-sans">
+  Ayuretreat: Rejuvenate &amp; Heal
+</h3>
     
     {% if retreats %}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-10">

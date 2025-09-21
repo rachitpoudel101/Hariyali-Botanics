@@ -2,17 +2,13 @@
 {% load static %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { font-family: 'Open Sans', sans-serif; }
-</style>
 
 {% block navbar %}
   {% include "base/navbar.html" %}
 {% endblock %}
 
 {% block about-us %}
-<section class="w-full bg-gradient-to-br from-[#f7fafc] to-[#e6fffa] py-16 px-4">
+<section class="w-full bg-gradient-to-br from-[#f7fafc] to-[#e6fffa] py-16 px-4 font-sans">
   <div class="container mx-auto">
     <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 transition-all duration-300">
       <h1 class="text-4xl md:text-5xl font-extrabold text-[#18382c] mb-2 tracking-tight">{{ blog.title }}</h1>

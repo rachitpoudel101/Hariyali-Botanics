@@ -1,13 +1,9 @@
 {% load static %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { font-family: 'Open Sans', sans-serif; }
-</style>
 
 <!-- ======= SKINCARE QUIZ SECTION ======= -->
-<section class="w-full bg-[#fdfaf6] py-10 px-2 sm:py-20 sm:px-4">
+<section class="w-full bg-[#fdfaf6] py-10 px-2 sm:py-20 sm:px-4 font-sans">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center w-full max-w-6xl mx-auto">
     <!-- Left: 2 stacked images -->
     <div class="flex flex-col gap-2 sm:gap-4">
@@ -24,10 +20,10 @@
     </div>
 
     <!-- Center: Text and CTA -->
-    <div class="flex flex-col items-center md:items-start text-center md:text-left font-['Open_Sans']">
-      <h2 class="text-3xl md:text-5xl font-bold text-[#18382c] mb-6 leading-tight font-['Open_Sans']">
+    <div class="flex flex-col items-center md:items-start text-center md:text-left font-sans">
+      <h2 class="text-3xl md:text-5xl font-bold text-[#18382c] mb-6 leading-tight font-sans">
         {% if quiz %}{{ quiz.title }}{% else %}SKINCARE{% endif %}<br>
-        <span class="italic font-playfair text-4xl md:text-6xl font-bold">{% if quiz %}{{ quiz.description|default:'Ritual Quiz' }}{% else %}Ritual Quiz{% endif %}</span>
+        <span class="font-sans text-4xl md:text-6xl font-bold">{% if quiz %}{{ quiz.description|default:'Ritual Quiz' }}{% else %}Ritual Quiz{% endif %}</span>
       </h2>
       <p class="text-lg md:text-2xl text-[#18382c] mb-10 font-medium font-['Open_Sans']">{% if quiz and quiz.description %}{{ quiz.description }}{% else %}Your personalized ritual in minutes{% endif %}</p>
       <a href="{% url 'quiz' %}" class="bg-[#18382c] text-white px-10 py-4 rounded-xl text-lg md:text-2xl font-bold tracking-wide hover:bg-[#285c44] transition font-['Open_Sans']">TAKE THE QUIZ</a>

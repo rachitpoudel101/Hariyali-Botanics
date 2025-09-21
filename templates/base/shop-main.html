@@ -1,15 +1,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { font-family: 'Open Sans', sans-serif; }
-</style>
 
-<main class="shop-page-main max-w-7xl mx-auto px-4 pt-12 pb-28">
-  <h1 class="text-3xl md:text-4xl font-bold text-sage mb-6 text-center font-playfair drop-shadow-lg">Shop Products</h1>
+<main class="shop-page-main max-w-7xl mx-auto px-4 pt-12 pb-28 font-sans">
+  <h1 class="text-3xl md:text-4xl font-bold text-sage mb-6 text-center font-playfair drop-shadow-lg font-sans">Shop Products</h1>
 
   <!-- Categories -->
-  <div class="flex overflow-x-auto pb-3 hide-scrollbar mb-8">
+  <div class="flex overflow-x-auto pb-3 hide-scrollbar mb-8 font-sans">
     <div class="flex gap-2 sm:gap-4 px-1 sm:justify-center min-w-max mx-auto">
       {% if not active_category %}
         <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold hover:bg-[#285c44] hover:text-white transition-all">
@@ -34,7 +30,7 @@
   </div>
 
   <!-- Product Grid -->
-  <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+  <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 font-sans">
     {% for product in products %}
       <div class="product-card bg-white p-3 sm:p-4 flex flex-col items-center transition-all hover:shadow-md">
         <div class="relative w-full aspect-square mb-3 overflow-hidden">
