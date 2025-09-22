@@ -45,105 +45,93 @@
       --tw-text-opacity: 1;
       color: rgb(79 70 229 / var(--tw-text-opacity));
   }
+  /* scrollbar hide and viewport tweaks (like product slider) */
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .slider-viewport { align-items: flex-start; }
+
+  /* Added: make testimonial slider snap on mobile and ensure full-width cards */
+  .slider-viewport { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  #testimonial-slider { scroll-padding-left: 1rem; }
+  .testimonial-card { scroll-snap-align: start; }
+
+  /* Position arrows further outside the content on medium+ screens */
+  @media (min-width: 768px) {
+    .testimonials-arrow-left { left: -48px; }   /* push left arrow further left */
+    .testimonials-arrow-right { right: -48px; } /* push right arrow further right */
+  }
   </style>
 
   <section class="py-24 font-sans">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
           <div class="mb-14 flex flex-col justify-center items-center sm:flex-row sm:items-center sm:justify-between max-sm:gap-8">
               <h2 class="text-2xl text-center font-sans font-bold text-gray-900 lg:text-left">Testimonials</h2>
-              <!-- Slider controls -->
-              <div class="flex items-center gap-8">
-                  <button id="slider-button-left"
-                      class="swiper-button-prev group flex justify-center items-center border border-solid border-indigo-600 w-12 h-12 transition-all duration-500 rounded-full hover:bg-indigo-600 "
-                      data-carousel-prev>
-                      <svg class="h-6 w-6 text-indigo-600 group-hover:text-white" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path
-                              d="M20.9999 12L4.99992 12M9.99992 6L4.70703 11.2929C4.3737 11.6262 4.20703 11.7929 4.20703 12C4.20703 12.2071 4.3737 12.3738 4.70703 12.7071L9.99992 18"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                  </button>
-                  <button id="slider-button-right"
-                      class="swiper-button-next group flex justify-center items-center border border-solid border-indigo-600 w-12 h-12 transition-all duration-500 rounded-full hover:bg-indigo-600"
-                      data-carousel-next>
-                      <svg class="h-6 w-6 text-indigo-600 group-hover:text-white" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path
-                              d="M3 12L19 12M14 18L19.2929 12.7071C19.6262 12.3738 19.7929 12.2071 19.7929 12C19.7929 11.7929 19.6262 11.6262 19.2929 11.2929L14 6"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                  </button>
-              </div>
           </div>
-          <!--Slider wrapper-->
-          <div class="lg:flex grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-8 swiper mySwiper">
-              <div class="swiper-wrapper">
+
+          <!-- absolute arrows (same style & placement as product slider) -->
+          <button id="testimonials-left" aria-label="Scroll left"
+              class="absolute top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex testimonials-arrow-left">
+              <svg class="h-4 w-4 text-[#333]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </button>
+          <button id="testimonials-right" aria-label="Scroll right"
+              class="absolute top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex testimonials-arrow-right">
+              <svg class="h-4 w-4 text-[#333]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </button>
+
+          <!-- Horizontal testimonial slider (like product slider) -->
+          <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative">
+              <div id="testimonial-slider" class="flex gap-6 w-full min-w-0 py-4 px-2">
                   {% for review in reviews %}
-                  <div class="swiper-slide group bg-white border border-solid h-auto border-gray-300 rounded-none p-6 transition-all duration-500 w-full hover:border-indigo-600 slide-active:border-indigo-600">
-                      <div class="flex items-center mb-9 gap-2 text-amber-500 transition-all duration-500 group-hover:text-indigo-600 swiper-slide-active:text-indigo-600">
-                          <!-- You can add stars or icons here if needed -->
+                  <div class="testimonial-card bg-white p-6 shadow-sm hover:shadow-md min-w-full sm:min-w-[320px] w-full sm:w-[320px] flex-shrink-0 flex flex-col items-start rounded-none border border-gray-300">
+                      <div class="flex items-center mb-4 gap-2 text-amber-500 transition-all duration-500 group-hover:text-indigo-600">
+                          <!-- optional stars/icons -->
                       </div>
-                      <p class="text-lg text-gray-500 leading-8 h-24 transition-all duration-500 mb-9 group-hover:text-gray-800">
+                      <p class="text-base text-gray-500 leading-7 min-h-[80px] transition-all duration-500 mb-6">
                           "{{ review.testimonial }}"
                       </p>
-                      <div class="flex items-center gap-5">
-                          <!-- Avatar or initials -->
+                      <div class="flex items-center gap-4 mt-auto w-full">
                           <div class="w-12 h-12 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold text-xl">
                               {{ review.name|slice:":1" }}
                           </div>
                           <div class="grid gap-1">
-                              <h5 class="text-gray-900 font-medium transition-all duration-500 group-hover:text-indigo-600 swiper-slide-active:text-indigo-600">
-                                  {{ review.name }}
-                              </h5>
+                              <h5 class="text-gray-900 font-medium">{{ review.name }}</h5>
                               <span class="text-sm leading-6 text-gray-500">{{ review.location }}</span>
                           </div>
                       </div>
                   </div>
                   {% empty %}
-                  <div class="swiper-slide">
-                      <p class="col-span-full text-center text-gray-500">No reviews available.</p>
-                  </div>
+                  <div class="min-w-full text-center text-gray-500 py-8">No reviews available.</div>
                   {% endfor %}
               </div>
           </div>
       </div>
   </section>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
-      var swiper = new Swiper(".mySwiper", {
-          slidesPerView: 3,
-          spaceBetween: 28,
-          centeredSlides: true,
-          loop: true,
-          pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-          },
-          navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-          },
-          autoplay: {
-              delay: 5000,
-              disableOnInteraction: false,
-          },
-          breakpoints: {
-              0: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-                  centeredSlides: false,
-              },
-              768: {
-                  slidesPerView: 2,
-                  spaceBetween: 28,
-                  centeredSlides: true,
-              },
-              1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 32,
-              },
-          },
-      });
+    // Smooth scroll controls for testimonial slider (left/right buttons)
+    (function() {
+      var container = document.getElementById('testimonial-slider');
+      var left = document.getElementById('testimonials-left');
+      var right = document.getElementById('testimonials-right');
+      if (!container) return;
+
+      // On wider screens scroll by the full visible container width, on small screens keep slightly smaller
+      var scrollAmount = Math.floor(container.clientWidth * (window.innerWidth >= 768 ? 1 : 0.9)) || 300;
+
+      if (left) {
+        left.addEventListener('click', function() {
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+      }
+      if (right) {
+        right.addEventListener('click', function() {
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+      // Optional: enable arrow buttons on small devices by showing them when touch not supported
+    })();
   </script>
