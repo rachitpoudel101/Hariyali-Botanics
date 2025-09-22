@@ -7,7 +7,7 @@
 <!--benefits/How to usae /Ingredients -->
 <section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-12">
     <!-- Benefits Section -->
-    <section class="flex flex-col md:flex-row gap-6 items-center border rounded-xl p-6">
+    <section class="flex flex-col md:flex-row gap-6 items-center border p-6">
       <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
         <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-2 text-center">Benefits</h2>
         {% if benefits %}
@@ -73,7 +73,7 @@
     </section>
 
     <!-- Ingredients Section -->
-    <section class="flex flex-col md:flex-row gap-6 items-center border rounded-xl p-6">
+    <section class="flex flex-col md:flex-row gap-6 items-center border p-6">
       <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
         <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-2 text-center">Ingredients</h2>
         {% if ingredients %}
@@ -115,7 +115,7 @@
       <div id="similar-slider" class="flex gap-6 transition-transform duration-300">
         {% if similar_products %}
           {% for product in similar_products %}
-            <div class="flex-shrink-0 w-64 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="flex-shrink-0 w-64 bg-white shadow-md overflow-hidden">
               <div class="w-full h-64 overflow-hidden">
                 {% if product.primary_image and product.primary_image.image %}
                   <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
@@ -126,7 +126,7 @@
                 <p class="text-sm text-gray-500 mb-2 line-clamp-2">{{ product.description|truncatechars:60 }}</p>
                 <div class="flex justify-between items-center">
                   <span class="text-[#18382c] font-bold">Rs{{ product.price }} NPR</span>
-                  <a href="{% url 'prodec' product.id %}" class="text-xs bg-[#18382c] text-white px-3 py-1 rounded hover:bg-[#285c44]">View</a>
+                  <a href="{% url 'prodec' product.id %}" class="text-xs bg-[#18382c] text-white px-3 py-1 hover:bg-[#285c44]">View</a>
                 </div>
               </div>
             </div>
@@ -138,10 +138,10 @@
     </div>
     {% if similar_products|length > 1 %}
       <!-- Navigation Arrows -->
-      <button id="similar-arrow-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10" style="display:none;">
+      <button id="similar-arrow-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border shadow p-2 z-10" style="display:none;">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button id="similar-arrow-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border rounded-full shadow p-2 z-10">
+      <button id="similar-arrow-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border shadow p-2 z-10">
         <i class="fas fa-chevron-right"></i>
       </button>
     {% endif %}
@@ -154,7 +154,7 @@
     <div id="reviews-list" class="space-y-6 mb-8">
       {% if reviews %}
         {% for review in reviews %}
-          <div class="bg-white rounded-lg shadow p-4">
+          <div class="bg-white shadow p-4">
             <div class="flex items-center gap-2 mb-1">
               <span class="font-semibold text-[#18382c]">{{ review.reviewer }}</span>
               <div class="text-yellow-400 text-sm">
@@ -172,21 +172,21 @@
           </div>
         {% endfor %}
       {% else %}
-        <div class="bg-white rounded-lg shadow p-4">
+        <div class="bg-white shadow p-4">
           <p class="text-gray-500 text-center">No reviews yet. Be the first to review this product!</p>
         </div>
       {% endif %}
     </div>
 
-    <form method="POST" action="{% url 'submit_review' product.id %}" class="bg-[#f8f8f8] rounded-lg p-6 shadow space-y-4 max-w-lg">
+    <form method="POST" action="{% url 'submit_review' product.id %}" class="bg-[#f8f8f8] p-6 shadow space-y-4 max-w-lg">
       {% csrf_token %}
       <div>
         <label for="review-name" class="block text-xs font-medium mb-1 text-[#18382c]">Your Name</label>
-        <input type="text" id="review-name" name="reviewer_name" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+        <input type="text" id="review-name" name="reviewer_name" class="w-full px-3 py-2 border border-gray-300 text-sm" required>
       </div>
       <div>
         <label for="review-rating" class="block text-xs font-medium mb-1 text-[#18382c]">Rating</label>
-        <select id="review-rating" name="rating" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required>
+        <select id="review-rating" name="rating" class="w-full px-3 py-2 border border-gray-300 text-sm" required>
           <option value="5">★★★★★</option>
           <option value="4">★★★★☆</option>
           <option value="3">★★★☆☆</option>
@@ -196,9 +196,9 @@
       </div>
       <div>
         <label for="review-text" class="block text-xs font-medium mb-1 text-[#18382c]">Review</label>
-        <textarea id="review-text" name="comment" rows="3" class="w-full px-3 py-2 rounded border border-gray-300 text-sm" required></textarea>
+        <textarea id="review-text" name="comment" rows="3" class="w-full px-3 py-2 border border-gray-300 text-sm" required></textarea>
       </div>
-      <button type="submit" class="bg-[#18382c] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#285c44] transition">Submit Review</button>
+      <button type="submit" class="bg-[#18382c] text-white px-6 py-2 font-semibold text-sm hover:bg-[#285c44] transition">Submit Review</button>
 
       {% if messages %}
         {% for message in messages %}
@@ -255,7 +255,7 @@
               
               // Create and append the new review
               const newReview = document.createElement('div');
-              newReview.className = 'bg-white rounded-lg shadow p-4';
+              newReview.className = 'bg-white shadow p-4';
               
               // Generate stars based on rating
               let stars = '';

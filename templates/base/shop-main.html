@@ -8,20 +8,20 @@
   <div class="flex overflow-x-auto pb-3 hide-scrollbar mb-8 font-sans">
     <div class="flex gap-2 sm:gap-4 px-1 sm:justify-center min-w-max mx-auto">
       {% if not active_category %}
-        <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap font-bold hover:bg-[#285c44] hover:text-white transition-all">
+        <a href="{% url 'shop' %}" class="category-btn bg-sage text-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap font-bold hover:bg-[#285c44] hover:text-white transition-all">
           All Products
         </a>
         {% for category in categories %}
-          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
+          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
             {{ category.name }}
           </a>
         {% endfor %}
       {% else %}
-        <a href="{% url 'shop' %}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
+        <a href="{% url 'shop' %}" class="category-btn bg-gray-200 text-gray-700 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap hover:bg-[#285c44] hover:text-white transition-all">
           All Products
         </a>
         {% for category in categories %}
-          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-all {% if active_category|default:'' == category.id|stringformat:'s' %}bg-sage text-white font-bold{% else %}bg-gray-200 text-gray-700{% endif %} hover:bg-[#285c44] hover:text-white">
+          <a href="{% url 'shop' %}?category={{ category.id }}" class="category-btn px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-all {% if active_category|default:'' == category.id|stringformat:'s' %}bg-sage text-white font-bold{% else %}bg-gray-200 text-gray-700{% endif %} hover:bg-[#285c44] hover:text-white">
             {{ category.name }}
           </a>
         {% endfor %}
@@ -30,15 +30,17 @@
   </div>
 
   <!-- Product Grid -->
-  <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 font-sans">
+  <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 font-sans  rounded-none">
     {% for product in products %}
-      <div class="product-card bg-white p-3 sm:p-4 flex flex-col items-center transition-all hover:shadow-md">
-        <div class="relative w-full aspect-square mb-3 overflow-hidden">
+      <div class="product-card bg-white p-3 sm:p-4 flex flex-col items-center transition-all hover:shadow-md rounded-none">
+        <div class="relative w-full aspect-square mb-3 overflow-visible rounded-none">
           {% with img=product.images.all|first %}
             {% if img and img.image %}
-              <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover"/>
+              <!-- force no rounded corners on the image -->
+              <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover rounded-none" style="border-radius:0 !important;"/>
             {% else %}
-              <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-sm text-center px-2">
+              <!-- ensure fallback box has no rounding -->
+              <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-sm text-center px-2 rounded-none" style="border-radius:0 !important;">
                 {{ product.name|default:"No image" }}
               </div>
             {% endif %}
