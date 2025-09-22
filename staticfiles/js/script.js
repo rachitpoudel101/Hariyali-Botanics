@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="mb-2"><span class="font-semibold text-[#18382c]">You:</span> ${userMsg}</div>
           <div class="mb-2"><span class="font-semibold text-[#18382c]">Bot:</span> Hello customer, we are Hariyali Botanic.<br>
           For more details, contact us on WhatsApp.</div>
-          <a href="https://wa.me/9848553543" target="_blank" class="inline-block bg-[#25D366] text-white px-3 py-1 rounded mt-2 font-semibold text-xs hover:bg-[#128C7E] transition">
+          <a href="https://wa.me/9766626737" target="_blank" class="inline-block bg-[#25D366] text-white px-3 py-1 rounded mt-2 font-semibold text-xs hover:bg-[#128C7E] transition">
             WhatsApp Chat
           </a>
         `;
