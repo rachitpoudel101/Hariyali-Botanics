@@ -45,9 +45,9 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <span class="font-bold text-2xl md:text-3xl text-[#18382c]">Rs{{ product.price }} NPR</span>
+      <span class="font-bold text-2xl md:text-3xl text-[#18382c]">{{ product.price }} NPR</span>
       {% if product.original_price %}
-      <span class="line-through text-[#999] text-lg">Rs{{ product.original_price }} NPR</span>
+      <span class="line-through text-[#999] text-lg">{{ product.original_price }} NPR</span>
       {% endif %}
     </div>
 

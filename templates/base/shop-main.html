@@ -47,7 +47,7 @@
           {% endwith %}
         </div>
         <h2 class="text-sm sm:text-base font-medium mb-1 font-playfair text-[#18382c] text-center">{{ product.name }}</h2>
-        <p class="text-[#8B4513] font-medium mb-2 text-xs sm:text-sm">Rs {{ product.price }}</p>
+        <p class="text-[#8B4513] font-medium mb-2 text-xs sm:text-sm">NPR{{ product.price }}</p>
         <div class="flex gap-1 w-full">
           <a href="{% url 'product-details' product.id %}" class="flex-1 text-center bg-white border border-sage text-sage px-2 py-1 text-xs font-medium hover:bg-sage hover:text-white transition-colors">View Details</a>
           <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://www.daraz.com.np{% endif %}" target="_blank" class="flex-1 text-center bg-sage text-white px-2 py-1 text-xs font-medium hover:bg-[#285c44] transition-colors">Buy Now</a>
