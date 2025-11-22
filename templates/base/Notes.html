@@ -1,0 +1,137 @@
+<!-- ======= COMMUNITY TESTIMONIALS SECTION ======= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+  <section class="w-full bg-[#fdfaf6] py-10 px-2 sm:py-16 sm:px-4 flex flex-col items-center">
+    <h2 class="text-2xl text-center font-sans font-bold text-[#18382c] mb-8">Hariyali Community <span class="text-[#8B4513]">|</span> Love Notes</h2>
+    <div class="w-full max-w-md sm:max-w-2xl relative">
+      <div id="testimonial-rotator" class="text-center">
+        <blockquote class="text-lg md:text-xl italic text-[#18382c] font-sans min-h-[100px]" id="testimonial-quote">
+          "The products have transformed my skin! Love the natural feel."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .swiper-button-prev:after,
+  .swiper-rtl .swiper-button-next:after {
+      content: '' !important;
+  }
+  .swiper-button-next:after,
+  .swiper-rtl .swiper-button-prev:after {
+      content: '' !important;
+  }
+  .swiper-button-next svg,
+  .swiper-button-prev svg {
+      width: 24px !important;
+      height: 24px !important;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+      position: relative !important;
+  }
+  .swiper-slide.swiper-slide-active {
+      --tw-border-opacity: 1 !important;
+      border-color: rgb(79 70 229 / var(--tw-border-opacity)) !important;
+  }
+  .swiper-slide.swiper-slide-active>.swiper-slide-active\:text-indigo-600 {
+      --tw-text-opacity: 1;
+      color: rgb(79 70 229 / var(--tw-text-opacity));
+  }
+  .swiper-slide.swiper-slide-active>.flex .grid .swiper-slide-active\:text-indigo-600 {
+      --tw-text-opacity: 1;
+      color: rgb(79 70 229 / var(--tw-text-opacity));
+  }
+  /* scrollbar hide and viewport tweaks (like product slider) */
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .slider-viewport { align-items: flex-start; }
+
+  /* Added: make testimonial slider snap on mobile and ensure full-width cards */
+  .slider-viewport { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  #testimonial-slider { scroll-padding-left: 1rem; }
+  .testimonial-card { scroll-snap-align: start; }
+
+  /* Position arrows further outside the content on medium+ screens */
+  @media (min-width: 768px) {
+    .testimonials-arrow-left { left: -48px; }   /* push left arrow further left */
+    .testimonials-arrow-right { right: -48px; } /* push right arrow further right */
+  }
+  </style>
+
+  <section class="py-24 font-sans">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+          <div class="mb-14 flex flex-col justify-center items-center sm:flex-row sm:items-center sm:justify-between max-sm:gap-8">
+              <h2 class="text-2xl text-center font-sans font-bold text-gray-900 lg:text-left">Testimonials</h2>
+          </div>
+
+          <!-- absolute arrows (same style & placement as product slider) -->
+          <button id="testimonials-left" aria-label="Scroll left"
+              class="absolute top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex testimonials-arrow-left">
+              <svg class="h-4 w-4 text-[#333]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </button>
+          <button id="testimonials-right" aria-label="Scroll right"
+              class="absolute top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex testimonials-arrow-right">
+              <svg class="h-4 w-4 text-[#333]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </button>
+
+          <!-- Horizontal testimonial slider (like product slider) -->
+          <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative">
+              <div id="testimonial-slider" class="flex gap-6 w-full min-w-0 py-4 px-2">
+                  {% for review in reviews %}
+                  <div class="testimonial-card bg-white p-6 shadow-sm hover:shadow-md min-w-full sm:min-w-[320px] w-full sm:w-[320px] flex-shrink-0 flex flex-col items-start rounded-none border border-gray-300">
+                      <div class="flex items-center mb-4 gap-2 text-amber-500 transition-all duration-500 group-hover:text-indigo-600">
+                          <!-- optional stars/icons -->
+                      </div>
+                      <p class="text-base text-gray-500 leading-7 min-h-[80px] transition-all duration-500 mb-6">
+                          "{{ review.testimonial }}"
+                      </p>
+                      <div class="flex items-center gap-4 mt-auto w-full">
+                          <div class="w-12 h-12 rounded-full bg-[#f8f5f0] flex items-center justify-center text-[#8B4513] font-bold text-xl">
+                              {{ review.name|slice:":1" }}
+                          </div>
+                          <div class="grid gap-1">
+                              <h5 class="text-gray-900 font-medium">{{ review.name }}</h5>
+                              <span class="text-sm leading-6 text-gray-500">{{ review.location }}</span>
+                          </div>
+                      </div>
+                  </div>
+                  {% empty %}
+                  <div class="min-w-full text-center text-gray-500 py-8">No reviews available.</div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <script>
+    // Smooth scroll controls for testimonial slider (left/right buttons)
+    (function() {
+      var container = document.getElementById('testimonial-slider');
+      var left = document.getElementById('testimonials-left');
+      var right = document.getElementById('testimonials-right');
+      if (!container) return;
+
+      // On wider screens scroll by the full visible container width, on small screens keep slightly smaller
+      var scrollAmount = Math.floor(container.clientWidth * (window.innerWidth >= 768 ? 1 : 0.9)) || 300;
+
+      if (left) {
+        left.addEventListener('click', function() {
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+      }
+      if (right) {
+        right.addEventListener('click', function() {
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+      // Optional: enable arrow buttons on small devices by showing them when touch not supported
+    })();
+  </script>

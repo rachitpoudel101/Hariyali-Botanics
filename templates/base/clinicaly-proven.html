@@ -1,0 +1,74 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<!-- ======= CLINICALLY PROVEN RESULTS FULL-WIDTH SECTION ======= -->
+<section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-0 font-sans">
+  <section class="w-full bg-[#f9f7f3] shadow-md p-6 flex flex-col gap-6 border border-[#e5e5e5]">
+    {% if customer_results %}
+    <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
+      
+      <!-- Results Text -->
+      <div class="flex-1 flex flex-col gap-4">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-2 text-center">Consumer results</h2>
+          <div class="flex flex-col gap-2">
+            {% for result in customer_results %}
+              {% if forloop.counter <= 3 %}
+                <div class="flex items-center gap-3">
+                  <span class="text-3xl md:text-4xl font-bold text-[#18382c]">{{ result.result|slice:":5" }}</span>
+                  <span class="text-base md:text-lg text-gray-700">{{ result.result|slice:"5:" }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div>
+          <div class="flex flex-col gap-2">
+            {% for result in customer_results %}
+              {% if forloop.counter > 3 and forloop.counter <= 6 %}
+                <div class="flex items-center gap-3">
+                  <span class="text-3xl md:text-4xl font-bold text-[#18382c]">{{ result.result|slice:":5" }}</span>
+                  <span class="text-base md:text-lg text-gray-700">{{ result.result|slice:"5:" }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="text-xs text-gray-500 mt-2">
+          *Based on a clinical study. **Based on a consumer perception study.
+        </div>
+      </div>
+
+      <!-- Results Images -->
+      <div class="flex-1 flex flex-row items-center justify-center gap-4">
+        {% if customer_results %}
+          {% for result in customer_results %}
+            {% if result.image and forloop.counter <= 2 %}
+              <img src="{{ result.image.url }}" alt="Clinical Results {{ forloop.counter }}" 
+                   class="w-full h-full object-cover shadow" />
+            {% endif %}
+          {% empty %}
+            <div class="text-center text-gray-500">
+              No customer results data available for this product.
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="text-center text-gray-500">
+            No customer results data available for this product.
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+    {% else %}
+    <div class="text-center text-gray-500 py-4">
+      No customer results data available for this product.
+    </div>
+    {% endif %}
+  </section>
+</section>

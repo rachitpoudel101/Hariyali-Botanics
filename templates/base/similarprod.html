@@ -1,0 +1,316 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<body class="font-sans">
+  
+<!--benefits/How to usae /Ingredients -->
+<section class="max-w-7xl mx-auto px-4 flex flex-col gap-8 pb-12">
+    <!-- Benefits Section -->
+    <section class="flex flex-col md:flex-row gap-6 items-center border p-6">
+      <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
+        <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-2 text-center">Benefits</h2>
+        {% if benefits %}
+          <ul class="list-disc pl-6 text-gray-700 space-y-1 text-base">
+            {% for benefit in benefits %}
+              <li>{{ benefit.benefit }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-gray-500">No benefits information available for this product.</p>
+        {% endif %}
+      </div>
+      <div class="flex-1 flex items-center justify-center order-2 w-full h-[500px] md:h-[600px]">
+  {% if benefits %}
+    {% with has_image=False %}
+      {% for benefit in benefits %}
+        {% if benefit.image and not has_image %}
+          <img src="{{ benefit.image.url }}" alt="Benefits"
+               class="w-full h-full object-cover shadow-lg" />
+          {% with has_image=True %}{% endwith %}
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
+  {% else %}
+    <div class="text-center text-gray-500">
+      No benefits data available.
+    </div>
+  {% endif %}
+</div>
+
+</section>
+
+    <!-- How to Use Section -->
+<section class="flex flex-col md:flex-row gap-6 items-center ">
+      <div class="flex-1 flex flex-col gap-4 order-2 md:order-2">
+          <h2 class="text-2xl md:text-3xl font-bold text-[#18382c] mb-4 text-center">How to Use</h2>
+          {% if how_to_use %}
+            <div class="text-gray-700 text-base space-y-3 leading-relaxed">
+              {% for step in how_to_use %}
+                <p>{{ step.step }}</p>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-gray-500 text-center">No usage instructions available for this product.</p>
+          {% endif %}
+        </div>
+      <div class="flex-1 flex items-center justify-center order-1 ">
+        {% if how_to_use %}
+          {% with has_image=False %}
+            {% for step in how_to_use %}
+              {% if step.image and not has_image %}
+                <img src="{{ step.image.url }}" alt="How to Use" 
+                     class="w-full h-full object-cover" />
+                {% with has_image=True %}{% endwith %}
+              {% endif %}
+            {% endfor %}
+          {% endwith %}
+        {% else %}
+          <div class="text-center text-gray-500">
+            No usage instructions data available.
+          </div>
+        {% endif %}
+      </div>
+</section>
+
+<section class="flex flex-col md:flex-row gap-6 items-center border p-6">
+  <div class="flex-1 flex flex-col gap-2 order-1 md:order-1">
+    <h2 class="font-sans md:text-3xl font-bold text-[#18382c] mb-2 text-center">Ingredients</h2>
+    {% if ingredients %}
+      <div class="text-gray-700 text-base flex flex-col space-y-2">  <!-- 👈 Added spacing here -->
+        {% for item in ingredients %}
+          <p>{{ item.ingredient }}</p>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-gray-500">No ingredient information available for this product.</p>
+    {% endif %}
+  </div>
+
+  <div class="flex-1 flex items-center justify-center order-2 md:order-2">
+    {% if ingredients %}
+      {% with has_image=False %}
+        {% for item in ingredients %}
+          {% if item.image and not has_image %}
+            <img src="{{ item.image.url }}" alt="Ingredients" class="w-full h-full object-cover" />
+            {% with has_image=True %}{% endwith %}
+          {% endif %}
+        {% endfor %}
+      {% endwith %}
+    {% else %}
+      <div class="text-center text-gray-500">
+        No ingredients data available.
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+</section>
+
+<!-- ======= SIMILAR PRODUCTS SECTION ======= -->
+<section class="max-w-5xl mx-auto px-4 py-10">
+  <h2 class="font-sans text-2xl font-bold mb-6 text-[#18382c]">Similar Products</h2>
+  <div class="relative">
+    <!-- Slider viewport -->
+    <div id="similar-slider-viewport" class="overflow-hidden">
+      <div id="font-sans similar-slider" class="flex gap-6 transition-transform duration-300">
+        {% if similar_products %}
+          {% for product in similar_products %}
+            <div class="flex-shrink-0 w-64 bg-white shadow-md overflow-hidden">
+              <div class="w-full h-64 overflow-hidden">
+                {% if product.primary_image and product.primary_image.image %}
+                  <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                {% endif %}
+              </div>
+              <div class="p-4">
+                <h3 class="font-sans text-lg font-semibold text-[#18382c] line-clamp-2">{{ product.name }}</h3>
+                <p class="font-sans text-sm text-gray-500 mb-2 line-clamp-2">{{ product.description|truncatechars:60 }}</p>
+                <div class="flex justify-between items-center">
+                  <span class="font-sans text-[#18382c] font-bold">{{ product.price }} NPR</span>
+                  <a href="{% url 'prodec' product.id %}" class="font-sans text-xs bg-[#18382c] text-white px-3 py-1 hover:bg-[#285c44]">View</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="font-sans w-full text-center text-gray-500">No similar products found</div>
+        {% endif %}
+      </div>
+    </div>
+    {% if similar_products|length > 1 %}
+      <!-- Navigation Arrows -->
+      <button id="similar-arrow-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border shadow p-2 z-10" style="display:none;">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="similar-arrow-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border shadow p-2 z-10">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ======= PRODUCT REVIEWS SECTION ======= -->
+<!-- <section class="max-w-5xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold mb-6 text-[#18382c]">Product Reviews</h2>
+    <div id="reviews-list" class="space-y-6 mb-8">
+      {% if reviews %}
+        {% for review in reviews %}
+          <div class="bg-white shadow p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-semibold text-[#18382c]">{{ review.reviewer }}</span>
+              <div class="text-yellow-400 text-sm">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= review.rating %}
+                    ★
+                  {% else %}
+                    ☆
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <span class="text-xs text-gray-500">{{ review.created_at|date:"F j, Y" }}</span>
+            </div>
+            <p class="text-gray-700 text-sm">{{ review.comment }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="bg-white shadow p-4">
+          <p class="text-gray-500 text-center">No reviews yet. Be the first to review this product!</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <form method="POST" action="{% url 'submit_review' product.id %}" class="bg-[#f8f8f8] p-6 shadow space-y-4 max-w-lg">
+      {% csrf_token %}
+      <div>
+        <label for="review-name" class="block text-xs font-medium mb-1 text-[#18382c]">Your Name</label>
+        <input type="text" id="review-name" name="reviewer_name" class="w-full px-3 py-2 border border-gray-300 text-sm" required>
+      </div>
+      <div>
+        <label for="review-rating" class="block text-xs font-medium mb-1 text-[#18382c]">Rating</label>
+        <select id="review-rating" name="rating" class="w-full px-3 py-2 border border-gray-300 text-sm" required>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+      </div>
+      <div>
+        <label for="review-text" class="block text-xs font-medium mb-1 text-[#18382c]">Review</label>
+        <textarea id="review-text" name="comment" rows="3" class="w-full px-3 py-2 border border-gray-300 text-sm" required></textarea>
+      </div>
+      <button type="submit" class="bg-[#18382c] text-white px-6 py-2 font-semibold text-sm hover:bg-[#285c44] transition">Submit Review</button>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="{% if message.tags == 'success' %}text-green-500{% else %}text-red-500{% endif %} text-sm mt-2">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </form>
+</section> -->
+</body>
+<script>
+      reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const name = document.getElementById('review-name').value;
+        const rating = document.getElementById('review-rating').value;
+        const comment = document.getElementById('review-text').value;
+        
+        // Hide any previous messages
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        
+        // Send the review data
+        fetch('/product/{{ product.id }}/review/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')  // Add CSRF token for better security
+          },
+          body: JSON.stringify({
+            name: name,
+            rating: parseInt(rating),
+            comment: comment
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Show success message
+            successMessage.classList.remove('hidden');
+            
+            // Clear the form
+            reviewForm.reset();
+            
+            // Add the new review to the reviews list
+            if (reviewsList) {
+              // Remove "no reviews yet" message if it exists
+              const noReviewsMessage = reviewsList.querySelector('.text-gray-500.text-center');
+              if (noReviewsMessage) {
+                noReviewsMessage.parentElement.remove();
+              }
+              
+              // Create and append the new review
+              const newReview = document.createElement('div');
+              newReview.className = 'bg-white shadow p-4';
+              
+              // Generate stars based on rating
+              let stars = '';
+              for (let i = 1; i <= 5; i++) {
+                stars += i <= data.review.rating ? '★' : '☆';
+              }
+              
+              newReview.innerHTML = `
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-semibold text-[#18382c]">${data.review.reviewer}</span>
+                  <div class="text-yellow-400 text-sm">${stars}</div>
+                  <span class="text-xs text-gray-500">${data.review.created_at}</span>
+                </div>
+                <p class="text-gray-700 text-sm">${data.review.comment}</p>
+              `;
+              
+              reviewsList.insertBefore(newReview, reviewsList.firstChild);
+              
+              // Update the review count in the product info section if it exists
+              const reviewCountSpan = document.querySelector('.review-count');
+              if (reviewCountSpan) {
+                const currentCount = parseInt(reviewCountSpan.getAttribute('data-count') || '0');
+                const newCount = currentCount + 1;
+                reviewCountSpan.setAttribute('data-count', newCount);
+                reviewCountSpan.textContent = `${newCount} ${newCount === 1 ? 'review' : 'reviews'}`;
+              }
+            }
+          } else {
+            // Show error message
+            errorMessage.classList.remove('hidden');
+            errorMessage.textContent = data.error || 'Something went wrong. Please try again.';
+          }
+        })
+        .catch(error => {
+          // Show error message
+          errorMessage.classList.remove('hidden');
+          errorMessage.textContent = 'Network error. Please try again.';
+          console.error('Error:', error);
+        });
+      });
+    
+    // Helper function to get CSRF token from cookies
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+</script>

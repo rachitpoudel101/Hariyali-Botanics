@@ -1,0 +1,159 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<section class="w-full min-h-[400px] md:min-h-screen overflow-hidden relative flex items-center justify-center pt-12 sm:pt-16 md:pt-20">
+    <!-- Hero Video -->
+    {% if video_url %}
+    <video src="{{ video_url }}" autoplay muted loop playsinline class="w-full h-full object-cover absolute inset-0 z-0" id="heroVideo">
+        <source src="{{ video_url }}" type="video/mp4">
+    </video>
+    {% else %}
+    <div class="w-full h-full flex items-center justify-center absolute inset-0 z-0 bg-gray-900/80 text-white">
+        <span>No hero video available.</span>
+    </div>
+    {% endif %}
+
+    <!-- Overlay with Text at bottom -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-8 md:pb-10 ">
+        <!-- Typing Animation Text -->
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg mb-4 font-sans">
+            <!-- Replace static title with a container that will type multiple words at a time -->
+            <span id="typed-word" aria-hidden="true"></span>
+            <span id="cursor" class="inline-block w-1 md:w-1.5 bg-white ml-1"></span>
+            <span class="sr-only">{{ hero_title }}</span> <!-- keep original title for screen readers -->
+        </h1>
+        <!-- Paragraph CTA -->
+        <p class="text-base md:text-lg lg:text-xl text-white/90 max-w-3xl font-light drop-shadow font-sans">
+            <!-- typed paragraph container + cursor; keep original for screen readers -->
+            <span id="typed-para" aria-hidden="true"></span>
+            <span id="cursor-para" class="inline-block w-1 md:w-1.5 bg-white ml-1"></span>
+            <span class="sr-only">{{ hero_description }}</span>
+        </p>
+
+        <!-- non-JS fallback so hosted site always shows content if JS is blocked -->
+        <noscript class="mt-4 text-white/95">
+            <div>{{ hero_title }}</div>
+            <div class="mt-2 text-sm">{{ hero_description }}</div>
+        </noscript>
+    </div>
+
+    <!-- Typing script: types 3-4 words at a time from hero_title and types paragraph -->
+    <style>
+    /* fallback blink if not provided by utilities */
+    @keyframes cp-blink { 50% { opacity: 0; } }
+    #cursor, #cursor-para { animation: cp-blink 1s step-end infinite; }
+    </style>
+
+</section>
+
+ <script>
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Read data
+                var heroTitle = "{{ hero_title|escapejs }}";
+                var heroDesc = "{{ hero_description|escapejs }}";
+
+                // ELEMENTS
+                var elTitle = document.getElementById('typed-word');
+                var elPara = document.getElementById('typed-para');
+
+                // If JS blocked or elements missing, bail to fallback
+                if (!elTitle || !elPara) {
+                    if (elTitle) elTitle.textContent = heroTitle || '';
+                    if (elPara) elPara.textContent = heroDesc || '';
+                    return;
+                }
+
+                // TITLE grouping: use up to maxChunk (4) words; if fewer words present, use available count
+                var words = heroTitle ? heroTitle.trim().split(/\s+/).filter(Boolean) : [];
+                var minChunk = 3, maxChunk = 4;
+                var chunkSize = words.length >= maxChunk ? maxChunk : Math.max(1, words.length); // 3-4 if enough, else available words
+
+                // Build sliding groups (wrap-around)
+                var groups = [];
+                for (var i = 0; i < words.length; i++) {
+                    var parts = [];
+                    for (var j = 0; j < chunkSize; j++) {
+                        parts.push(words[(i + j) % words.length]);
+                    }
+                    groups.push(parts.join(' '));
+                }
+                if (!groups.length && heroTitle) groups = [heroTitle];
+
+                // Title typing vars
+                var wIndex = 0, charIndex = 0, typing = true;
+                var typeSpeed = 90, deleteSpeed = 45, pauseAfterWord = 1400;
+
+                function typeTitleLoop() {
+                    if (!groups.length) return;
+                    var current = groups[wIndex];
+                    if (typing) {
+                        if (charIndex < current.length) {
+                            charIndex++;
+                            elTitle.textContent = current.slice(0, charIndex);
+                            setTimeout(typeTitleLoop, typeSpeed);
+                        } else {
+                            typing = false;
+                            setTimeout(typeTitleLoop, pauseAfterWord);
+                        }
+                    } else {
+                        if (charIndex > 0) {
+                            charIndex--;
+                            elTitle.textContent = current.slice(0, charIndex);
+                            setTimeout(typeTitleLoop, deleteSpeed);
+                        } else {
+                            wIndex = (wIndex + 1) % groups.length;
+                            typing = true;
+                            setTimeout(typeTitleLoop, typeSpeed);
+                        }
+                    }
+                }
+
+                // Paragraph typing vars (full sentence)
+                var pIndex = 0, pTyping = true;
+                var pTypeSpeed = 40, pDeleteSpeed = 25, pPause = 2800;
+
+                function typeParaLoop() {
+                    if (!heroDesc) return;
+                    if (pTyping) {
+                        if (pIndex < heroDesc.length) {
+                            pIndex++;
+                            elPara.textContent = heroDesc.slice(0, pIndex);
+                            setTimeout(typeParaLoop, pTypeSpeed);
+                        } else {
+                            pTyping = false;
+                            setTimeout(typeParaLoop, pPause);
+                        }
+                    } else {
+                        if (pIndex > 0) {
+                            pIndex--;
+                            elPara.textContent = heroDesc.slice(0, pIndex);
+                            setTimeout(typeParaLoop, pDeleteSpeed);
+                        } else {
+                            pTyping = true;
+                            setTimeout(typeParaLoop, pTypeSpeed);
+                        }
+                    }
+                }
+
+                // Start loops
+                setTimeout(function() {
+                    // In case script is blocked by CSP, these will never run; noscript helps in that case.
+                    typeTitleLoop();
+                    typeParaLoop();
+                }, 300);
+
+            } catch (err) {
+                console.error('Hero typing script error:', err);
+                // Graceful fallback: show static content
+                var fallbackTitle = document.getElementById('typed-word');
+                var fallbackPara = document.getElementById('typed-para');
+                if (fallbackTitle) fallbackTitle.textContent = "{{ hero_title|escapejs }}";
+                if (fallbackPara) fallbackPara.textContent = "{{ hero_description|escapejs }}";
+            }
+        });
+    })();
+    </script>
+

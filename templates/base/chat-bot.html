@@ -1,0 +1,23 @@
+<div id="chatbot-btn" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+    <button type="button" class="bg-[#18382c] text-white rounded-full shadow-lg p-4 flex items-center gap-2 hover:bg-[#285c44] transition focus:outline-none">
+      <i class="fas fa-comment-dots"></i>
+      <span class="hidden md:inline">Chat</span>
+    </button>
+  </div>
+  <div id="chatbot-popup" style="position:fixed;bottom:110px;right:24px;z-index:9999;display:none;" class="bg-white rounded-xl shadow-lg border border-[#18382c] w-80 max-w-xs p-4">
+    <div class="flex items-center gap-2 mb-2">
+      <i class="fas fa-leaf text-[#18382c]"></i>
+      <span class="font-bold text-[#18382c]">Hariyali Botanic Chat</span>
+    </div>
+    <div id="chatbot-messages" class="mb-3 text-sm text-gray-700 min-h-[48px]"></div>
+    <form id="chatbot-form" class="flex gap-2">
+      <input type="text" id="chatbot-input" class="flex-1 border rounded px-2 py-1 text-sm" placeholder="Type your message..." autocomplete="off" required>
+      <button type="submit" class="bg-[#18382c] text-white px-3 rounded text-sm">Send</button>
+    </form>
+  </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Open Sans', sans-serif; }
+</style>

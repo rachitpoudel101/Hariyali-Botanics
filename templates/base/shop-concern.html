@@ -1,0 +1,66 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  /* Custom styles for better responsive scaling */
+  .shop-concern-swiper {
+    overflow: hidden;
+    /* Prevent slides from dropping below at high zoom */
+    max-width: 100%;
+  }
+  .shop-concern-swiper .swiper-slide {
+    /* Ensure slides stay in row and scale well */
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<section class="w-full bg-[#f7f2ea] py-8 px-2 sm:py-10 sm:px-4 flex flex-col items-center shop-concern-section font-sans">
+    <h3 class="text-xl md:text-2xl font-bold text-[#8B4513] mb-6" style="font-family: 'Open Sans', sans-serif;">SHOP BY CONCERN</h3>
+    <div class="w-full max-w-5xl">
+      <div class="swiper shop-concern-swiper">
+        <div class="swiper-wrapper">
+          {% for concern in concerns %}
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <a href="{% url 'shop' %}?concern={{ concern.id }}" class="flex flex-col items-center justify-center w-32 h-40 sm:w-40 sm:h-48 md:w-56 md:h-64 group">
+                <img src="{{ concern.photo.url }}" alt="{{ concern.title }}" class="w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 object-cover transition-all duration-300 filter grayscale group-hover:scale-105"/>
+                <span class="mt-4 text-[#8B4513] text-xs md:text-sm">{{ concern.title }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <!-- Swiper navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Swiper pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper('.shop-concern-swiper', {
+    slidesPerView: 2,
+    spaceBetween: 16,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    loop: true,
+    breakpoints: {
+      480: { slidesPerView: 2.5, spaceBetween: 16 },
+      640: { slidesPerView: 3, spaceBetween: 20 },
+      1024: { slidesPerView: 4, spaceBetween: 24 }
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  });
+</script>

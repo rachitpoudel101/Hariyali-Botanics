@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+{% block navbar %}
+  {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block about-us %}
+<section class="w-full bg-gradient-to-br from-[#f7fafc] to-[#e6fffa] py-16 px-4 font-sans">
+  <div class="container mx-auto">
+    <div class="max-w-4xl mx-auto bg-white  shadow-xl p-8 md:p-12 transition-all duration-300">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-[#18382c] mb-2 tracking-tight">{{ blog.title }}</h1>
+      <div class="text-[#8B4513] font-semibold mb-4 text-lg">{{ blog.name }}</div>
+      <div class="border-b border-[#e2e8f0] mb-6"></div>
+      
+      {% if blog.image %}
+      <div class="mb-8 flex justify-center">
+        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="max-w-md w-full  shadow-md hover:scale-105 transition-transform duration-300">
+      </div>
+      {% endif %}
+      
+      <div class="prose prose-lg max-w-none text-gray-700 mb-8 leading-relaxed">
+        {{ blog.content|safe }}
+      </div>
+      
+      {% if blog.tags %}
+      <div class="flex flex-wrap gap-3 mt-6">
+        {% for tag in blog.get_tags %}
+        <span class="inline-block bg-[#e6fffa] text-[#285c44] text-sm px-4 py-2  font-medium shadow hover:bg-[#b2f5ea] transition-colors duration-200 cursor-pointer">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      <div class="mt-10 text-center">
+        <a href="{% url 'blog' %}" class="inline-block px-6 py-3 bg-gradient-to-r from-[#285c44] to-[#18382c] text-white font-semibold  shadow hover:scale-105 transition-transform duration-200">← Back to Blogs</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+    {% include "base/footer.html" %}
+{% endblock %}

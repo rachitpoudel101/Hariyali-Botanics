@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+{% block navbar %}
+  {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block hero %}
+  {%include "base/hero.html"%}
+{% endblock %}
+
+{% block product%}
+    {% include "base/product_slider.html"%}
+{% endblock %}
+
+{% block concern%}
+    {% include "base/shop-concern.html"%}
+{% endblock %}
+
+{% block guide%}
+    {% include "base/digital-guide.html"%}
+{% endblock %}
+
+{% block ayuretreat%}
+    {% include "base/ayuretreat.html"%}
+{% endblock %}
+
+{% block quiz %}
+  {%include "base/quiz.html"%}
+{% endblock %}
+
+{% block Notes %}
+  {%include "base/Notes.html"%}
+{% endblock %}
+
+{% block blog %}
+  {%include "base/blog.html"%}
+{% endblock %}
+
+{% block footer%}
+    {% include "base/footer.html"%}
+    {% include "base/chat-bot.html" %}
+{% endblock %}

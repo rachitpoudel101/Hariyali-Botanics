@@ -1,0 +1,83 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<section class="py-4 px-2 sm:py-8 sm:px-4 bg-[#fffaf4] font-sans">
+    <div class="slider-section w-full relative flex items-start">
+        <!-- Fixed Bestseller Label -->
+        <div class="bestseller-label flex flex-col justify-center items-center mr-2 mt-4 lg:mt-8 min-w-[80px]">
+            <a href="{% url 'shop' %}?filter=bestsellers" class="vertical hidden lg:flex">BESTSELLERS</a>
+            <a href="{% url 'shop' %}?filter=bestsellers" class="horizontal flex lg:hidden">BESTSELLERS</a>
+        </div>
+
+        <!-- Slider Navigation Buttons -->
+        <button id="slider-left" aria-label="Scroll left" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="slider-right" aria-label="Scroll right" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 border border-sage rounded-full p-2 shadow hover:bg-sage hover:text-white transition hidden md:flex">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Horizontal Product Slider -->
+        <div class="slider-viewport w-full overflow-x-auto scrollbar-hide scroll-smooth relative flex">
+
+            <div id="horizontal-slider" class="flex gap-0 w-full min-w-0">
+
+                {% if products %}
+                    {% for product in products|slice:":6" %}
+                        <div class="bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 min-w-[220px] sm:min-w-[300px] w-[220px] sm:w-[300px] flex flex-col items-center animate-fadeIn product-card rounded-none" style="border-radius:0;">
+                            <div class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] flex items-center justify-center mx-auto">
+                                {% with img=product.images.all|first %}
+                                    {% if img and img.image %}
+                                        <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover rounded-none" style="max-width:180px;max-height:180px;border-radius:0;">
+                                    {% else %}
+                                        <img src="{% static 'images/default.png' %}" alt="No Image" class="w-full h-full object-cover rounded-none" style="max-width:180px;max-height:180px;border-radius:0;">
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="flex flex-col gap-2 mt-4 items-center w-full">
+                                <!-- Product Name linking to detail page -->
+                                <a href="{% url 'product-details' product.id %}" class="text-sm sm:text-base font-semibold font-playfair text-[#333] leading-snug hover:underline">
+                                    {{ product.name }}
+                                </a>
+                                <div class="flex flex-col gap-1 items-center">
+                                    <span class="font-medium text-[#333] text-[11px]">{{ product.price }} NPR</span>
+                                    {% if product.original_price %}
+                                        <span class="line-through text-[#999] text-[10px]">{{ product.original_price }} NPR</span>
+                                    {% endif %}
+                                </div>
+                                <div class="flex gap-3 items-center mt-2 justify-center w-full">
+                                    <!-- View Details Button -->
+                                    <a href="{% url 'product-details' product.id %}" class="border border-sage text-sage px-2 sm:px-3 py-1 text-xs font-semibold hover:bg-sage hover:text-white transition-colors duration-200">
+                                        View Details
+                                    </a>
+
+                                    <!-- Shop Now Button (external URL or default Daraz) -->
+                                    <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://https://s.daraz.com.np/s.JfNA{% endif %}" target="_blank" class="border border-[#333] text-[#333] px-2 sm:px-3 py-1 text-xs font-semibold uppercase hover:bg-[#333] hover:text-white transition-colors duration-200">
+                                        Shop Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center text-[#333] font-semibold py-10 w-full">No products available.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* .scrollbar-hide::-webkit-scrollbar { display: none; } */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.slider-section { display: flex; }
+.bestseller-label { flex-shrink: 0; }
+.slider-viewport { align-items: flex-start; }
+</style>

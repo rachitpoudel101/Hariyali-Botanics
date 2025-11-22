@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+{% block navbar %}
+  {% include "base/navbar.html" %}
+{% endblock %}
+
+{% block shop %}
+  {%include "base/prodec.html"%}
+{% endblock %}
+
+{% block clinicaly-proven %}
+  {% include "base/clinicaly-proven.html"%}
+{% endblock %}
+
+{% block silimar-product %}
+  {%include "base/similarprod.html"%}
+{% endblock %}
+
+{% block footer%}
+    {% include "base/footer.html"%}
+{% endblock %}

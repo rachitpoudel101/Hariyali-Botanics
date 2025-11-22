@@ -1,0 +1,77 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- ======= PRODUCT DETAILS SECTION ======= -->
+<main class="max-w-7xl mx-auto px-4 py-10 md:py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start font-sans">
+  <!-- Product Gallery -->
+  <div class="w-full flex flex-col gap-6">
+    <div class="w-full aspect-square bg-gray-100 overflow-hidden flex items-center justify-center relative shadow-lg">
+      {# Use first product image (primary first), else default #}
+      {% if product_images %}
+        {% with product_images|first as primary_image %}
+          {% if primary_image.image %}
+            <img id="main-product-img" src="{{ primary_image.image.url }}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+          {% else %}
+            <img id="main-product-img" src="{% static 'images/default.png' %}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+          {% endif %}
+        {% endwith %}
+      {% else %}
+        <img id="main-product-img" src="{% static 'images/default.png' %}" alt="{{ product.name }}" class="object-cover w-full h-full transition-all duration-300" />
+      {% endif %}
+      {% if product.best_seller %}
+      <span class="absolute top-4 left-4 bg-[#8B4513] text-white text-xs font-bold px-3 py-1 shadow">Best Seller</span>
+      {% endif %}
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="flex gap-3 justify-center">
+      {% if product_images %}
+        {% for img in product_images %}
+          <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover border-2 border-gray-200 cursor-pointer hover:border-[#8B4513]" onclick="document.getElementById('main-product-img').src='{{ img.image.url }}'">
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Product Info & Actions -->
+  <div class="w-full flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start bg-white/90 z-20 shadow-lg p-6">
+    <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c]">{{ product.name }}</h1>
+    <div class="flex items-center gap-3">
+      <span class="text-[#666] text-base">{{ product.review_count }} reviews</span>
+      {% if product.review_count > 0 %}
+        <a href="#reviews-list" class="text-xs text-[#8B4513] underline ml-2">See all reviews</a>
+      {% endif %}
+    </div>
+
+    <div class="flex items-center gap-4">
+      <span class="font-bold text-2xl md:text-3xl text-[#18382c]">{{ product.price }} NPR</span>
+      {% if product.original_price %}
+      <span class="line-through text-[#999] text-lg">{{ product.original_price }} NPR</span>
+      {% endif %}
+    </div>
+
+    <div class="text-base md:text-lg text-gray-700 leading-relaxed">
+      {{ product.description }}
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="size" class="block text-sm font-medium mb-1">Size</label>
+      <select id="size" class="px-4 py-2 border border-gray-300 bg-white text-base cursor-pointer w-40">
+        {% for key,label in size_choices %}
+          <option value="{{ key }}" {% if product.size == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://www.daraz.com.np{% endif %}" target="_blank" class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 font-semibold text-lg transition w-full md:w-1/2 mt-2 shadow-lg text-center">
+      Buy Now
+    </a>
+
+    <!-- <div class="flex items-center gap-3 mt-2 flex-wrap">
+      <span class="text-xs text-gray-500 whitespace-nowrap">Free shipping on orders over Rs5,000</span>
+      <span class="text-xs text-gray-500">|</span>
+      <span class="text-xs text-gray-500 whitespace-nowrap">Handcrafted in Nepal</span>
+    </div> -->
+  </div>
+</main>

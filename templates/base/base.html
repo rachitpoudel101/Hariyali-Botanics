@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hariyali Botanics</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+</head>
+<body class="bg-white text-gray-800 overflow-x-hidden font-sans">
+
+  <!-- Navbar block -->
+  {% block navbar %}{% endblock %}
+
+  <!-- Main content block -->
+  {% block hero %}{% endblock %}
+
+  <!-- Product-slider-->
+  {%block product%} {% endblock %}
+
+  <!--Shop BY concern-->
+  {% block concern %} {% endblock %}
+
+  <!--Digital Guide-->
+  {% block guide %} {% endblock %}
+  
+  <!--ayuretreat-->
+  {% block ayuretreat %} {% endblock %}
+
+  <!--Quiz-->
+  {% block quiz %} {% endblock %}
+
+  <!--Notes-->
+  {% block Notes %} {% endblock %}
+
+  <!--Blog-->
+  {% block blog %} {% endblock %}
+
+  <!--shop-->
+  {% block shop %} {% endblock %}
+
+  <!--product-details-mian-->
+  {% block prodec %} {% endblock %}
+
+  <!--clinicaly-proven-->
+  {% block clinicaly-proven %} {% endblock %}
+
+  <!--silimar-product-->
+  {% block silimar-product %} {% endblock %}
+
+  <!--about us-->
+  {% block about-us %} {% endblock %}
+
+  <!--Club-->
+  {% block club %} {% endblock %}
+
+  <!--Guide-->
+  {% block guides %} {% endblock %}
+
+  <!--Guide Detail-->
+  {% block guide_detail %} {% endblock %}
+
+  <!--Quiz-->
+  {% block quiz-dec %} {% endblock %}
+
+  <!--blog-->
+  {% block blog-desc %} {% endblock %}
+
+  <!--Fotter-->
+  {% block footer %} {% endblock %}
+<main>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/navigation.js' %}"></script>
+</body>
+
+</html>
