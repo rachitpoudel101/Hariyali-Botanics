@@ -2,6 +2,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+<style>
+  .quiz-option.selected {
+    border-color: #18382c;
+    background-color: #e6f2ee;
+    box-shadow: 0 0 0 2px rgba(24, 56, 44, 0.2);
+  }
+</style>
+
 <section class="font-sans">
   <div class="quiz-container relative min-h-screen flex flex-col items-center justify-center py-16 px-4 bg-gradient-to-br from-[#fdfaf6] to-[#e6e6e6] overflow-hidden">
     <!-- Decorative Top Image -->
@@ -53,7 +61,7 @@
             {% else %}
               <div class="grid grid-cols-1 gap-4">
                 {% for choice in question.choices.all %}
-                  <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption('{{ question.id }}', '{{ choice.id }}')" data-type="{{ choice.body_type|default:'neutral' }}">
+                  <button type="button" class="quiz-option w-full bg-[#fdfaf6] border border-gray-200 rounded-lg py-4 px-6 text-left hover:border-[#18382c]" onclick="selectOption(this, '{{ question.id }}', '{{ choice.id }}')" data-type="{{ choice.body_type|default:'neutral' }}">
                     {{ choice.choice_text }}
                   </button>
                 {% endfor %}
@@ -76,3 +84,53 @@
     <div class="absolute inset-0 bg-[url('quiz-bg.jpg')] bg-cover bg-center opacity-20 pointer-events-none select-none"></div>
   </div>
 </section>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = {{ questions|length|add:2 }};
+  const userResponses = {};
+
+  function nextStep() {
+    // Basic validation for step 1
+    if (currentStep === 1) {
+      const name = document.getElementById('userName').value;
+      const age = document.getElementById('userAge').value;
+      const email = document.getElementById('userEmail').value;
+      if (!name || !age || !email) {
+        alert('Please fill in your name, age, and email.');
+        return;
+      }
+      userResponses['name'] = name;
+      userResponses['age'] = age;
+      userResponses['email'] = email;
+      userResponses['phone'] = document.getElementById('userPhone').value;
+    }
+
+    if (currentStep < totalSteps) {
+      document.getElementById('step' + currentStep).classList.add('hidden');
+      currentStep++;
+      document.getElementById('step' + currentStep).classList.remove('hidden');
+      updateProgressBar();
+    }
+  }
+
+  function selectOption(element, questionId, choiceId) {
+    // Store response
+    userResponses[questionId] = choiceId;
+
+    // Handle highlighting
+    const optionsContainer = element.parentElement;
+    const allOptions = optionsContainer.querySelectorAll('.quiz-option');
+    allOptions.forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+  }
+
+  function updateProgressBar() {
+    const progress = ((currentStep - 1) / (totalSteps -1)) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }
+
+  function restartQuiz() {
+    window.location.reload();
+  }
+</script>

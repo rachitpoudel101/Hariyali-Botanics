@@ -38,7 +38,7 @@
   <div class="w-full flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start bg-white/90 z-20 shadow-lg p-6">
     <h1 class="text-3xl md:text-4xl font-bold font-playfair text-[#18382c]">{{ product.name }}</h1>
     <div class="flex items-center gap-3">
-      <span class="text-[#666] text-base">{{ product.review_count }} reviews</span>
+      <span class="text-[#666] text-lg">{{ product.review_count }} reviews</span>
       {% if product.review_count > 0 %}
         <a href="#reviews-list" class="text-xs text-[#8B4513] underline ml-2">See all reviews</a>
       {% endif %}
@@ -64,7 +64,7 @@
       </select>
     </div>
 
-    <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://www.daraz.com.np{% endif %}" target="_blank" class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 font-semibold text-lg transition w-full md:w-1/2 mt-2 shadow-lg text-center">
+    <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://s.daraz.com.np/s.JfNA{% endif %}" target="_blank" class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 font-semibold text-lg transition w-full md:w-1/2 mt-2 shadow-lg text-center">
       Buy Now
     </a>
 
