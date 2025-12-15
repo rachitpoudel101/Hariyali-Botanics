@@ -56,12 +56,8 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <label for="size" class="block text-sm font-medium mb-1">Size</label>
-      <select id="size" class="px-4 py-2 border border-gray-300 bg-white text-base cursor-pointer w-40">
-        {% for key,label in size %}
-          <option value="{{ key }}" {% if product.size == key %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-      </select>
+      <span class="block text-sm font-medium mb-1">Size</span>
+      <span class="block text-sm font-medium mb-1">{{ product.size }}</span>
     </div>
 
     <a href="{% if product.external_url %}{{ product.external_url }}{% else %}https://s.daraz.com.np/s.JfNA{% endif %}" target="_blank" class="bg-[#18382c] hover:bg-[#285c44] text-white px-8 py-3 font-semibold text-lg transition w-full md:w-1/2 mt-2 shadow-lg text-center">
