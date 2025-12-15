@@ -3,11 +3,6 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from ShopByConcern.models import ShopByConcern
 
-SIZE_CHOICES = [
-    ("30ml", "30 mL"),
-    ("50ml", "50 mL"),
-]
-
 
 class Category(models.Model):
     class Meta:
@@ -47,7 +42,7 @@ class Product(models.Model):
     skin_types = models.ManyToManyField(Skintype, related_name="products", blank=True)
     is_active = models.BooleanField(default=True)
     review_count = models.IntegerField(default=0)
-    size = models.CharField(max_length=10, choices=SIZE_CHOICES, default="30ml")
+    size = models.CharField(max_length=10, null=True, blank=True)
     similar_products = models.ManyToManyField(
         "self", symmetrical=False, blank=True, related_name="related_to"
     )

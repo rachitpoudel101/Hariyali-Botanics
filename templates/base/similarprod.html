@@ -47,7 +47,7 @@
           {% if how_to_use %}
             <div class="text-gray-700 text-base space-y-3 leading-relaxed">
               {% for step in how_to_use %}
-                <p>{{ step.step }}</p>
+                <ul>{{ step.step }}</ul>
               {% endfor %}
             </div>
           {% else %}

@@ -58,7 +58,7 @@
     <div class="flex flex-col gap-2">
       <label for="size" class="block text-sm font-medium mb-1">Size</label>
       <select id="size" class="px-4 py-2 border border-gray-300 bg-white text-base cursor-pointer w-40">
-        {% for key,label in size_choices %}
+        {% for key,label in size %}
           <option value="{{ key }}" {% if product.size == key %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
       </select>

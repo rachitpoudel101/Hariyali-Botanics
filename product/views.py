@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import (
     Product,
-    SIZE_CHOICES,
     Review,
     ProductImage,
     CustomerResult,
@@ -143,7 +142,7 @@ def prodec(request, id):
         "Normal/product-details.html",
         {
             "product": product,
-            "size_choices": SIZE_CHOICES,
+            "size": product.size,
             "product_images": product_images,
             "reviews": reviews,
             "similar_products": similar_products,
@@ -461,6 +460,7 @@ def submit_booking_inquiry(request, retreat_id):
             retreat = get_object_or_404(AyureTreat, id=retreat_id)
             name = request.POST.get("name")
             email = request.POST.get("email")
+            phone_number = request.POST.get("phone_number")
             reason_for_retreat = request.POST.get("reason_for_retreat")
             inquiry = BookingInquiry(
                 ayure_treat=retreat,
