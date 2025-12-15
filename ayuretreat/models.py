@@ -93,6 +93,7 @@ class BookingInquiry(models.Model):
     )
     name = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(null=False, blank=False)
+    phone_number = models.CharField(max_length=10, null=False, blank=False,default=None)
     reason_for_retreat = models.TextField(
         help_text="Why the person wants to join the retreat"
     )
