@@ -3,58 +3,115 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-  /* Custom styles for better responsive scaling */
-  .shop-concern-swiper {
-    overflow: hidden;
-    /* Prevent slides from dropping below at high zoom */
-    max-width: 100%;
+/* Custom styles for better responsive scaling */
+.shop-concern-swiper {
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+.shop-concern-swiper .swiper-slide {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+/* Make navigation buttons smaller on mobile */
+.shop-concern-swiper .swiper-button-next,
+.shop-concern-swiper .swiper-button-prev {
+  width: 30px;
+  height: 30px;
+}
+
+.shop-concern-swiper .swiper-button-next:after,
+.shop-concern-swiper .swiper-button-prev:after {
+  font-size: 20px;
+}
+
+/* Adjust pagination for mobile */
+.shop-concern-swiper .swiper-pagination {
+  bottom: -5px;
+}
+
+@media (min-width: 640px) {
+  .shop-concern-swiper .swiper-button-next,
+  .shop-concern-swiper .swiper-button-prev {
+    width: 44px;
+    height: 44px;
   }
-  .shop-concern-swiper .swiper-slide {
-    /* Ensure slides stay in row and scale well */
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  
+  .shop-concern-swiper .swiper-button-next:after,
+  .shop-concern-swiper .swiper-button-prev:after {
+    font-size: 27px;
   }
+}
 </style>
+
 <section class="w-full bg-[#f7f2ea] py-8 px-2 sm:py-10 sm:px-4 flex flex-col items-center shop-concern-section font-sans">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-[#18382c] text-2xl text-center font-sans font-bold mb-8" style="font-family: 'Open Sans', sans-serif;">Shop By Concern</h3>
-    <div class="w-full max-w-5xl">
+  <div class="w-full max-w-6xl mx-auto px-2 sm:px-4">
+    <h3 class="text-[#18382c] text-xl sm:text-2xl text-center font-sans font-bold mb-6 sm:mb-8" style="font-family: 'Open Sans', sans-serif;">Shop By Concern</h3>
+    
+    <div class="w-full relative">
       <div class="swiper shop-concern-swiper">
         <div class="swiper-wrapper">
           {% for concern in concerns %}
-            <div class="swiper-slide flex flex-col items-center justify-center">
-              <a href="{% url 'shop' %}?concern={{ concern.id }}" class="flex flex-col items-center justify-center w-32 h-40 sm:w-40 sm:h-48 md:w-56 md:h-64 group">
-                <img src="{{ concern.photo.url }}" alt="{{ concern.title }}" class="w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 object-cover transition-all duration-300 filter grayscale group-hover:scale-105"/>
-                <span class="mt-4 text-[#8B4513] text-xs md:text-sm">{{ concern.title }}</span>
-              </a>
-            </div>
+          <div class="swiper-slide">
+            <a href="{% url 'shop' %}?concern={{ concern.id }}" class="flex flex-col items-center justify-center w-full group">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+                <img src="{{ concern.photo.url }}" 
+                     alt="{{ concern.title }}" 
+                     class="w-full h-full object-cover transition-all duration-300 filter grayscale group-hover:scale-105"/>
+              </div>
+              <span class="mt-2 sm:mt-4 text-[#8B4513] text-xs sm:text-sm text-center px-1">{{ concern.title }}</span>
+            </a>
+          </div>
           {% endfor %}
         </div>
+        
         <!-- Swiper navigation buttons -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+        
         <!-- Swiper pagination -->
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    </div>
+  </div>
 </section>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   var swiper = new Swiper('.shop-concern-swiper', {
     slidesPerView: 2,
-    spaceBetween: 16,
+    spaceBetween: 10,
     autoplay: {
       delay: 3000,
       disableOnInteraction: false,
     },
     loop: true,
     breakpoints: {
-      480: { slidesPerView: 2.5, spaceBetween: 16 },
-      640: { slidesPerView: 3, spaceBetween: 20 },
-      1024: { slidesPerView: 4, spaceBetween: 24 }
+      360: { 
+        slidesPerView: 2, 
+        spaceBetween: 10 
+      },
+      480: { 
+        slidesPerView: 2.5, 
+        spaceBetween: 12 
+      },
+      640: { 
+        slidesPerView: 3, 
+        spaceBetween: 16 
+      },
+      768: { 
+        slidesPerView: 3.5, 
+        spaceBetween: 20 
+      },
+      1024: { 
+        slidesPerView: 4, 
+        spaceBetween: 24 
+      }
     },
     navigation: {
       nextEl: '.swiper-button-next',
