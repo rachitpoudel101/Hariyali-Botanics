@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils.text import slugify
 from ShopByConcern.models import ShopByConcern
 
 
@@ -10,6 +11,12 @@ class Category(models.Model):
 
     name = models.CharField(max_length=50, null=True, blank=False, default=None)
     description = models.CharField(max_length=150, null=True, default=None)
+    slug = models.SlugField(max_length=50, unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
