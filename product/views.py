@@ -34,13 +34,31 @@ def index(request):
         video_url = hero_video.video.url if hero_video and hero_video.video else None
         hero_title = hero_video.title if hero_video else ""
         hero_description = hero_video.description if hero_video else ""
-        products = Product.objects.all().order_by("-id")[:6]
+        
+        # Use raw SQL to handle decimal conversion errors
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT id FROM product 
+                WHERE is_active = 1 
+                ORDER BY id DESC 
+                LIMIT 6
+            """)
+            product_ids = [row[0] for row in cursor.fetchall()]
+        
+        products = []
+        for pid in product_ids:
+            try:
+                products.append(Product.objects.get(id=pid))
+            except Exception:
+                continue
+        
         concerns = ShopByConcern.objects.all()
         guides = Guide.objects.all()[:5]
         reviews = CustomerReview.objects.all()
         blogs = Blog.objects.all().order_by("-id")[:4]
         retreats = AyureTreat.objects.filter(is_deleted=False)
-        categories = Category.objects.all()  # Added categories
+        categories = Category.objects.all()
 
         # Fetch the latest active quiz and its images (up to 4)
         quiz = Quiz.objects.filter(is_active=True).order_by("-id").first()
@@ -59,12 +77,17 @@ def index(request):
                 "reviews": reviews,
                 "blogs": blogs,
                 "retreats": retreats,
-                "categories": categories,  # Pass categories to the template
-                "quiz": quiz,  # Add quiz data
-                "quiz_images": quiz_images,  # Add quiz images
+                "categories": categories,
+                "quiz": quiz,
+                "quiz_images": quiz_images,
             },
         )
-    except Exception:
+    except Exception as e:
+        # Log the error for debugging
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error in index view: {str(e)}")
+        
         return render(
             request,
             "Normal/index.html",
@@ -78,9 +101,9 @@ def index(request):
                 "reviews": CustomerReview.objects.all(),
                 "blogs": Blog.objects.all().order_by("-id")[:4],
                 "retreats": AyureTreat.objects.filter(is_deleted=False),
-                "categories": Category.objects.all(),  # Pass categories in case of exception
-                "quiz": None,  # Add quiz data even in exception
-                "quiz_images": [],  # Add quiz images even in exception
+                "categories": Category.objects.all(),
+                "quiz": None,
+                "quiz_images": [],
             },
         )
 
