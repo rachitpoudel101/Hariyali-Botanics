@@ -120,7 +120,11 @@ def shop(request):
     if filter_param == "bestsellers":
         products = products.filter(best_seller=True)
     if category_id:
-        products = products.filter(category__id=category_id)
+        # Support both numeric id and slug (e.g. "face-care")
+        if category_id.isdigit():
+            products = products.filter(category__id=category_id)
+        else:
+            products = products.filter(category__slug=category_id)
 
     concerns = ShopByConcern.objects.all()
     categories = Category.objects.all()  # Ensure categories are fetched
@@ -132,9 +136,9 @@ def shop(request):
             "products": products,
             "active_filter": filter_param,
             "concerns": concerns,
-            "categories": categories,  # Pass categories to the template
+            "categories": categories,
             "active_concern": concern_id,
-            "active_category": category_id,
+            "active_category": category_id,  # works for both id and slug
         },
     )
 

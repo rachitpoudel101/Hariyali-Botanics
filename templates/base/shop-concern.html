@@ -60,9 +60,15 @@
           <div class="swiper-slide">
             <a href="{% url 'shop' %}?concern={{ concern.id }}" class="flex flex-col items-center justify-center w-full group">
               <div class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+                {% if concern.photo %}
                 <img src="{{ concern.photo.url }}" 
                      alt="{{ concern.title }}" 
                      class="w-full h-full object-cover transition-all duration-300 filter grayscale group-hover:scale-105"/>
+                {% else %}
+                <div class="w-full h-full bg-[#e8dcc8] flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
+                  <span class="text-[#18382c] text-xs sm:text-sm font-semibold text-center px-2">{{ concern.title|truncatechars:15 }}</span>
+                </div>
+                {% endif %}
               </div>
               <span class="mt-2 sm:mt-4 text-[#8B4513] text-xs sm:text-sm text-center px-1">{{ concern.title }}</span>
             </a>
